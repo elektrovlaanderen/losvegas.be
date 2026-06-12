@@ -7,7 +7,7 @@
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 :root{
-  --fire:#FF4500;--fire-bright:#FF6A00;--yellow:#FFE500;--cyan:#00F5FF;--purple:#C800FF;--purple-light:#E060FF;
+  --fire:#FF4500;--fire-bright:#FF6A00;--yellow:#FFE500;--cyan:#00F5FF;--purple-light:#E060FF;--green:#39FF14;
   --white:#F8F6F0;--dark:#050305;--dark2:#0A080E;--dark3:#100D16;--panel:#15121C;--panel2:#1A1622;--muted:rgba(248,246,240,0.42);
 }
 body{background:var(--dark);color:var(--white);font-family:'Outfit',sans-serif;font-weight:300;line-height:1.7;overflow-x:hidden;}
@@ -40,6 +40,7 @@ nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between
 .py{color:var(--yellow);border-color:rgba(255,229,0,0.35);}
 .pc{color:var(--cyan);border-color:rgba(0,245,255,0.3);}
 .pp{color:var(--purple-light);border-color:rgba(200,0,255,0.3);}
+.pg{color:var(--green);border-color:rgba(57,255,20,0.3);}
 .hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;animation:up 0.7s ease 0.9s both;}
 .btn-fire{background:var(--fire);color:var(--white);font-family:'Outfit',sans-serif;font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;font-weight:600;padding:0.95rem 2.5rem;border:none;cursor:pointer;border-radius:2px;transition:all 0.2s;}
 .btn-fire:hover{background:var(--fire-bright);transform:translateY(-2px);}
@@ -49,7 +50,7 @@ nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between
 .btn-yellow:hover{filter:brightness(1.1);transform:translateY(-2px);}
 
 .ticker{background:var(--fire);padding:0.55rem 0;overflow:hidden;white-space:nowrap;}
-.ticker-inner{display:inline-block;animation:ticker 32s linear infinite;}
+.ticker-inner{display:inline-block;animation:ticker 36s linear infinite;}
 .ticker-text{font-family:'Khand',sans-serif;font-size:0.75rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--white);}
 @keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 
@@ -59,7 +60,7 @@ nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between
 .sy{color:var(--yellow);}
 .sf{color:var(--fire);}
 .sc{color:var(--cyan);}
-.sp{color:var(--purple-light);}
+.sg{color:var(--green);}
 .slabel{font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);}
 
 .wrap{max-width:1100px;margin:0 auto;}
@@ -68,32 +69,43 @@ nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between
 .stag-f{color:var(--fire-bright);}.stag-f::before{background:var(--fire-bright);}
 .stag-y{color:var(--yellow);}.stag-y::before{background:var(--yellow);}
 .stag-c{color:var(--cyan);}.stag-c::before{background:var(--cyan);}
-.stag-p{color:var(--purple-light);}.stag-p::before{background:var(--purple-light);}
+.stag-g{color:var(--green);}.stag-g::before{background:var(--green);}
 .stag-w{color:rgba(248,246,240,0.4);}.stag-w::before{background:rgba(248,246,240,0.2);}
 h2.big{font-family:'Black Han Sans',sans-serif;font-size:clamp(2rem,4vw,3.2rem);letter-spacing:0.03em;line-height:1.05;margin-bottom:0.5rem;}
 
+/* SECTION DIVIDER */
+.section-divider{display:flex;align-items:center;gap:1.5rem;margin-bottom:3rem;}
+.section-divider-line{flex:1;height:1px;}
+.section-divider-label{font-family:'Black Han Sans',sans-serif;font-size:1rem;letter-spacing:0.1em;white-space:nowrap;padding:0.5rem 1.5rem;border-radius:2px;}
+.div-vegas{border-color:rgba(255,69,0,0.2);}.div-vegas .section-divider-line{background:rgba(255,69,0,0.2);}
+.div-vegas .section-divider-label{color:var(--fire);border:1px solid rgba(255,69,0,0.3);background:rgba(255,69,0,0.07);}
+.div-socal{border-color:rgba(57,255,20,0.2);}.div-socal .section-divider-line{background:rgba(57,255,20,0.2);}
+.div-socal .section-divider-label{color:var(--green);border:1px solid rgba(57,255,20,0.3);background:rgba(57,255,20,0.06);}
+
 /* TOURS */
 .tours-section{padding:6rem 2.5rem;background:var(--dark2);border-top:1px solid rgba(255,69,0,0.08);border-bottom:1px solid rgba(255,69,0,0.08);}
-.tours-intro{font-size:0.87rem;color:var(--muted);max-width:600px;line-height:1.9;margin-bottom:1.5rem;}
-
-/* VERTREK TOGGLE */
-.vertrek-toggle{display:flex;gap:0;margin-bottom:3rem;border:1px solid rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;width:fit-content;}
-.vtbtn{font-family:'Outfit',sans-serif;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;padding:0.7rem 1.8rem;border:none;cursor:pointer;transition:all 0.2s;font-weight:500;}
-.vtbtn.active-vegas{background:var(--fire);color:var(--white);}
-.vtbtn.active-corona{background:var(--cyan);color:var(--dark);}
-.vtbtn.inactive{background:rgba(255,255,255,0.04);color:rgba(248,246,240,0.35);}
-
+.tours-intro{font-size:0.87rem;color:var(--muted);max-width:640px;line-height:1.9;margin-bottom:1.5rem;}
+.info-banner{background:rgba(255,229,0,0.06);border:1px solid rgba(255,229,0,0.15);border-radius:3px;padding:1rem 1.5rem;margin-bottom:3.5rem;display:flex;gap:0.8rem;align-items:flex-start;}
+.info-banner p{font-size:0.8rem;color:rgba(248,246,240,0.55);line-height:1.8;}
+.info-banner p strong{color:rgba(248,246,240,0.8);font-weight:500;}
 .tours-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+.tours-grid-2{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:2rem;}
+
 .tour-card{background:var(--panel);border:1px solid rgba(255,255,255,0.05);border-radius:3px;overflow:hidden;transition:border-color 0.3s;}
 .tour-card:hover{border-color:rgba(0,245,255,0.2);}
+.tour-card-socal{background:var(--panel);border:1px solid rgba(57,255,20,0.08);border-radius:3px;overflow:hidden;transition:border-color 0.3s;}
+.tour-card-socal:hover{border-color:rgba(57,255,20,0.25);}
 .tour-card-top{padding:1.5rem 1.5rem 1rem;}
 .tour-region{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:0.6rem;}
-.tour-card h3{font-family:'Khand',sans-serif;font-size:1.2rem;font-weight:600;letter-spacing:0.05em;margin-bottom:0.4rem;}
-.tour-card p{font-size:0.8rem;color:var(--muted);line-height:1.8;margin-bottom:0.8rem;}
+.tour-region-socal{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--green);margin-bottom:0.6rem;}
+.tour-card h3,.tour-card-socal h3{font-family:'Khand',sans-serif;font-size:1.2rem;font-weight:600;letter-spacing:0.05em;margin-bottom:0.4rem;}
+.tour-card p,.tour-card-socal p{font-size:0.8rem;color:var(--muted);line-height:1.8;margin-bottom:0.8rem;}
 .stops{display:flex;flex-wrap:wrap;gap:0.35rem;margin-bottom:0.5rem;}
 .stop{font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.25rem 0.6rem;background:rgba(0,245,255,0.06);border:1px solid rgba(0,245,255,0.15);color:rgba(0,245,255,0.7);border-radius:2px;}
-.tour-duration{font-size:0.65rem;color:rgba(248,246,240,0.3);letter-spacing:0.1em;}
+.stop-socal{font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.25rem 0.6rem;background:rgba(57,255,20,0.05);border:1px solid rgba(57,255,20,0.18);color:rgba(57,255,20,0.7);border-radius:2px;}
+.tour-duration{font-size:0.65rem;color:rgba(248,246,240,0.28);letter-spacing:0.1em;}
 
+/* PRICE BLOCKS - Vegas tours: two columns */
 .tour-bottom{border-top:1px solid rgba(255,255,255,0.05);padding:1rem 1.5rem;background:rgba(0,0,0,0.2);}
 .price-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.4rem;}
 .price-block{text-align:right;}
@@ -101,15 +113,12 @@ h2.big{font-family:'Black Han Sans',sans-serif;font-size:clamp(2rem,4vw,3.2rem);
 .price-val{font-family:'Black Han Sans',sans-serif;font-size:1.5rem;line-height:1;}
 .price-val-vegas{color:var(--fire);}
 .price-val-corona{color:var(--cyan);}
-.price-sub{font-size:0.58rem;color:rgba(248,246,240,0.25);letter-spacing:0.08em;margin-top:1px;}
+.price-val-socal{color:var(--green);}
 .price-divider{width:1px;height:40px;background:rgba(255,255,255,0.07);margin:0 0.8rem;}
-.tour-excl{font-size:0.62rem;color:rgba(248,246,240,0.22);font-style:italic;margin-top:0.5rem;}
+.tour-excl{font-size:0.6rem;color:rgba(248,246,240,0.2);font-style:italic;margin-top:0.5rem;}
 
-/* INFO BANNER */
-.info-banner{background:rgba(255,229,0,0.06);border:1px solid rgba(255,229,0,0.15);border-radius:3px;padding:1rem 1.5rem;margin-bottom:3.5rem;display:flex;gap:0.8rem;align-items:flex-start;}
-.info-banner-icon{color:var(--yellow);font-size:1rem;flex-shrink:0;margin-top:2px;}
-.info-banner p{font-size:0.8rem;color:rgba(248,246,240,0.55);line-height:1.8;}
-.info-banner p strong{color:rgba(248,246,240,0.8);font-weight:500;}
+/* SoCal: single price */
+.tour-bottom-socal{border-top:1px solid rgba(57,255,20,0.08);padding:1rem 1.5rem;background:rgba(0,0,0,0.2);display:flex;justify-content:space-between;align-items:center;}
 
 /* SCHEMA */
 .schema-section{padding:6rem 2.5rem;}
@@ -121,7 +130,6 @@ h2.big{font-family:'Black Han Sans',sans-serif;font-size:clamp(2rem,4vw,3.2rem);
 .sb-c{background:rgba(0,245,255,0.1);color:var(--cyan);border:1px solid rgba(0,245,255,0.25);}
 .sb-y{background:rgba(255,229,0,0.1);color:var(--yellow);border:1px solid rgba(255,229,0,0.3);}
 .stop-top{padding:2rem 2rem 1.5rem;}
-.schema-icon{font-size:2rem;margin-bottom:1rem;line-height:1;}
 .schema-card h3{font-family:'Khand',sans-serif;font-size:1.3rem;font-weight:600;letter-spacing:0.05em;margin-bottom:0.4rem;}
 .s-tagline{font-size:0.75rem;font-style:italic;font-family:'Khand',sans-serif;margin-bottom:1rem;color:var(--muted);}
 .s-price-row{display:flex;align-items:baseline;gap:0.4rem;margin-bottom:0.5rem;}
@@ -141,7 +149,6 @@ h2.big{font-family:'Black Han Sans',sans-serif;font-size:clamp(2rem,4vw,3.2rem);
 .estate{font-size:0.7rem;color:rgba(248,246,240,0.45);display:flex;align-items:center;gap:0.4rem;}
 .estate::before{content:'$80';font-size:0.58rem;color:var(--cyan);font-weight:600;}
 
-/* WA BAND */
 .wa-band{padding:3.5rem 2.5rem;background:var(--dark3);border-top:1px solid rgba(37,211,102,0.12);border-bottom:1px solid rgba(37,211,102,0.12);}
 .wa-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;}
 .wa-text h2{font-family:'Black Han Sans',sans-serif;font-size:2rem;letter-spacing:0.03em;line-height:1;margin-bottom:0.4rem;}
@@ -157,22 +164,10 @@ h2.big{font-family:'Black Han Sans',sans-serif;font-size:clamp(2rem,4vw,3.2rem);
 .btn-ref{font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--purple-light);border:1px solid rgba(200,0,255,0.3);padding:0.6rem 1.4rem;border-radius:2px;white-space:nowrap;cursor:pointer;background:transparent;font-family:'Outfit',sans-serif;transition:all 0.2s;text-decoration:none;}
 .btn-ref:hover{background:rgba(200,0,255,0.08);}
 
-.about-section{padding:5rem 2.5rem;background:var(--dark2);border-top:1px solid rgba(0,245,255,0.05);}
-.about-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.3fr 1fr;gap:5rem;align-items:center;}
-.about-text p{font-size:0.87rem;color:var(--muted);line-height:1.95;margin-bottom:1rem;}
-.about-text p strong{color:var(--white);font-weight:500;}
-.about-quote{margin-top:1.5rem;padding:1.2rem 1.5rem;border-left:3px solid var(--cyan);background:rgba(0,245,255,0.04);border-radius:0 3px 3px 0;font-family:'Khand',sans-serif;font-size:1.05rem;font-weight:500;color:var(--cyan);letter-spacing:0.04em;line-height:1.5;}
-.map-wrap{background:var(--panel);border:1px solid rgba(0,245,255,0.12);border-radius:3px;overflow:hidden;}
-.map-hdr{background:var(--dark3);padding:0.8rem 1.2rem;border-bottom:1px solid rgba(0,245,255,0.08);display:flex;align-items:center;gap:0.5rem;}
-.mdot{width:8px;height:8px;border-radius:50%;}
-
 footer{background:#030205;padding:1.8rem 2.5rem;border-top:1px solid rgba(255,69,0,0.1);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
 .flinks{display:flex;gap:1.5rem;}
 .flinks a{font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(248,246,240,0.16);text-decoration:none;}
 @keyframes up{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
-
-/* WA SVG icon helper */
-.waico{display:inline-block;vertical-align:middle;}
 </style>
 </head>
 <body>
@@ -197,31 +192,30 @@ footer{background:#030205;padding:1.8rem 2.5rem;border-top:1px solid rgba(255,69
     <svg viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;position:absolute;inset:0;opacity:0.45;" preserveAspectRatio="xMidYMid slice">
       <rect width="1200" height="900" fill="#050305"/>
       <ellipse cx="600" cy="680" rx="700" ry="200" fill="rgba(255,69,0,0.08)"/>
-      <ellipse cx="300" cy="400" rx="400" ry="300" fill="rgba(200,0,255,0.04)"/>
-      <ellipse cx="900" cy="500" rx="350" ry="250" fill="rgba(0,245,255,0.04)"/>
+      <ellipse cx="200" cy="500" rx="300" ry="200" fill="rgba(57,255,20,0.03)"/>
+      <ellipse cx="1000" cy="400" rx="300" ry="200" fill="rgba(0,245,255,0.03)"/>
       <circle cx="100" cy="80" r="1" fill="rgba(248,246,240,0.7)"/><circle cx="250" cy="40" r="1.5" fill="rgba(248,246,240,0.8)"/><circle cx="400" cy="100" r="1" fill="rgba(248,246,240,0.5)"/><circle cx="600" cy="30" r="1.2" fill="rgba(248,246,240,0.7)"/><circle cx="800" cy="60" r="1" fill="rgba(248,246,240,0.8)"/><circle cx="950" cy="25" r="1.5" fill="rgba(248,246,240,0.6)"/><circle cx="1100" cy="80" r="1" fill="rgba(248,246,240,0.7)"/>
       <rect x="50" y="490" width="30" height="210" fill="#0D0810"/><rect x="155" y="445" width="65" height="255" fill="#120D18"/>
-      <polygon points="258,405 273,500 283,500 298,405" fill="#100C15"/><polygon points="263,405 293,405 288,392 268,392" fill="#100C15"/><line x1="278" y1="392" x2="278" y2="372" stroke="#100C15" stroke-width="4"/><rect x="276" y="370" width="4" height="8" fill="#FF4500" opacity="0.9"/>
+      <polygon points="258,405 273,500 283,500 298,405" fill="#100C15"/><line x1="278" y1="392" x2="278" y2="372" stroke="#100C15" stroke-width="4"/><rect x="276" y="370" width="4" height="8" fill="#FF4500" opacity="0.9"/>
       <circle cx="378" cy="462" r="65" fill="#110D18"/>
       <polygon points="478,700 558,700 518,502" fill="#0F0B14"/><polygon points="513,502 523,502 538,302 498,302" fill="rgba(255,229,0,0.05)"/>
       <rect x="608" y="502" width="14" height="198" fill="#120D18"/><circle cx="615" cy="428" r="18" fill="#120D18"/>
       <path d="M 718 700 Q 728 552 758 502 Q 798 482 818 502 Q 838 552 828 700 Z" fill="#100C15"/>
       <rect x="878" y="522" width="80" height="178" fill="#120D18"/>
-      <rect x="978" y="542" width="12" height="158" fill="#150F1C"/><rect x="996" y="532" width="12" height="168" fill="#130D1A"/>
       <rect x="1098" y="482" width="28" height="218" fill="#120D18"/>
       <rect x="0" y="700" width="1200" height="200" fill="#030205"/>
       <rect x="0" y="700" width="1200" height="2" fill="rgba(255,69,0,0.12)"/>
     </svg>
   </div>
   <div class="hero-content">
-    <div class="eyebrow"><span class="blink"></span>Nederlandstalige USA-kenner · Gevestigd in California<span class="blink"></span></div>
-    <h1 class="hero-title"><span class="ht1">IK KEN</span><span class="ht2">VEGAS</span><span class="ht3">en de rest van Amerika ook</span></h1>
-    <p class="hero-sub"><strong>36 staten bezocht.</strong> Woonachtig in Corona, California — Vegas om de hoek. Privétours en reisschema's in het <strong>Nederlands</strong>, van A tot Z.</p>
+    <div class="eyebrow"><span class="blink"></span>Nederlandstalige USA-kenner · Corona, California<span class="blink"></span></div>
+    <h1 class="hero-title"><span class="ht1">IK KEN</span><span class="ht2">VEGAS</span><span class="ht3">én heel Southern California</span></h1>
+    <p class="hero-sub"><strong>36 staten bezocht.</strong> Woonachtig in Corona, CA — Vegas én SoCal om de hoek. Privétours en reisschema's in het <strong>Nederlands</strong>, van A tot Z.</p>
     <div class="pills">
       <span class="pill py">36 staten bezocht</span>
-      <span class="pill pf">Privé dagtours</span>
-      <span class="pill pc">Vegas insider</span>
-      <span class="pill pp">Reisschema's op maat</span>
+      <span class="pill pf">Vegas & Utah tours</span>
+      <span class="pill pg">SoCal tours</span>
+      <span class="pill pc">Reisschema's op maat</span>
     </div>
     <div class="hero-btns">
       <button class="btn-fire">Bekijk de tours</button>
@@ -236,7 +230,7 @@ footer{background:#030205;padding:1.8rem 2.5rem;border-top:1px solid rgba(255,69
 <!-- TICKER -->
 <div class="ticker">
   <div class="ticker-inner">
-    <span class="ticker-text">&nbsp;&nbsp;★&nbsp; 36 staten bezocht &nbsp;★&nbsp; Vanaf Vegas $595 &nbsp;★&nbsp; Vanaf Corona $795 &nbsp;★&nbsp; Reisschema $80/staat &nbsp;★&nbsp; Op maat vanaf $200 &nbsp;★&nbsp; Nederlandstalig &nbsp;★&nbsp; WhatsApp only &nbsp;★&nbsp; 36 staten bezocht &nbsp;★&nbsp; Vanaf Vegas $595 &nbsp;★&nbsp; Vanaf Corona $795 &nbsp;★&nbsp; Reisschema $80/staat &nbsp;★&nbsp; Op maat vanaf $200 &nbsp;★&nbsp; Nederlandstalig &nbsp;★&nbsp; WhatsApp only &nbsp;★&nbsp;</span>
+    <span class="ticker-text">&nbsp;&nbsp;★&nbsp; Vegas Strip $595 &nbsp;★&nbsp; Grand Canyon $750 &nbsp;★&nbsp; Temecula wijnroute $550 &nbsp;★&nbsp; LA filmlocaties $695 &nbsp;★&nbsp; Malibu $650 &nbsp;★&nbsp; Sequoia $795 &nbsp;★&nbsp; Zion $795 &nbsp;★&nbsp; Bryce Canyon $895 &nbsp;★&nbsp; Nederlandstalig &nbsp;★&nbsp; WhatsApp only &nbsp;★&nbsp; Vegas Strip $595 &nbsp;★&nbsp; Grand Canyon $750 &nbsp;★&nbsp; Temecula wijnroute $550 &nbsp;★&nbsp; LA filmlocaties $695 &nbsp;★&nbsp; Malibu $650 &nbsp;★&nbsp; Sequoia $795 &nbsp;★&nbsp; Zion $795 &nbsp;★&nbsp; Bryce Canyon $895 &nbsp;★&nbsp; Nederlandstalig &nbsp;★&nbsp; WhatsApp only &nbsp;★&nbsp;</span>
   </div>
 </div>
 
@@ -245,8 +239,8 @@ footer{background:#030205;padding:1.8rem 2.5rem;border-top:1px solid rgba(255,69
   <div class="stats-row">
     <div class="stat"><div class="snum sy">36</div><div class="slabel">Staten bezocht</div></div>
     <div class="stat"><div class="snum sf">$595</div><div class="slabel">Vanaf Vegas</div></div>
-    <div class="stat"><div class="snum sc">$795</div><div class="slabel">Vanaf Corona CA</div></div>
-    <div class="stat"><div class="snum sp">NL</div><div class="slabel">100% in jouw taal</div></div>
+    <div class="stat"><div class="snum sg">$550</div><div class="slabel">SoCal vanaf</div></div>
+    <div class="stat"><div class="snum sc">NL</div><div class="slabel">100% in jouw taal</div></div>
   </div>
 </div>
 
@@ -255,16 +249,21 @@ footer{background:#030205;padding:1.8rem 2.5rem;border-top:1px solid rgba(255,69
   <div class="wrap">
     <div class="stag stag-f">Privé dagtours</div>
     <h2 class="big">Jij rijdt niet.<br><span style="color:var(--fire);">Ik rij voor jou.</span></h2>
-    <p class="tours-intro">Geen bus, geen groep, geen vaste vertrekuren. Elke tour is privé — voor jullie alleen. Kies je vertrekpunt: je verblijft al in Vegas, of je vertrekt vanuit Zuid-Californië.</p>
+    <p class="tours-intro">Geen bus, geen groep, geen vaste vertrekuren. Elke tour is privé — voor jullie alleen. Van Vegas & de nationale parken tot de mooiste plekken van Southern California, allemaal vanuit Corona bereikbaar.</p>
 
     <div class="info-banner">
-      <div class="info-banner-icon">◆</div>
-      <p><strong>Entreekosten en parkeerkosten zijn niet inbegrepen</strong> in de tourprijzen — deze worden ter plaatse door de klant betaald. Bij meerdaagse tours zijn overnachtingen niet inbegrepen. Prijzen zijn per voertuig (tot 6 personen).</p>
+      <p>◆&nbsp; <strong>Entreekosten en parkeerkosten zijn niet inbegrepen</strong> — deze worden ter plaatse door de klant betaald. Bij meerdaagse tours zijn overnachtingen niet inbegrepen. Prijzen zijn per voertuig (tot 6 personen). Tours met twee prijskolommen: links = vertrek vanuit Vegas, rechts = vertrek vanuit Corona CA.</p>
     </div>
 
-    <div class="tours-grid">
+    <!-- VEGAS & PARKEN -->
+    <div class="section-divider div-vegas">
+      <div class="section-divider-line"></div>
+      <div class="section-divider-label">Vegas, Utah & Arizona</div>
+      <div class="section-divider-line"></div>
+    </div>
 
-      <!-- Vegas Strip -->
+    <div class="tours-grid" style="margin-bottom:4rem;">
+
       <div class="tour-card">
         <div class="tour-card-top">
           <div class="tour-region">Las Vegas · Nevada</div>
@@ -275,21 +274,14 @@ footer{background:#030205;padding:1.8rem 2.5rem;border-top:1px solid rgba(255,69
         </div>
         <div class="tour-bottom">
           <div class="price-row">
-            <div class="price-block">
-              <div class="price-label">Vertrek Vegas</div>
-              <div class="price-val price-val-vegas">$595</div>
-            </div>
+            <div class="price-block"><div class="price-label">Vertrek Vegas</div><div class="price-val price-val-vegas">$595</div></div>
             <div class="price-divider"></div>
-            <div class="price-block">
-              <div class="price-label">Vertrek Corona</div>
-              <div class="price-val price-val-corona">$795</div>
-            </div>
+            <div class="price-block"><div class="price-label">Vertrek Corona</div><div class="price-val price-val-corona">$795</div></div>
           </div>
           <div class="tour-excl">excl. entrees & parkeren · tot 6 pers.</div>
         </div>
       </div>
 
-      <!-- Red Rock / Valley of Fire -->
       <div class="tour-card">
         <div class="tour-card-top">
           <div class="tour-region">Nevada · Natuur</div>
@@ -300,21 +292,14 @@ footer{background:#030205;padding:1.8rem 2.5rem;border-top:1px solid rgba(255,69
         </div>
         <div class="tour-bottom">
           <div class="price-row">
-            <div class="price-block">
-              <div class="price-label">Vertrek Vegas</div>
-              <div class="price-val price-val-vegas">$650</div>
-            </div>
+            <div class="price-block"><div class="price-label">Vertrek Vegas</div><div class="price-val price-val-vegas">$650</div></div>
             <div class="price-divider"></div>
-            <div class="price-block">
-              <div class="price-label">Vertrek Corona</div>
-              <div class="price-val price-val-corona">$1.295</div>
-            </div>
+            <div class="price-block"><div class="price-label">Vertrek Corona</div><div class="price-val price-val-corona">$1.295</div></div>
           </div>
           <div class="tour-excl">excl. entrees & parkeren · tot 6 pers.</div>
         </div>
       </div>
 
-      <!-- Hoover Dam -->
       <div class="tour-card">
         <div class="tour-card-top">
           <div class="tour-region">Nevada · Arizona</div>
@@ -325,21 +310,14 @@ footer{background:#030205;padding:1.8rem 2.5rem;border-top:1px solid rgba(255,69
         </div>
         <div class="tour-bottom">
           <div class="price-row">
-            <div class="price-block">
-              <div class="price-label">Vertrek Vegas</div>
-              <div class="price-val price-val-vegas">$650</div>
-            </div>
+            <div class="price-block"><div class="price-label">Vertrek Vegas</div><div class="price-val price-val-vegas">$650</div></div>
             <div class="price-divider"></div>
-            <div class="price-block">
-              <div class="price-label">Vertrek Corona</div>
-              <div class="price-val price-val-corona">$995</div>
-            </div>
+            <div class="price-block"><div class="price-label">Vertrek Corona</div><div class="price-val price-val-corona">$995</div></div>
           </div>
           <div class="tour-excl">excl. entrees & parkeren · tot 6 pers.</div>
         </div>
       </div>
 
-      <!-- Grand Canyon -->
       <div class="tour-card">
         <div class="tour-card-top">
           <div class="tour-region">Nationaal Park · Arizona</div>
@@ -350,21 +328,14 @@ footer{background:#030205;padding:1.8rem 2.5rem;border-top:1px solid rgba(255,69
         </div>
         <div class="tour-bottom">
           <div class="price-row">
-            <div class="price-block">
-              <div class="price-label">Vertrek Vegas</div>
-              <div class="price-val price-val-vegas">$750</div>
-            </div>
+            <div class="price-block"><div class="price-label">Vertrek Vegas</div><div class="price-val price-val-vegas">$750</div></div>
             <div class="price-divider"></div>
-            <div class="price-block">
-              <div class="price-label">Vertrek Corona</div>
-              <div class="price-val price-val-corona">$1.395</div>
-            </div>
+            <div class="price-block"><div class="price-label">Vertrek Corona</div><div class="price-val price-val-corona">$1.395</div></div>
           </div>
           <div class="tour-excl">excl. entrees & parkeren · tot 6 pers.</div>
         </div>
       </div>
 
-      <!-- Zion -->
       <div class="tour-card">
         <div class="tour-card-top">
           <div class="tour-region">Utah · Nationaal Park</div>
@@ -375,96 +346,214 @@ footer{background:#030205;padding:1.8rem 2.5rem;border-top:1px solid rgba(255,69
         </div>
         <div class="tour-bottom">
           <div class="price-row">
-            <div class="price-block">
-              <div class="price-label">Vertrek Vegas</div>
-              <div class="price-val price-val-vegas">$795</div>
-            </div>
+            <div class="price-block"><div class="price-label">Vertrek Vegas</div><div class="price-val price-val-vegas">$795</div></div>
             <div class="price-divider"></div>
-            <div class="price-block">
-              <div class="price-label">Vertrek Corona</div>
-              <div class="price-val price-val-corona">$1.495</div>
-            </div>
+            <div class="price-block"><div class="price-label">Vertrek Corona</div><div class="price-val price-val-corona">$1.495</div></div>
           </div>
           <div class="tour-excl">excl. entrees & parkeren · tot 6 pers.</div>
         </div>
       </div>
 
-      <!-- Bryce Canyon -->
       <div class="tour-card">
         <div class="tour-card-top">
           <div class="tour-region">Utah · Nationaal Park</div>
           <h3>Bryce Canyon</h3>
-          <p>Hoodoos zo ver het oog reikt — een andere planeet. Vanuit Vegas al een flinke trip, vanuit Corona een volledige expeditie.</p>
+          <p>Hoodoos zo ver het oog reikt — een andere planeet. Vanuit Vegas al een flinke trip, vanuit Corona een expeditie.</p>
           <div class="stops"><span class="stop">Bryce Canyon</span><span class="stop">Sunrise Point</span><span class="stop">Inspiration Point</span></div>
           <div class="tour-duration" style="margin-top:0.5rem;">± 13u · zeer lange dag</div>
         </div>
         <div class="tour-bottom">
           <div class="price-row">
-            <div class="price-block">
-              <div class="price-label">Vertrek Vegas</div>
-              <div class="price-val price-val-vegas">$895</div>
-            </div>
+            <div class="price-block"><div class="price-label">Vertrek Vegas</div><div class="price-val price-val-vegas">$895</div></div>
             <div class="price-divider"></div>
-            <div class="price-block">
-              <div class="price-label">Vertrek Corona</div>
-              <div class="price-val price-val-corona">$1.595</div>
-            </div>
+            <div class="price-block"><div class="price-label">Vertrek Corona</div><div class="price-val price-val-corona">$1.595</div></div>
           </div>
           <div class="tour-excl">excl. entrees & parkeren · tot 6 pers.</div>
         </div>
       </div>
 
-      <!-- Bryce + Antelope -->
-      <div class="tour-card" style="border-color:rgba(255,229,0,0.12);">
+      <div class="tour-card" style="border-color:rgba(255,229,0,0.12);grid-column:span 2;">
         <div class="tour-card-top">
           <div class="tour-region" style="color:var(--yellow);">Utah · Arizona · Dubbele park</div>
           <h3 style="color:var(--yellow);">Bryce Canyon + Antelope Canyon</h3>
-          <p>De ultieme combinatie — hoodoos én de beroemde lichtstralen van Antelope Canyon. Beste gereserveerd als overnachting erbij.</p>
+          <p>De ultieme combinatie — hoodoos én de lichtstralen van Antelope Canyon. Bij voorkeur met overnachting erbij.</p>
           <div class="stops">
-            <span class="stop" style="border-color:rgba(255,229,0,0.2);color:rgba(255,229,0,0.7);background:rgba(255,229,0,0.05);">Bryce Canyon</span>
-            <span class="stop" style="border-color:rgba(255,229,0,0.2);color:rgba(255,229,0,0.7);background:rgba(255,229,0,0.05);">Antelope Canyon</span>
-            <span class="stop" style="border-color:rgba(255,229,0,0.2);color:rgba(255,229,0,0.7);background:rgba(255,229,0,0.05);">Horseshoe Bend</span>
+            <span class="stop" style="border-color:rgba(255,229,0,0.2);color:rgba(255,229,0,0.7);background:rgba(255,229,0,0.04);">Bryce Canyon</span>
+            <span class="stop" style="border-color:rgba(255,229,0,0.2);color:rgba(255,229,0,0.7);background:rgba(255,229,0,0.04);">Antelope Canyon</span>
+            <span class="stop" style="border-color:rgba(255,229,0,0.2);color:rgba(255,229,0,0.7);background:rgba(255,229,0,0.04);">Horseshoe Bend</span>
           </div>
           <div class="tour-duration" style="margin-top:0.5rem;color:rgba(255,229,0,0.4);">± 15u · aanbevolen met overnachting</div>
         </div>
         <div class="tour-bottom" style="background:rgba(255,229,0,0.03);">
           <div class="price-row">
-            <div class="price-block">
-              <div class="price-label">Vertrek Vegas</div>
-              <div class="price-val" style="color:var(--yellow);font-family:'Black Han Sans',sans-serif;font-size:1.5rem;">$995</div>
-            </div>
+            <div class="price-block"><div class="price-label">Vertrek Vegas</div><div class="price-val" style="color:var(--yellow);font-family:'Black Han Sans',sans-serif;font-size:1.5rem;">$995</div></div>
             <div class="price-divider"></div>
-            <div class="price-block">
-              <div class="price-label">Vertrek Corona</div>
-              <div class="price-val" style="color:var(--yellow);font-family:'Black Han Sans',sans-serif;font-size:1.5rem;">$1.795</div>
-            </div>
+            <div class="price-block"><div class="price-label">Vertrek Corona</div><div class="price-val" style="color:var(--yellow);font-family:'Black Han Sans',sans-serif;font-size:1.5rem;">$1.795</div></div>
           </div>
           <div class="tour-excl">excl. entrees, parkeren & overnachting · tot 6 pers.</div>
         </div>
       </div>
 
-      <!-- Meerdaagse tour -->
-      <div class="tour-card" style="border-color:rgba(200,0,255,0.15);grid-column:span 2;">
+      <div class="tour-card" style="border-color:rgba(200,0,255,0.12);">
         <div class="tour-card-top">
-          <div class="tour-region" style="color:var(--purple-light);">Meerdere staten · Volledig op maat</div>
+          <div class="tour-region" style="color:var(--purple-light);">Meerdere staten · Op maat</div>
           <h3 style="color:var(--purple-light);">Meerdaagse West-USA Tour</h3>
-          <p>Combineer Nevada, Utah, Arizona en California over meerdere dagen. Overnachtingen niet inbegrepen — ik rij, jullie slapen waar jullie willen. Prijs op basis van dagen, kilometers en regio.</p>
+          <p>Combineer Nevada, Utah en Arizona over meerdere dagen. Overnachtingen niet inbegrepen — ik rij, jullie slapen waar jullie willen.</p>
           <div class="stops">
-            <span class="stop" style="border-color:rgba(200,0,255,0.2);color:rgba(224,96,255,0.7);background:rgba(200,0,255,0.05);">CA</span>
-            <span class="stop" style="border-color:rgba(200,0,255,0.2);color:rgba(224,96,255,0.7);background:rgba(200,0,255,0.05);">NV</span>
-            <span class="stop" style="border-color:rgba(200,0,255,0.2);color:rgba(224,96,255,0.7);background:rgba(200,0,255,0.05);">UT</span>
-            <span class="stop" style="border-color:rgba(200,0,255,0.2);color:rgba(224,96,255,0.7);background:rgba(200,0,255,0.05);">AZ</span>
-            <span class="stop" style="border-color:rgba(200,0,255,0.2);color:rgba(224,96,255,0.7);background:rgba(200,0,255,0.05);">Fully custom</span>
+            <span class="stop" style="border-color:rgba(200,0,255,0.2);color:rgba(224,96,255,0.7);background:rgba(200,0,255,0.04);">NV</span>
+            <span class="stop" style="border-color:rgba(200,0,255,0.2);color:rgba(224,96,255,0.7);background:rgba(200,0,255,0.04);">UT</span>
+            <span class="stop" style="border-color:rgba(200,0,255,0.2);color:rgba(224,96,255,0.7);background:rgba(200,0,255,0.04);">AZ</span>
+            <span class="stop" style="border-color:rgba(200,0,255,0.2);color:rgba(224,96,255,0.7);background:rgba(200,0,255,0.04);">Fully custom</span>
           </div>
         </div>
         <div class="tour-bottom" style="background:rgba(200,0,255,0.03);">
           <div class="price-row">
             <div class="price-block" style="text-align:left;">
               <div class="price-label">Prijs</div>
-              <div class="price-val" style="color:var(--purple-light);font-family:'Black Han Sans',sans-serif;font-size:1.5rem;">Offerte via WhatsApp</div>
+              <div class="price-val" style="color:var(--purple-light);font-family:'Black Han Sans',sans-serif;font-size:1.3rem;">Offerte via WhatsApp</div>
             </div>
           </div>
-          <div class="tour-excl">excl. entrees, parkeren & overnachtingen · flexibel aantal personen</div>
+          <div class="tour-excl">excl. entrees, parkeren & overnachtingen</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SOUTHERN CALIFORNIA -->
+    <div class="section-divider div-socal">
+      <div class="section-divider-line"></div>
+      <div class="section-divider-label">Southern California · Vertrek Corona</div>
+      <div class="section-divider-line"></div>
+    </div>
+
+    <div class="tours-grid-2">
+
+      <div class="tour-card-socal">
+        <div class="tour-card-top">
+          <div class="tour-region-socal">Inland Empire · ~45 min</div>
+          <h3>Temecula wijnroute</h3>
+          <p>De wijnvallei van SoCal — charming, relaxed en verrassend goed. Winery-bezoeken, lunches en lokale wijnen op wandelafstand van elkaar.</p>
+          <div class="stops"><span class="stop-socal">Old Town Temecula</span><span class="stop-socal">Wilson Creek</span><span class="stop-socal">Callaway Winery</span></div>
+          <div class="tour-duration" style="margin-top:0.5rem;">± 6u</div>
+        </div>
+        <div class="tour-bottom-socal">
+          <div><div class="price-label">Vertrek Corona</div><div class="price-val price-val-socal">$550</div><div class="price-sub" style="font-size:0.58rem;color:rgba(248,246,240,0.2);">excl. wijnproeverijen</div></div>
+          <div class="tdetail" style="font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(248,246,240,0.25);">tot 6 pers.</div>
+        </div>
+      </div>
+
+      <div class="tour-card-socal">
+        <div class="tour-card-top">
+          <div class="tour-region-socal">San Bernardino Mountains · ~1u</div>
+          <h3>Big Bear & Mountains</h3>
+          <p>Pijnbomenwouden, een bergmeer en in de winter sneeuw — allemaal op een uur van Corona. Zomer en winter beide de moeite.</p>
+          <div class="stops"><span class="stop-socal">Big Bear Lake</span><span class="stop-socal">Snow Summit</span><span class="stop-socal">Hiking trails</span></div>
+          <div class="tour-duration" style="margin-top:0.5rem;">± 7u</div>
+        </div>
+        <div class="tour-bottom-socal">
+          <div><div class="price-label">Vertrek Corona</div><div class="price-val price-val-socal">$595</div><div class="price-sub" style="font-size:0.58rem;color:rgba(248,246,240,0.2);">excl. entrees</div></div>
+          <div class="tdetail" style="font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(248,246,240,0.25);">tot 6 pers.</div>
+        </div>
+      </div>
+
+      <div class="tour-card-socal">
+        <div class="tour-card-top">
+          <div class="tour-region-socal">Coachella Valley · ~1u</div>
+          <h3>Palm Springs & Desert</h3>
+          <p>Mid-century modernisme, palmbomen en woestijnhitte. De gondola naar Mt. San Jacinto geeft je in 10 minuten een temperatuurverschil van 40°C.</p>
+          <div class="stops"><span class="stop-socal">Palm Springs</span><span class="stop-socal">Aerial Tramway</span><span class="stop-socal">Joshua Tree</span></div>
+          <div class="tour-duration" style="margin-top:0.5rem;">± 7u</div>
+        </div>
+        <div class="tour-bottom-socal">
+          <div><div class="price-label">Vertrek Corona</div><div class="price-val price-val-socal">$595</div><div class="price-sub" style="font-size:0.58rem;color:rgba(248,246,240,0.2);">excl. entrees</div></div>
+          <div class="tdetail" style="font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(248,246,240,0.25);">tot 6 pers.</div>
+        </div>
+      </div>
+
+      <div class="tour-card-socal">
+        <div class="tour-card-top">
+          <div class="tour-region-socal">Los Angeles · ~1u</div>
+          <h3>Hollywood filmlocaties</h3>
+          <p>Van Pulp Fiction tot La La Land, van Friends tot The Big Lebowski — ik breng je langs de echte locaties, niet de toeristische clichés.</p>
+          <div class="stops"><span class="stop-socal">Hollywood</span><span class="stop-socal">Griffith Park</span><span class="stop-socal">Iconic locations</span></div>
+          <div class="tour-duration" style="margin-top:0.5rem;">± 8u</div>
+        </div>
+        <div class="tour-bottom-socal">
+          <div><div class="price-label">Vertrek Corona</div><div class="price-val price-val-socal">$695</div><div class="price-sub" style="font-size:0.58rem;color:rgba(248,246,240,0.2);">excl. entrees & parkeren</div></div>
+          <div class="tdetail" style="font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(248,246,240,0.25);">tot 6 pers.</div>
+        </div>
+      </div>
+
+      <div class="tour-card-socal">
+        <div class="tour-card-top">
+          <div class="tour-region-socal">Los Angeles Coast · ~1u</div>
+          <h3>Santa Monica, Venice & Malibu</h3>
+          <p>De iconische pier, de boardwalk van Venice Beach, de kliffen van Malibu en de Pacific Coast Highway. Classic SoCal in één dag.</p>
+          <div class="stops"><span class="stop-socal">Santa Monica Pier</span><span class="stop-socal">Venice Beach</span><span class="stop-socal">Malibu PCH</span></div>
+          <div class="tour-duration" style="margin-top:0.5rem;">± 8u</div>
+        </div>
+        <div class="tour-bottom-socal">
+          <div><div class="price-label">Vertrek Corona</div><div class="price-val price-val-socal">$650</div><div class="price-sub" style="font-size:0.58rem;color:rgba(248,246,240,0.2);">excl. parkeren</div></div>
+          <div class="tdetail" style="font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(248,246,240,0.25);">tot 6 pers.</div>
+        </div>
+      </div>
+
+      <div class="tour-card-socal">
+        <div class="tour-card-top">
+          <div class="tour-region-socal">San Diego · ~1.5u</div>
+          <h3>USS Midway & San Diego</h3>
+          <p>Het beroemde vliegdekschip USS Midway, het historische Gaslamp Quarter en de mooiste baai van California. San Diego verrast altijd.</p>
+          <div class="stops"><span class="stop-socal">USS Midway</span><span class="stop-socal">Gaslamp Quarter</span><span class="stop-socal">Balboa Park</span></div>
+          <div class="tour-duration" style="margin-top:0.5rem;">± 8u</div>
+        </div>
+        <div class="tour-bottom-socal">
+          <div><div class="price-label">Vertrek Corona</div><div class="price-val price-val-socal">$650</div><div class="price-sub" style="font-size:0.58rem;color:rgba(248,246,240,0.2);">excl. entrees USS Midway</div></div>
+          <div class="tdetail" style="font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(248,246,240,0.25);">tot 6 pers.</div>
+        </div>
+      </div>
+
+      <div class="tour-card-socal">
+        <div class="tour-card-top">
+          <div class="tour-region-socal">Santa Barbara · ~2u</div>
+          <h3>Santa Barbara & coast</h3>
+          <p>De Rivièra van Amerika — wit gestuukte gebouwen, wijngaarden, een prachtige haven en de langzame vibe van een Spaanse havenstad.</p>
+          <div class="stops"><span class="stop-socal">State Street</span><span class="stop-socal">Stearns Wharf</span><span class="stop-socal">Mission Santa Barbara</span></div>
+          <div class="tour-duration" style="margin-top:0.5rem;">± 9u</div>
+        </div>
+        <div class="tour-bottom-socal">
+          <div><div class="price-label">Vertrek Corona</div><div class="price-val price-val-socal">$750</div><div class="price-sub" style="font-size:0.58rem;color:rgba(248,246,240,0.2);">excl. parkeren</div></div>
+          <div class="tdetail" style="font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(248,246,240,0.25);">tot 6 pers.</div>
+        </div>
+      </div>
+
+      <div class="tour-card-socal">
+        <div class="tour-card-top">
+          <div class="tour-region-socal">Sequoia NP · ~2.5u</div>
+          <h3>Sequoia National Park</h3>
+          <p>De grootste bomen op aarde. General Sherman — 2800 jaar oud, 85 meter hoog. Woorden schieten tekort. Je moet het gezien hebben.</p>
+          <div class="stops"><span class="stop-socal">General Sherman</span><span class="stop-socal">Giant Forest</span><span class="stop-socal">Moro Rock</span></div>
+          <div class="tour-duration" style="margin-top:0.5rem;">± 10u</div>
+        </div>
+        <div class="tour-bottom-socal">
+          <div><div class="price-label">Vertrek Corona</div><div class="price-val price-val-socal">$795</div><div class="price-sub" style="font-size:0.58rem;color:rgba(248,246,240,0.2);">excl. parkentree</div></div>
+          <div class="tdetail" style="font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(248,246,240,0.25);">tot 6 pers.</div>
+        </div>
+      </div>
+
+      <div class="tour-card-socal" style="border-color:rgba(57,255,20,0.15);">
+        <div class="tour-card-top">
+          <div class="tour-region-socal" style="color:rgba(57,255,20,0.8);">Volledig op maat · SoCal</div>
+          <h3 style="color:var(--green);">Custom SoCal Tour</h3>
+          <p>Laguna Beach, OC coast, Disneyland omgeving, Rose Bowl, Getty Museum — combineer wat jij wil zien in één gepersonaliseerde dag.</p>
+          <div class="stops">
+            <span class="stop-socal">Laguna Beach</span>
+            <span class="stop-socal">OC Coast</span>
+            <span class="stop-socal">Jouw keuze</span>
+          </div>
+        </div>
+        <div class="tour-bottom-socal" style="background:rgba(57,255,20,0.03);">
+          <div><div class="price-label">Prijs</div><div class="price-val" style="color:var(--green);font-family:'Black Han Sans',sans-serif;font-size:1.3rem;">Offerte via WhatsApp</div></div>
+          <div class="tdetail" style="font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(248,246,240,0.25);">flexibel</div>
         </div>
       </div>
 
@@ -485,7 +574,7 @@ footer{background:#030205;padding:1.8rem 2.5rem;border-top:1px solid rgba(255,69
           <h3>Standaard reisschema</h3>
           <p class="s-tagline">Per staat · direct via WhatsApp</p>
           <div class="s-price-row"><span class="s-price s-price-c">$80</span><span class="s-unit">/ staat</span></div>
-          <p class="s-desc">Kant-en-klaar reisschema per staat: beste routes, timing, insider-tips en aanbevolen overnachtingen. Ideaal als je zelf rijdt.</p>
+          <p class="s-desc">Kant-en-klaar reisschema per staat of regio: beste routes, timing, insider-tips en aanbevolen overnachtingen.</p>
           <ul class="s-feats">
             <li class="fc">Dag-per-dag planning</li>
             <li class="fc">Beste routes & tussenstops</li>
@@ -533,12 +622,12 @@ footer{background:#030205;padding:1.8rem 2.5rem;border-top:1px solid rgba(255,69
       <div class="estate-list">
         <span class="estate">&nbsp;Nevada</span>
         <span class="estate">&nbsp;California (totaal)</span>
+        <span class="estate">&nbsp;California (SoCal)</span>
         <span class="estate">&nbsp;Utah (Mighty Five)</span>
         <span class="estate">&nbsp;Arizona</span>
         <span class="estate">&nbsp;California (PCH)</span>
         <span class="estate">&nbsp;Oregon</span>
-        <span class="estate">&nbsp;Washington</span>
-        <span class="estate" style="color:rgba(200,0,255,0.5);">&nbsp;Andere staat? App me</span>
+        <span class="estate" style="color:rgba(200,0,255,0.5);">&nbsp;Andere regio? App me</span>
       </div>
     </div>
   </div>
@@ -569,93 +658,6 @@ footer{background:#030205;padding:1.8rem 2.5rem;border-top:1px solid rgba(255,69
       </div>
     </div>
     <a href="https://www.trouweninvegas.be" class="btn-ref">→ trouweninvegas.be</a>
-  </div>
-</section>
-
-<!-- ABOUT + MAP -->
-<section class="about-section">
-  <div class="about-inner">
-    <div class="about-text">
-      <div class="stag stag-w" style="margin-bottom:1rem;">Over mij</div>
-      <h2 class="big" style="font-size:2.2rem;margin-bottom:1.5rem;">Geen reisgids.<br><span style="color:var(--fire);">Een echte<br>USA-kenner.</span></h2>
-      <p>Ik ben een <strong>Belg die Amerika kent van binnenuit</strong> — 36 staten, ontelbare highways, nationale parken, steden en vergeten dorpjes.</p>
-      <p>Nu woon ik in <strong>Corona, California</strong>, met Las Vegas om de hoek. Ik ken de Strip, maar ook de plekken die geen toerist ooit vindt.</p>
-      <p>Geen callcenter, geen script. <strong>Gewoon iemand die er woont en de weg kent.</strong></p>
-      <div class="about-quote">"36 staten. Eén gids. Jouw trip."</div>
-    </div>
-    <div>
-      <div class="map-wrap">
-        <div class="map-hdr">
-          <div class="mdot" style="background:var(--fire);"></div>
-          <div class="mdot" style="background:var(--yellow);"></div>
-          <div class="mdot" style="background:var(--cyan);opacity:0.6;"></div>
-          <span style="font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-left:0.4rem;">bezochte staten · 36/50</span>
-        </div>
-        <div style="padding:1.2rem;">
-          <svg viewBox="0 0 500 285" xmlns="http://www.w3.org/2000/svg" style="width:100%;">
-            <rect width="500" height="285" fill="#0E0B14" rx="3"/>
-            <rect x="28" y="90" width="32" height="42" fill="rgba(255,69,0,0.4)" stroke="rgba(255,69,0,0.8)" stroke-width="1.5" rx="1"/><text x="44" y="115" font-family="monospace" font-size="7" fill="#FF9060" text-anchor="middle" font-weight="bold">CA</text>
-            <rect x="62" y="75" width="32" height="42" fill="rgba(255,69,0,0.4)" stroke="rgba(255,69,0,0.8)" stroke-width="1.5" rx="1"/><text x="78" y="100" font-family="monospace" font-size="7" fill="#FF9060" text-anchor="middle" font-weight="bold">NV</text>
-            <rect x="96" y="75" width="30" height="42" fill="rgba(255,229,0,0.18)" stroke="rgba(255,229,0,0.55)" stroke-width="1" rx="1"/><text x="111" y="100" font-family="monospace" font-size="7" fill="#FFE500" text-anchor="middle">UT</text>
-            <rect x="62" y="119" width="32" height="30" fill="rgba(255,229,0,0.18)" stroke="rgba(255,229,0,0.55)" stroke-width="1" rx="1"/><text x="78" y="138" font-family="monospace" font-size="7" fill="#FFE500" text-anchor="middle">AZ</text>
-            <rect x="62" y="30" width="32" height="43" fill="rgba(255,229,0,0.18)" stroke="rgba(255,229,0,0.55)" stroke-width="1" rx="1"/><text x="78" y="55" font-family="monospace" font-size="7" fill="#FFE500" text-anchor="middle">ID</text>
-            <rect x="96" y="30" width="42" height="30" fill="rgba(255,229,0,0.18)" stroke="rgba(255,229,0,0.55)" stroke-width="1" rx="1"/><text x="117" y="49" font-family="monospace" font-size="7" fill="#FFE500" text-anchor="middle">MT</text>
-            <rect x="96" y="62" width="42" height="30" fill="rgba(255,229,0,0.18)" stroke="rgba(255,229,0,0.55)" stroke-width="1" rx="1"/><text x="117" y="81" font-family="monospace" font-size="7" fill="#FFE500" text-anchor="middle">WY</text>
-            <rect x="128" y="94" width="42" height="30" fill="rgba(255,229,0,0.18)" stroke="rgba(255,229,0,0.55)" stroke-width="1" rx="1"/><text x="149" y="113" font-family="monospace" font-size="7" fill="#FFE500" text-anchor="middle">CO</text>
-            <rect x="128" y="126" width="42" height="28" fill="rgba(255,229,0,0.18)" stroke="rgba(255,229,0,0.55)" stroke-width="1" rx="1"/><text x="149" y="144" font-family="monospace" font-size="7" fill="#FFE500" text-anchor="middle">NM</text>
-            <rect x="172" y="140" width="42" height="40" fill="rgba(255,229,0,0.18)" stroke="rgba(255,229,0,0.55)" stroke-width="1" rx="1"/><text x="193" y="164" font-family="monospace" font-size="7" fill="#FFE500" text-anchor="middle">TX</text>
-            <rect x="172" y="116" width="36" height="24" fill="rgba(255,229,0,0.18)" stroke="rgba(255,229,0,0.55)" stroke-width="1" rx="1"/><text x="190" y="132" font-family="monospace" font-size="7" fill="#FFE500" text-anchor="middle">OK</text>
-            <rect x="172" y="90" width="36" height="24" fill="rgba(255,229,0,0.18)" stroke="rgba(255,229,0,0.55)" stroke-width="1" rx="1"/><text x="190" y="106" font-family="monospace" font-size="7" fill="#FFE500" text-anchor="middle">NE</text>
-            <rect x="172" y="60" width="36" height="28" fill="rgba(255,229,0,0.18)" stroke="rgba(255,229,0,0.55)" stroke-width="1" rx="1"/><text x="190" y="78" font-family="monospace" font-size="7" fill="#FFE500" text-anchor="middle">SD</text>
-            <rect x="172" y="30" width="36" height="28" fill="rgba(255,229,0,0.18)" stroke="rgba(255,229,0,0.55)" stroke-width="1" rx="1"/><text x="190" y="48" font-family="monospace" font-size="7" fill="#FFE500" text-anchor="middle">ND</text>
-            <rect x="210" y="30" width="32" height="36" fill="rgba(255,229,0,0.18)" stroke="rgba(255,229,0,0.55)" stroke-width="1" rx="1"/><text x="226" y="52" font-family="monospace" font-size="7" fill="#FFE500" text-anchor="middle">MN</text>
-            <rect x="210" y="68" width="32" height="26" fill="rgba(255,229,0,0.18)" stroke="rgba(255,229,0,0.55)" stroke-width="1" rx="1"/><text x="226" y="84" font-family="monospace" font-size="7" fill="#FFE500" text-anchor="middle">IA</text>
-            <rect x="210" y="96" width="32" height="26" fill="rgba(255,229,0,0.18)" stroke="rgba(255,229,0,0.55)" stroke-width="1" rx="1"/><text x="226" y="112" font-family="monospace" font-size="7" fill="#FFE500" text-anchor="middle">MO</text>
-            <rect x="210" y="124" width="32" height="24" fill="rgba(255,229,0,0.18)" stroke="rgba(255,229,0,0.55)" stroke-width="1" rx="1"/><text x="226" y="139" font-family="monospace" font-size="7" fill="#FFE500" text-anchor="middle">AR</text>
-            <rect x="210" y="150" width="32" height="24" fill="rgba(255,229,0,0.18)" stroke="rgba(255,229,0,0.55)" stroke-width="1" rx="1"/><text x="226" y="165" font-family="monospace" font-size="7" fill="#FFE500" text-anchor="middle">LA</text>
-            <rect x="244" y="38" width="28" height="28" fill="rgba(255,229,0,0.18)" stroke="rgba(255,229,0,0.55)" stroke-width="1" rx="1"/><text x="258" y="56" font-family="monospace" font-size="7" fill="#FFE500" text-anchor="middle">WI</text>
-            <rect x="244" y="68" width="28" height="28" fill="rgba(255,229,0,0.18)" stroke="rgba(255,229,0,0.55)" stroke-width="1" rx="1"/><text x="258" y="86" font-family="monospace" font-size="7" fill="#FFE500" text-anchor="middle">IL</text>
-            <rect x="274" y="68" width="24" height="28" fill="rgba(255,229,0,0.18)" stroke="rgba(255,229,0,0.55)" stroke-width="1" rx="1"/><text x="286" y="86" font-family="monospace" font-size="7" fill="#FFE500" text-anchor="middle">IN</text>
-            <rect x="274" y="38" width="28" height="28" fill="rgba(255,229,0,0.18)" stroke="rgba(255,229,0,0.55)" stroke-width="1" rx="1"/><text x="288" y="56" font-family="monospace" font-size="7" fill="#FFE500" text-anchor="middle">MI</text>
-            <rect x="274" y="98" width="28" height="22" fill="rgba(255,229,0,0.18)" stroke="rgba(255,229,0,0.55)" stroke-width="1" rx="1"/><text x="288" y="113" font-family="monospace" font-size="7" fill="#FFE500" text-anchor="middle">KY</text>
-            <rect x="274" y="122" width="28" height="22" fill="rgba(255,229,0,0.18)" stroke="rgba(255,229,0,0.55)" stroke-width="1" rx="1"/><text x="288" y="137" font-family="monospace" font-size="7" fill="#FFE500" text-anchor="middle">TN</text>
-            <rect x="244" y="148" width="26" height="24" fill="rgba(255,229,0,0.18)" stroke="rgba(255,229,0,0.55)" stroke-width="1" rx="1"/><text x="257" y="164" font-family="monospace" font-size="7" fill="#FFE500" text-anchor="middle">MS</text>
-            <rect x="274" y="148" width="24" height="24" fill="rgba(255,229,0,0.18)" stroke="rgba(255,229,0,0.55)" stroke-width="1" rx="1"/><text x="286" y="164" font-family="monospace" font-size="7" fill="#FFE500" text-anchor="middle">AL</text>
-            <rect x="300" y="68" width="26" height="28" fill="rgba(255,229,0,0.18)" stroke="rgba(255,229,0,0.55)" stroke-width="1" rx="1"/><text x="313" y="86" font-family="monospace" font-size="7" fill="#FFE500" text-anchor="middle">OH</text>
-            <rect x="300" y="98" width="26" height="22" fill="rgba(255,229,0,0.18)" stroke="rgba(255,229,0,0.55)" stroke-width="1" rx="1"/><text x="313" y="113" font-family="monospace" font-size="7" fill="#FFE500" text-anchor="middle">WV</text>
-            <rect x="330" y="50" width="30" height="26" fill="rgba(255,229,0,0.18)" stroke="rgba(255,229,0,0.55)" stroke-width="1" rx="1"/><text x="345" y="67" font-family="monospace" font-size="7" fill="#FFE500" text-anchor="middle">PA</text>
-            <rect x="362" y="30" width="30" height="30" fill="rgba(255,229,0,0.18)" stroke="rgba(255,229,0,0.55)" stroke-width="1" rx="1"/><text x="377" y="49" font-family="monospace" font-size="7" fill="#FFE500" text-anchor="middle">NY</text>
-            <rect x="330" y="78" width="30" height="18" fill="rgba(255,229,0,0.18)" stroke="rgba(255,229,0,0.55)" stroke-width="1" rx="1"/><text x="345" y="91" font-family="monospace" font-size="7" fill="#FFE500" text-anchor="middle">MD</text>
-            <rect x="363" y="78" width="18" height="14" fill="rgba(0,245,255,0.25)" stroke="rgba(0,245,255,0.7)" stroke-width="1" rx="1"/><text x="372" y="89" font-family="monospace" font-size="6" fill="#00F5FF" text-anchor="middle" font-weight="bold">DC</text>
-            <rect x="300" y="192" width="26" height="22" fill="rgba(255,229,0,0.18)" stroke="rgba(255,229,0,0.55)" stroke-width="1" rx="1"/><text x="313" y="207" font-family="monospace" font-size="7" fill="#FFE500" text-anchor="middle">GA</text>
-            <rect x="300" y="216" width="40" height="28" fill="rgba(255,229,0,0.18)" stroke="rgba(255,229,0,0.55)" stroke-width="1" rx="1"/><text x="320" y="234" font-family="monospace" font-size="7" fill="#FFE500" text-anchor="middle">FL</text>
-            <!-- Not visited -->
-            <rect x="28" y="30" width="32" height="28" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.07)" stroke-width="0.5" rx="1"/><text x="44" y="48" font-family="monospace" font-size="7" fill="rgba(248,246,240,0.18)" text-anchor="middle">WA</text>
-            <rect x="28" y="60" width="32" height="28" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.07)" stroke-width="0.5" rx="1"/><text x="44" y="78" font-family="monospace" font-size="7" fill="rgba(248,246,240,0.18)" text-anchor="middle">OR</text>
-            <rect x="300" y="122" width="30" height="22" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.07)" stroke-width="0.5" rx="1"/><text x="315" y="137" font-family="monospace" font-size="7" fill="rgba(248,246,240,0.18)" text-anchor="middle">VA</text>
-            <rect x="300" y="146" width="30" height="22" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.07)" stroke-width="0.5" rx="1"/><text x="315" y="161" font-family="monospace" font-size="7" fill="rgba(248,246,240,0.18)" text-anchor="middle">NC</text>
-            <rect x="300" y="170" width="26" height="20" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.07)" stroke-width="0.5" rx="1"/><text x="313" y="184" font-family="monospace" font-size="7" fill="rgba(248,246,240,0.18)" text-anchor="middle">SC</text>
-            <rect x="362" y="62" width="22" height="20" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.07)" stroke-width="0.5" rx="1"/><text x="373" y="76" font-family="monospace" font-size="7" fill="rgba(248,246,240,0.18)" text-anchor="middle">NJ</text>
-            <rect x="392" y="30" width="26" height="18" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.07)" stroke-width="0.5" rx="1"/><text x="405" y="43" font-family="monospace" font-size="7" fill="rgba(248,246,240,0.18)" text-anchor="middle">MA</text>
-            <rect x="420" y="18" width="20" height="18" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.07)" stroke-width="0.5" rx="1"/><text x="430" y="31" font-family="monospace" font-size="6" fill="rgba(248,246,240,0.18)" text-anchor="middle">VT</text>
-            <rect x="442" y="18" width="18" height="20" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.07)" stroke-width="0.5" rx="1"/><text x="451" y="32" font-family="monospace" font-size="6" fill="rgba(248,246,240,0.18)" text-anchor="middle">NH</text>
-            <rect x="462" y="14" width="28" height="30" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.07)" stroke-width="0.5" rx="1"/><text x="476" y="33" font-family="monospace" font-size="7" fill="rgba(248,246,240,0.18)" text-anchor="middle">ME</text>
-            <rect x="330" y="98" width="22" height="16" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.07)" stroke-width="0.5" rx="1"/><text x="341" y="110" font-family="monospace" font-size="6" fill="rgba(248,246,240,0.18)" text-anchor="middle">DE</text>
-            <rect x="386" y="62" width="18" height="16" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.07)" stroke-width="0.5" rx="1"/><text x="395" y="73" font-family="monospace" font-size="6" fill="rgba(248,246,240,0.18)" text-anchor="middle">CT</text>
-            <rect x="30" y="245" width="50" height="28" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.07)" stroke-width="0.5" rx="1"/><text x="55" y="263" font-family="monospace" font-size="7" fill="rgba(248,246,240,0.18)" text-anchor="middle">AK</text>
-            <rect x="90" y="248" width="36" height="22" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.07)" stroke-width="0.5" rx="1"/><text x="108" y="263" font-family="monospace" font-size="7" fill="rgba(248,246,240,0.18)" text-anchor="middle">HI</text>
-            <!-- Legend -->
-            <rect x="30" y="272" width="10" height="7" fill="rgba(255,69,0,0.4)" stroke="rgba(255,69,0,0.8)" stroke-width="1" rx="1"/>
-            <text x="44" y="279" font-family="monospace" font-size="7" fill="rgba(248,246,240,0.35)">Thuisbasis</text>
-            <rect x="120" y="272" width="10" height="7" fill="rgba(255,229,0,0.18)" stroke="rgba(255,229,0,0.55)" stroke-width="1" rx="1"/>
-            <text x="134" y="279" font-family="monospace" font-size="7" fill="rgba(248,246,240,0.35)">Bezocht (36)</text>
-            <rect x="232" y="272" width="10" height="7" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.07)" stroke-width="0.5" rx="1"/>
-            <text x="246" y="279" font-family="monospace" font-size="7" fill="rgba(248,246,240,0.18)">Nog niet</text>
-            <text x="468" y="279" font-family="monospace" font-size="9" fill="rgba(255,69,0,0.8)" text-anchor="end" font-weight="bold">36 / 50</text>
-          </svg>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
