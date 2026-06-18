@@ -211,6 +211,75 @@ footer{background:#030205;padding:1.8rem 2.5rem;border-top:1px solid rgba(255,69
 .footer-logo-be{font-family:'Black Han Sans',sans-serif;font-size:0.5rem;color:#00F5FF;text-shadow:0 0 4px rgba(0,245,255,0.6);margin-left:2px;align-self:flex-start;margin-top:2px;}
 .flinks{display:flex;gap:1.5rem;}
 .flinks a{font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(248,246,240,0.16);text-decoration:none;}
+
+/* ============ MOBIELE / RESPONSIVE LAYOUT ============ */
+@media (max-width: 900px){
+  /* NAV */
+  nav{padding:0.7rem 1.2rem;flex-wrap:wrap;gap:0.6rem;}
+  .nav-links{gap:1rem;flex-wrap:wrap;justify-content:center;width:100%;}
+  .nav-links a{font-size:0.62rem;letter-spacing:0.1em;}
+  .nav-logo-los,.nav-logo-vegas{font-size:1.2rem;}
+
+  /* HERO */
+  .hero{padding:3rem 1.2rem 2.5rem;min-height:auto;}
+  .hero-neon-frame{padding:1rem 1.5rem 0.9rem;}
+  .hero-neon-text{font-size:clamp(2rem,11vw,3rem);}
+  .hneon-be{font-size:1rem;margin-top:0.3rem;}
+  .hero-neon-tagline{font-size:0.5rem;letter-spacing:0.25em;}
+  .hero-title{font-size:clamp(2.2rem,12vw,3.5rem);}
+  .hero-sub{font-size:0.9rem;}
+  .hero-btns{flex-direction:column;width:100%;}
+  .hero-btns button,.hero-btns a{width:100%;justify-content:center;}
+
+  /* STATS — 2 kolommen ipv 4 */
+  .stats-row{grid-template-columns:repeat(2,1fr);}
+  .snum{font-size:2.2rem;}
+
+  /* TOURS — 1 kolom */
+  .tours-section{padding:3.5rem 1.2rem;}
+  .tours-grid,.tours-grid-socal{grid-template-columns:1fr;}
+  .tour-card[style*="span 2"]{grid-column:auto !important;}
+  .section-divider{gap:0.8rem;}
+  .section-divider-label{font-size:0.75rem;padding:0.4rem 0.8rem;letter-spacing:0.05em;white-space:normal;text-align:center;}
+  h2.big{font-size:1.8rem;}
+
+  /* SCHEMA — 1 kolom */
+  .schema-section{padding:3.5rem 1.2rem;}
+  .schema-grid{grid-template-columns:1fr;}
+
+  /* WA BAND — gestapeld */
+  .wa-band{padding:2.5rem 1.2rem;}
+  .wa-inner{flex-direction:column;text-align:center;}
+  .wa-text p{margin:0 auto;}
+  .btn-wa-big{width:100%;justify-content:center;}
+
+  /* REFERRAL — gestapeld */
+  .ref-section{padding:1.5rem 1.2rem;}
+  .ref-card{flex-direction:column;text-align:center;padding:1.5rem;}
+  .ref-card > div:first-child{flex-direction:column;text-align:center;}
+  .btn-ref{width:100%;text-align:center;}
+
+  /* ABOUT — 1 kolom, kaart onder tekst */
+  .about-section{padding:3.5rem 1.2rem;}
+  .about-inner{grid-template-columns:1fr;gap:2.5rem;}
+
+  /* FOOTER — gestapeld */
+  footer{flex-direction:column;text-align:center;gap:1rem;}
+  .flinks{flex-wrap:wrap;justify-content:center;}
+
+  /* TICKER iets kleiner */
+  .ticker-text{font-size:0.68rem;}
+}
+
+@media (max-width: 480px){
+  /* STATS — 1 kolom op heel kleine schermen */
+  .stats-row{grid-template-columns:1fr 1fr;}
+  .hero-neon-text{font-size:2rem;}
+  .hneon-be{font-size:0.85rem;}
+  .price-val{font-size:1.3rem;}
+  .nav-logo-los,.nav-logo-vegas{font-size:1.05rem;}
+}
+
 </style>
 </head>
 <body>
@@ -281,7 +350,7 @@ footer{background:#030205;padding:1.8rem 2.5rem;border-top:1px solid rgba(255,69
       <span class="ht3">én heel Southern California</span>
     </h1>
 
-    <p class="hero-sub"><strong>36 staten bezocht.</strong> Nu woonachtig in Corona, California — Vegas én SoCal om de hoek. Privétours en reisschema's in het <strong>Nederlands</strong>, van A tot Z.</p>
+    <p class="hero-sub"><strong>43 staten bezocht.</strong> Nu woonachtig in Corona, California — Vegas én SoCal om de hoek. Privétours en reisschema's in het <strong>Nederlands</strong>, van A tot Z.</p>
     <div class="pills">
       <span class="pill py">36 staten bezocht</span>
       <span class="pill pf">Vegas & Utah tours</span>
