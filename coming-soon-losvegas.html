@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LosVegas.be — 1 september 2026</title>
+<meta name="description" content="LosVegas.be gaat live op 1 september 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0c0a09; --ink-2:#17130f;
+    --sun:#e8873a; --sun-bright:#f4a94e; --rust:#b8472a; --sand:#e9dcc4;
+    --text:#ece2d0; --muted:#8d8272; --line:#332921;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; min-height:100svh; background:var(--ink); color:var(--text);
+    font-family:'Archivo',sans-serif; display:flex; flex-direction:column; overflow-x:hidden;
+  }
+  a{ color:inherit; text-decoration:none; }
+  .mono{ font-family:'Space Mono',monospace; }
+
+  /* achtergrond: donkere woestijnnacht met subtiele horizonlijn */
+  #bg{ position:fixed; inset:0; z-index:-2; background:
+      radial-gradient(90% 55% at 50% 88%, #3a2214 0%, transparent 62%),
+      radial-gradient(65% 45% at 15% 15%, #1d1a2a 0%, transparent 60%),
+      var(--ink); }
+  #bg video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.28; }
+  #scrim{ position:fixed; inset:0; z-index:-1; pointer-events:none;
+    background:linear-gradient(180deg,#0c0a09cc 0%, #0c0a0999 45%, #0c0a09ee 100%); }
+
+  /* koplampen-streep onderaan, subtiele beweging */
+  .beam{ position:fixed; left:0; right:0; bottom:0; height:38vh; z-index:-1; pointer-events:none; overflow:hidden; }
+  .beam::before{
+    content:""; position:absolute; left:-20%; right:-20%; bottom:-12vh; height:34vh;
+    background:radial-gradient(ellipse at 50% 100%, #e8873a2e 0%, transparent 68%);
+    animation:sweep 9s ease-in-out infinite alternate;
+  }
+  @keyframes sweep{ from{ transform:translateX(-6%);} to{ transform:translateX(6%);} }
+
+  /* topbalk */
+  .topbar{
+    display:flex; justify-content:space-between; align-items:center; gap:1rem;
+    padding:1.4rem clamp(1.25rem,6vw,3rem); border-bottom:1px solid var(--line);
+    font-family:'Space Mono',monospace; font-size:0.64rem; letter-spacing:0.16em; text-transform:uppercase;
+  }
+  .topbar .brand{ color:var(--sand); }
+  .topbar .brand b{ color:var(--sun); font-weight:400; }
+  .topbar .status{ display:flex; align-items:center; gap:0.5rem; color:var(--muted); }
+  .topbar .status .dot{ width:6px;height:6px;border-radius:50%;background:var(--sun); animation:pulse 2s ease-in-out infinite; }
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.75)}}
+
+  main{
+    flex:1; display:flex; flex-direction:column; justify-content:center;
+    padding:5vh clamp(1.25rem,6vw,3rem) 4vh; max-width:1000px; margin:0 auto; width:100%;
+  }
+
+  .kicker{
+    font-family:'Space Mono',monospace; font-size:0.68rem; letter-spacing:0.2em;
+    text-transform:uppercase; color:var(--sun); margin-bottom:1.1rem;
+  }
+  .headline{
+    font-family:'Anton',sans-serif; font-weight:400; text-transform:uppercase;
+    font-size:clamp(1.9rem,5.6vw,3.7rem); line-height:1.02; margin:0 0 2.2rem; max-width:18ch;
+    text-shadow:0 2px 40px #000000cc;
+  }
+  .headline .hl{
+    background:linear-gradient(100deg,var(--sun),var(--sun-bright) 55%,var(--rust));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+
+  /* aftelklok */
+  .clock{ display:flex; gap:clamp(0.6rem,2.5vw,1.6rem); flex-wrap:wrap; margin-bottom:1.1rem; }
+  .unit{
+    background:#17130fcc; border:1px solid var(--line); border-radius:8px;
+    padding:clamp(0.9rem,2.4vw,1.5rem) clamp(0.9rem,2.6vw,1.8rem);
+    min-width:clamp(74px,17vw,116px); text-align:center;
+    backdrop-filter:blur(4px);
+  }
+  .unit .n{
+    font-family:'Anton',sans-serif; font-size:clamp(2rem,7vw,3.6rem); line-height:1;
+    color:var(--sand); font-variant-numeric:tabular-nums; display:block;
+  }
+  .unit.sec .n{ color:var(--sun); }
+  .unit .l{
+    font-family:'Space Mono',monospace; font-size:0.56rem; letter-spacing:0.14em;
+    text-transform:uppercase; color:var(--muted); margin-top:0.6rem; display:block;
+  }
+  .launch-date{
+    font-family:'Space Mono',monospace; font-size:0.7rem; letter-spacing:0.1em;
+    color:var(--muted); margin:0 0 2rem;
+  }
+  .launch-date b{ color:var(--sun); font-weight:400; }
+
+  .lede{ max-width:46ch; font-size:1rem; line-height:1.65; opacity:0.85; margin:0 0 1.8rem; }
+
+  .cta-row{ display:flex; gap:1rem; flex-wrap:wrap; align-items:center; }
+  .wa-btn{
+    display:inline-flex; align-items:center; gap:0.55rem;
+    background:#25d366; color:#08240f; padding:0.95rem 1.8rem; border-radius:999px;
+    font-weight:700; font-size:0.9rem; box-shadow:0 8px 30px #25d36630;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .wa-btn:hover{ transform:translateY(-2px); box-shadow:0 12px 36px #25d36655; }
+  .cta-sub{ font-family:'Space Mono',monospace; font-size:0.66rem; color:var(--muted); }
+
+  footer{
+    padding:1.4rem clamp(1.25rem,6vw,3rem); border-top:1px solid var(--line);
+    font-family:'Space Mono',monospace; font-size:0.62rem; letter-spacing:0.08em;
+    color:var(--muted); display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap;
+  }
+  footer a{ color:var(--sun); }
+
+  @media (max-height:760px){
+    .unit{ padding:0.7rem 0.9rem; }
+    .unit .n{ font-size:clamp(1.6rem,6vw,2.4rem); }
+    .headline{ margin-bottom:1.6rem; }
+    .lede{ margin-bottom:1.4rem; }
+  }
+  @media (prefers-reduced-motion:reduce){
+    .beam::before{ animation:none; } .topbar .status .dot{ animation:none; } #bg video{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Achtergrondvideo optioneel: valt weg als het bestand er niet is. -->
+<div id="bg">
+  <video autoplay muted loop playsinline poster="poster/04-desert-highway.jpg">
+    <source src="video/04-desert-highway.mp4" type="video/mp4">
+  </video>
+</div>
+<div id="scrim"></div>
+<div class="beam"></div>
+
+<div class="topbar">
+  <span class="brand">LOS<b>VEGAS</b>.BE</span>
+  <span class="status"><span class="dot"></span> Binnenkort online</span>
+</div>
+
+<main>
+  <div class="kicker">Binnenkort</div>
+
+  <h1 class="headline">Tom, Dominique,<br>Ethan &amp; Summer<br>hebben <span class="hl">iets in petto.</span></h1>
+
+  <div class="clock" id="clock" role="timer" aria-live="off">
+    <div class="unit"><span class="n" id="d">00</span><span class="l">Dagen</span></div>
+    <div class="unit"><span class="n" id="h">00</span><span class="l">Uren</span></div>
+    <div class="unit"><span class="n" id="m">00</span><span class="l">Minuten</span></div>
+    <div class="unit sec"><span class="n" id="s">00</span><span class="l">Seconden</span></div>
+  </div>
+  <p class="launch-date">Online vanaf <b>1 september 2026</b></p>
+
+  <p class="lede">Nog even geduld, dan laten we zien waar we mee bezig zijn.</p>
+
+  <div class="cta-row">
+    <a class="wa-btn" href="https://wa.me/17028810971?text=Hallo!%20Ik%20zag%20de%20aftelling%20op%20losvegas.be%20en%20heb%20een%20vraag." target="_blank" rel="noopener">💬 Stuur ons een bericht</a>
+    <span class="cta-sub">Vragen mag altijd, ook nu al</span>
+  </div>
+</main>
+
+<footer>
+  <span>LOSVEGAS.BE</span>
+  <span><a href="https://wa.me/17028810971" target="_blank" rel="noopener">WHATSAPP</a></span>
+</footer>
+
+<script>
+(function(){
+  // Lanceerdatum: 1 september 2026, 00:00 lokale tijd.
+  var target = new Date(2026, 8, 1, 0, 0, 0).getTime();
+  var el = { d:document.getElementById('d'), h:document.getElementById('h'),
+             m:document.getElementById('m'), s:document.getElementById('s') };
+  var pad = function(n){ return String(n).padStart(2,'0'); };
+
+  function tick(){
+    var diff = target - Date.now();
+    if(diff <= 0){
+      document.getElementById('clock').innerHTML =
+        '<div class="unit" style="min-width:auto;padding:1.2rem 1.8rem"><span class="n" style="font-size:clamp(1.6rem,5vw,2.6rem)">We zijn live</span></div>';
+      document.querySelector('.launch-date').innerHTML = 'De site is <b>online</b>';
+      clearInterval(timer);
+      return;
+    }
+    var sec = Math.floor(diff/1000);
+    el.d.textContent = pad(Math.floor(sec/86400));
+    el.h.textContent = pad(Math.floor(sec%86400/3600));
+    el.m.textContent = pad(Math.floor(sec%3600/60));
+    el.s.textContent = pad(sec%60);
+  }
+  tick();
+  var timer = setInterval(tick, 1000);
+})();
+</script>
+</body>
+</html>
