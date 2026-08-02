@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LosVegas.be · Nederlandstalige privégids · Vegas & Southern California</title>
+<meta name="description" content="Privé dagtrips en reisschema's op maat door Nevada, Utah, Arizona en Southern California. 34 staten bezocht. Eén gids. Volledig in het Nederlands.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=Archivo+Narrow:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0c0a09;
+    --ink-2:#17130f;
+    --ink-3:#221b15;
+    --sun:#e8873a;        /* desert sunset orange */
+    --sun-bright:#f4a94e;
+    --rust:#b8472a;       /* canyon rust red */
+    --sand:#e9dcc4;       /* warm off-white */
+    --text:#ece2d0;
+    --muted:#9b8f79;
+    --line:#332921;
+  }
+  :root{ --gold:#e8873a; --gold-bright:#f4a94e; --gold-dim:#e8873a55; }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--text);
+    font-family:'Archivo', sans-serif;
+    overflow-x:hidden;
+  }
+  body.loading{ overflow:hidden; height:100vh; }
+  h1,h2,h3,.display{ font-family:'Anton', 'Archivo Narrow', sans-serif; font-weight:400; letter-spacing:0.005em; text-transform:uppercase; }
+  .mono{ font-family:'Space Mono', monospace; }
+  .eyebrow{
+    font-family:'Space Mono', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--gold);
+  }
+  a{ color:inherit; text-decoration:none; }
+
+  /* FIXED VIDEO LAYER */
+  #videoStage{
+    position:fixed; inset:0;
+    z-index:-2;
+    background:var(--ink);
+  }
+  #videoStage video, #videoStage img.fallback{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover;
+    opacity:0;
+    transition:opacity 1.1s ease;
+    will-change:opacity, transform;
+    transform:scale(1.06);
+  }
+  #videoStage .scene.active{ opacity:1; animation:kenburns 22s ease-out forwards; }
+  @keyframes kenburns{ from{ transform:scale(1.06);} to{ transform:scale(1.14);} }
+  /* darkening scrim so text stays readable over any frame */
+  #videoScrim{
+    position:fixed; inset:0;
+    z-index:-1;
+    background:
+      radial-gradient(120% 80% at 50% 0%, #0c0a0900 0%, #0c0a0955 60%, #0c0a09aa 100%),
+      linear-gradient(180deg, #0c0a0966 0%, #0c0a0988 55%, #0c0a09dd 100%);
+    pointer-events:none;
+  }
+
+  /* PRELOADER */
+  #preloader{
+    position:fixed; inset:0; z-index:1000;
+    background:var(--ink);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:1.6rem;
+    transition:opacity 0.8s ease, visibility 0.8s ease;
+  }
+  #preloader.done{ opacity:0; visibility:hidden; }
+  #preloader .brand{
+    font-family:'Anton', sans-serif;
+    text-transform:uppercase;
+    font-size:clamp(2rem,6vw,3.2rem);
+    letter-spacing:0.02em;
+  }
+  #preloader .brand .v{ color:var(--gold); }
+  #preloader .bar{
+    width:min(220px, 60vw); height:2px; background:var(--line); overflow:hidden;
+  }
+  #preloader .bar span{ display:block; height:100%; width:0%; background:var(--gold); transition:width 0.2s ease; }
+  #preloader .pct{ font-family:'Space Mono', monospace; font-size:0.75rem; color:var(--muted); }
+
+  /* FIXED CHROME */
+  #topRail{ position:fixed; top:0; left:0; right:0; height:2px; background:#ffffff10; z-index:90; }
+  #topRailFill{ height:100%; width:0%; background:linear-gradient(90deg,var(--gold),var(--gold-bright)); }
+
+  .hud{
+    position:fixed; z-index:90;
+    font-family:'Space Mono', monospace; font-size:0.62rem;
+    color:var(--muted); letter-spacing:0.08em;
+    background:#0c0a09aa; border:1px solid var(--line);
+    padding:0.35rem 0.6rem; border-radius:4px;
+    backdrop-filter:blur(6px);
+    display:flex; align-items:center; gap:0.5rem;
+  }
+  #sceneHud{ top:14px; right:14px; }
+  #sceneHud b{ color:var(--gold); }
+
+  /* hamburger */
+  #navToggle{
+    position:fixed; top:12px; left:14px; z-index:130;
+    width:40px; height:40px; border:1px solid var(--line); border-radius:6px;
+    background:#0c0a09aa; backdrop-filter:blur(6px); cursor:pointer;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px;
+  }
+  #navToggle span{ width:18px; height:2px; background:var(--sand); border-radius:2px; transition:transform 0.3s ease, opacity 0.2s ease; }
+  body.nav-open #navToggle span:nth-child(1){ transform:translateY(6px) rotate(45deg); }
+  body.nav-open #navToggle span:nth-child(2){ opacity:0; }
+  body.nav-open #navToggle span:nth-child(3){ transform:translateY(-6px) rotate(-45deg); }
+
+  #navOverlay{
+    position:fixed; inset:0; z-index:125;
+    background:linear-gradient(160deg,#0c0a09f5,#17130ff5);
+    backdrop-filter:blur(8px);
+    display:flex; flex-direction:column; justify-content:center; padding:8vh 8vw;
+    opacity:0; visibility:hidden; transition:opacity 0.4s ease, visibility 0.4s ease;
+  }
+  body.nav-open #navOverlay{ opacity:1; visibility:visible; }
+  #navOverlay .eyebrow{ margin-bottom:2.5rem; }
+  #navOverlay a{
+    font-family:'Anton',sans-serif; text-transform:uppercase; font-size:clamp(1.8rem,6vw,3rem);
+    color:var(--sand); padding:0.35rem 0; letter-spacing:0.01em; line-height:1.15;
+    transition:color 0.2s ease, padding-left 0.25s ease; display:flex; align-items:baseline; gap:1rem;
+  }
+  #navOverlay a .n{ font-family:'Space Mono',monospace; font-size:0.8rem; color:var(--gold-dim); }
+  #navOverlay a:hover{ color:var(--sun); padding-left:0.8rem; }
+  #navOverlay .navwa{ margin-top:2.5rem; align-self:flex-start; font-family:'Archivo',sans-serif; font-size:0.9rem; text-transform:none; }
+
+  .wa-float{
+    position:fixed; bottom:20px; right:16px; z-index:90;
+    display:flex; align-items:center; gap:0.5rem;
+    background:var(--gold); color:#1a1408;
+    padding:0.7rem 1.15rem; border-radius:999px;
+    font-weight:700; font-size:0.8rem;
+    box-shadow:0 6px 26px #00000077;
+  }
+
+  /* LAYOUT SHELL */
+  main{ position:relative; z-index:1; }
+  .section{ padding:0 6vw; }
+  .scrim-card{
+    background:linear-gradient(180deg,#0c0a0900,#0c0a0999 12%,#0c0a0999 88%,#0c0a0900);
+  }
+
+  /* HERO */
+  .hero{
+    min-height:100svh;
+    display:flex; flex-direction:column; justify-content:flex-end;
+    padding-bottom:8vh; padding-top:14vh;
+  }
+  .hero .eyebrow{ margin-bottom:1.4rem; }
+  .hero h1{
+    font-size:clamp(3.2rem, 11vw, 8rem);
+    line-height:0.92; margin:0 0 1.6rem; max-width:14ch;
+    text-shadow:0 2px 40px #000000cc;
+  }
+  .hero h1 .hl{
+    background:linear-gradient(100deg, var(--sun), var(--sun-bright) 60%, var(--rust));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .hero .lede{ max-width:44ch; color:var(--text); opacity:0.85; font-size:1.05rem; line-height:1.6; margin:0 0 1rem; }
+  .hero .note{ max-width:52ch; color:var(--sand); opacity:0.72; font-size:0.86rem; line-height:1.55; margin:0 0 2rem; padding-left:0.9rem; border-left:2px solid var(--gold); }
+  .stat-row{ display:flex; flex-wrap:wrap; gap:2.4rem; margin-bottom:2.4rem; }
+  .stat .num{ font-family:'Space Mono', monospace; font-size:1.35rem; color:var(--gold); }
+  .stat .lbl{ display:block; font-size:0.64rem; color:var(--muted); letter-spacing:0.08em; text-transform:uppercase; margin-top:0.2rem; }
+  .cta-row{ display:flex; gap:0.9rem; flex-wrap:wrap; }
+  .btn{ display:inline-block; padding:0.85rem 1.7rem; border-radius:2px; font-weight:700; font-size:0.82rem; letter-spacing:0.02em; }
+  .btn-solid{ background:var(--gold); color:#1a1408; }
+  .btn-line{ border:1px solid #ffffff33; color:var(--text); backdrop-filter:blur(4px); }
+  .scroll-hint{ margin-top:3rem; font-family:'Space Mono',monospace; font-size:0.6rem; color:var(--muted); letter-spacing:0.2em; display:flex; align-items:center; gap:0.6rem; }
+  .scroll-hint .l{ width:34px; height:1px; background:var(--gold); display:inline-block; animation:grow 2s ease-in-out infinite; transform-origin:left; }
+  @keyframes grow{ 0%,100%{ transform:scaleX(0.3); opacity:0.4;} 50%{ transform:scaleX(1); opacity:1;} }
+
+  /* CHAPTER HEADERS */
+  .chapter{ min-height:60svh; display:flex; flex-direction:column; justify-content:center; text-align:center; padding-top:12vh; padding-bottom:6vh; }
+  .chapter .eyebrow{ display:block; margin-bottom:0.7rem; }
+  .chapter h2{ font-size:clamp(2rem,5vw,3.4rem); margin:0 0 0.8rem; }
+  .chapter p{ color:var(--text); opacity:0.8; max-width:52ch; margin:0 auto; line-height:1.6; }
+
+  /* TOUR ACCORDION */
+  .tours{ padding-bottom:4vh; max-width:1000px; margin:0 auto; }
+  .tour{
+    border-bottom:1px solid var(--line);
+    background:#0c0a0966; backdrop-filter:blur(3px);
+    opacity:0; transform:translateY(16px);
+    transition:opacity 0.5s ease, transform 0.5s ease, background 0.25s ease;
+  }
+  .tour:first-child{ border-top:1px solid var(--line); }
+  .tour.in{ opacity:1; transform:none; }
+  .tour:hover{ background:#221b1599; }
+
+  /* clickable header (always visible) */
+  .tour-head{
+    display:grid; grid-template-columns:auto 1fr auto auto; gap:1.2rem; align-items:center;
+    padding:1.15rem 1.6rem; cursor:pointer; width:100%;
+    background:none; border:none; text-align:left; color:inherit; font:inherit;
+  }
+  .tour-head .idx{ font-family:'Space Mono',monospace; font-size:0.7rem; color:var(--gold-dim); }
+  .tour-head .ht{ min-width:0; }
+  .tour-head .tag{ font-family:'Space Mono',monospace; font-size:0.58rem; color:var(--gold); text-transform:uppercase; letter-spacing:0.08em; display:block; margin-bottom:0.15rem; }
+  .tour-head h3{ font-family:'Anton',sans-serif; font-weight:400; text-transform:uppercase; font-size:1.15rem; margin:0; line-height:1.05; letter-spacing:0.01em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .tour-head .hp{ font-family:'Space Mono',monospace; font-size:0.85rem; color:var(--gold); font-weight:700; text-align:right; white-space:nowrap; }
+  .tour-head .hp small{ display:block; font-size:0.52rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.05em; font-weight:400; }
+  .tour-head .chev{ width:22px; height:22px; position:relative; flex:none; opacity:0.7; transition:transform 0.3s ease; }
+  .tour-head .chev::before, .tour-head .chev::after{ content:""; position:absolute; top:50%; width:9px; height:2px; background:var(--gold); border-radius:2px; }
+  .tour-head .chev::before{ left:2px; transform:rotate(45deg); }
+  .tour-head .chev::after{ right:2px; transform:rotate(-45deg); }
+  .tour.open .tour-head .chev{ transform:rotate(180deg); }
+
+  /* expandable body */
+  .tour-body{ max-height:0; overflow:hidden; transition:max-height 0.4s ease; }
+  .tour-body-inner{ padding:0 1.6rem 1.6rem 3.4rem; }
+
+  /* fotostrook per tour */
+  .tour-photos{ display:flex; gap:0.6rem; margin:0 0 1.1rem; overflow-x:auto; padding-bottom:0.2rem; -webkit-overflow-scrolling:touch; }
+  .tour-photos:empty{ display:none; margin:0; }
+  .tour-photos img{
+    width:132px; height:94px; flex:none; object-fit:cover;
+    border-radius:5px; border:1px solid var(--line);
+    box-shadow:0 6px 18px #00000066;
+    transition:transform 0.25s ease, border-color 0.25s ease;
+  }
+  .tour-photos img:hover{ transform:translateY(-2px); border-color:var(--gold-dim); }
+  .tour-body p{ color:var(--text); opacity:0.82; font-size:0.95rem; line-height:1.6; margin:0 0 0.9rem; max-width:56ch; }
+  .tour-body .spots{ font-family:'Space Mono',monospace; font-size:0.66rem; color:var(--muted); letter-spacing:0.03em; margin-bottom:1rem; }
+  .tour-body .spots span:not(:last-child)::after{ content:" · "; color:var(--gold-dim); }
+  .tour-body .meta{ display:flex; flex-wrap:wrap; gap:1.4rem; align-items:center; margin-bottom:1.2rem; font-family:'Space Mono',monospace; }
+  .tour-body .meta .m{ font-size:0.72rem; }
+  .tour-body .meta .m .lbl{ display:block; font-size:0.56rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.15rem; }
+  .tour-body .meta .m .val{ color:var(--gold); font-weight:700; font-size:0.95rem; }
+  .tour-body .meta .m .dur{ color:var(--text); opacity:0.75; }
+  .tour-body .fine{ font-size:0.6rem; color:#6f6857; margin:0 0 1.1rem; line-height:1.4; }
+  .wa-btn{ display:inline-flex; align-items:center; gap:0.5rem; background:#25d366; color:#08240f; padding:0.7rem 1.3rem; border-radius:999px; font-weight:700; font-size:0.82rem; }
+  .wa-btn:hover{ filter:brightness(1.08); }
+  @media(max-width:720px){
+    .tour-head{ grid-template-columns:auto 1fr auto; gap:0.8rem; padding:1.05rem 1.1rem; }
+    .tour-head .idx{ display:none; }
+    .tour-head h3{ font-size:1rem; white-space:normal; }
+    .tour-body-inner{ padding:0 1.1rem 1.4rem 1.1rem; }
+    .tour-body .meta{ gap:1rem; }
+    .tour-photos img{ width:112px; height:80px; }
+  }
+
+  /* REISSCHEMA */
+  .schema{ padding:10vh 6vw; text-align:center; background:linear-gradient(180deg,#0c0a0900,#0c0a09ee 20%,#0c0a09ee 80%,#0c0a0900); }
+  .schema h2{ font-size:clamp(1.9rem,4.5vw,3rem); margin:0.6rem 0 2.6rem; }
+  .schema-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:1.4rem; max-width:860px; margin:0 auto; text-align:left; }
+  .card{ background:var(--ink-2); border:1px solid var(--line); border-radius:8px; padding:2.2rem 1.9rem; display:flex; flex-direction:column; gap:1rem; }
+  .card.feat{ border-color:var(--gold); box-shadow:0 0 50px #c9a24b18; }
+  .card .tag{ font-family:'Space Mono',monospace; font-size:0.62rem; color:var(--gold); text-transform:uppercase; letter-spacing:0.08em; }
+  .card h3{ margin:0; font-size:1.45rem; font-weight:500; }
+  .card .price{ font-family:'Space Mono',monospace; font-size:1.7rem; color:var(--gold); }
+  .card .price small{ display:block; font-size:0.6rem; color:var(--muted); font-family:'Archivo',sans-serif; margin-top:0.15rem; }
+  .card .desc{ color:var(--muted); font-size:0.88rem; line-height:1.55; margin:0; }
+  .card ul{ list-style:none; padding:0; margin:0; color:var(--muted); font-size:0.86rem; line-height:1.9; }
+  .card ul li::before{ content:"- "; color:var(--gold); }
+  .card .btn{ text-align:center; margin-top:0.4rem; }
+  .schema-states{ margin-top:2.6rem; display:flex; flex-wrap:wrap; gap:0.55rem; justify-content:center; font-family:'Space Mono',monospace; font-size:0.66rem; color:var(--muted); }
+  .schema-states span{ border:1px solid var(--line); padding:0.3rem 0.75rem; border-radius:999px; }
+
+  /* WEDDING */
+  .wedding{ max-width:860px; margin:0 auto 10vh; padding:2rem 2.2rem; border:1px solid var(--line); border-radius:8px; background:#0c0a09aa; backdrop-filter:blur(3px); display:flex; gap:1.4rem; align-items:center; flex-wrap:wrap; }
+  .wedding .ic{ font-size:1.6rem; }
+  .wedding h3{ margin:0 0 0.3rem; font-size:1.1rem; font-weight:600; font-family:'Archivo',sans-serif; display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap; }
+  .wedding h3 .soon{ font-family:'Space Mono',monospace; font-size:0.58rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--sun); border:1px solid var(--sun); padding:0.15rem 0.5rem; border-radius:999px; }
+  .wedding p{ margin:0; color:var(--muted); font-size:0.88rem; max-width:46ch; line-height:1.5; }
+  .wedding .btn{ margin-left:auto; }
+
+  /* ABOUT */
+  .about{ padding:12vh 6vw; text-align:center; max-width:720px; margin:0 auto; }
+  .about blockquote{ font-family:'Archivo',sans-serif; font-style:italic; font-weight:500; font-size:clamp(1.5rem,4vw,2.3rem); margin:0 0 1.6rem; line-height:1.3; color:var(--sand); }
+  .about .teaser-photo{ margin:1.6rem auto 1.8rem; max-width:190px; }
+  .about .teaser-photo img{
+    width:100%; height:auto; display:block; border-radius:6px;
+    border:1px solid var(--line);
+    box-shadow:0 12px 34px #00000088, 0 0 0 5px #17130f;
+  }
+  .about p{ color:var(--muted); line-height:1.7; font-size:0.98rem; }
+  .about .badge{ display:inline-flex; gap:0.5rem; align-items:baseline; font-family:'Space Mono',monospace; margin-top:1.8rem; border:1px solid var(--gold); padding:0.45rem 1rem; border-radius:999px; }
+  .about .badge b{ color:var(--gold); font-size:1.1rem; }
+  .about .badge span{ color:var(--muted); font-size:0.66rem; }
+
+  footer{ text-align:center; padding:3rem 6vw 6rem; color:var(--muted); font-size:0.72rem; border-top:1px solid var(--line); font-family:'Space Mono',monospace; letter-spacing:0.05em; }
+
+  /* COOKIE */
+  #cookie{ position:fixed; bottom:0; left:0; right:0; z-index:120; background:var(--ink-2); border-top:1px solid var(--line); padding:1rem 1.2rem; display:flex; gap:1rem; align-items:center; flex-wrap:wrap; font-size:0.78rem; color:var(--muted); transform:translateY(100%); transition:transform 0.5s ease; }
+  #cookie.show{ transform:translateY(0); }
+  #cookie p{ margin:0; flex:1; min-width:200px; line-height:1.4; }
+  #cookie a{ color:var(--gold); text-decoration:underline; }
+  #cookie .btn{ padding:0.55rem 1.1rem; font-size:0.72rem; cursor:pointer; border:none; }
+
+  @media (prefers-reduced-motion:reduce){
+    .tour{ opacity:1 !important; transform:none !important; transition:none !important; }
+    .scroll-hint .l{ animation:none; }
+    #videoStage video{ display:none; }
+    #videoStage img.fallback{ display:block; }
+  }
+</style>
+</head>
+<body class="loading">
+
+<!--
+  ==================================================================
+  ASSETS - zet deze bestanden naast index.html, ze koppelen automatisch:
+    video/01-vegas-strip.mp4    poster/01-vegas-strip.jpg
+    video/02-canyon-desert.mp4  poster/02-canyon-desert.jpg
+    video/03-utah-parks.mp4     poster/03-utah-parks.jpg
+    video/04-desert-highway.mp4 poster/04-desert-highway.jpg
+    video/05-temecula-vineyard.mp4  poster/05-temecula-vineyard.jpg
+    video/06-la-coast.mp4       poster/06-la-coast.jpg
+    video/07-san-diego-bay.mp4  poster/07-san-diego-bay.jpg
+    video/08-sequoia.mp4        poster/08-sequoia.jpg
+  Poster = 1 stilstaand frame per clip (fallback bij reduced-motion / trage lading).
+  ==================================================================
+-->
+
+<div id="videoStage"></div>
+<div id="videoScrim"></div>
+
+<div id="preloader">
+  <div class="brand">LOS<span class="v">VEGAS</span>.BE</div>
+  <div class="bar"><span id="preBar"></span></div>
+  <div class="pct" id="prePct">0%</div>
+</div>
+
+<div id="topRail"><div id="topRailFill"></div></div>
+
+<button id="navToggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+<nav id="navOverlay" aria-hidden="true">
+  <div class="eyebrow">LosVegas.be · Menu</div>
+  <a href="#top" data-nav><span class="n">00</span> Home</a>
+  <a href="#tours" data-nav><span class="n">01</span> Vegas, Utah &amp; Arizona</a>
+  <a href="#socal" data-nav><span class="n">02</span> Southern California</a>
+  <a href="#reisschema" data-nav><span class="n">03</span> Reisschema's</a>
+  <a href="over-ons.html" data-nav><span class="n">04</span> Over ons</a>
+  <a class="navwa" href="https://wa.me/17028810971" target="_blank" rel="noopener">💬 Direct via WhatsApp</a>
+</nav>
+
+<div class="hud" id="sceneHud"><b id="sceneIdx">01</b> / 08 · <span id="sceneName">VEGAS</span></div>
+<a class="wa-float" href="https://wa.me/17028810971" target="_blank" rel="noopener">💬 App me</a>
+
+<main id="top">
+  <section class="hero section" data-scene="0">
+    <div class="eyebrow">LOSVEGAS.BE · NEDERLANDSTALIGE PRIVÉGIDS</div>
+    <h1>34 staten.<br><span class="hl">Eén gids.</span><br>Jouw trip.</h1>
+    <p class="lede">Privé dagtrips en reisschema's op maat door Nevada, Utah, Arizona en heel Southern California. Jij rijdt niet, ik rij voor jou. Alles in het Nederlands.</p>
+    <p class="note">Je boekt de tour voor je eigen gezelschap, tot 6 personen. Koppel, gezin of vriendengroep: de prijs geldt voor de hele wagen, dus je splitst de kosten onderling. Nooit vreemden erbij.</p>
+    <div class="stat-row">
+      <div class="stat"><span class="num">34</span><span class="lbl">Staten bezocht</span></div>
+      <div class="stat"><span class="num">$595</span><span class="lbl">Vertrek uit Vegas · prijs vanaf</span></div>
+      <div class="stat"><span class="num">$550</span><span class="lbl">Vertrek uit Corona · prijs vanaf</span></div>
+      <div class="stat"><span class="num">tot 6</span><span class="lbl">Prijs per tour, niet per persoon</span></div>
+    </div>
+    <div class="cta-row">
+      <a class="btn btn-solid" href="#tours">Bekijk de tours</a>
+      <a class="btn btn-line" href="https://wa.me/17028810971" target="_blank" rel="noopener">Direct WhatsApp</a>
+    </div>
+    <div class="scroll-hint"><span class="l"></span> SCROLL OM TE VERKENNEN</div>
+  </section>
+
+  <section class="chapter section" data-scene="1" id="tours">
+    <span class="eyebrow">Hoofdstuk 01</span>
+    <h2 class="display">Vegas, Utah &amp; Arizona</h2>
+    <p>Dagtrips vanuit Las Vegas: de stad zelf en de wereldwonderen op rijafstand. Geen bus, geen vreemden erbij, geen vaste vertrekuren.</p>
+  </section>
+
+  <section class="tours section" id="listVegas"></section>
+
+  <section class="chapter section" data-scene="4" id="socal">
+    <span class="eyebrow">Hoofdstuk 02</span>
+    <h2 class="display">Southern California</h2>
+    <p>Vertrek vanuit Corona: van wijnvallei tot kustlijn, van filmlocaties tot de grootste bomen op aarde.</p>
+  </section>
+
+  <section class="tours section" id="listSocal"></section>
+
+  <section class="schema section" data-scene="3" id="reisschema">
+    <span class="eyebrow">Jouw trip, uitgestippeld</span>
+    <h2 class="display">Reisschema's op maat</h2>
+    <div class="schema-grid">
+      <div class="card">
+        <span class="tag">Populair · per staat</span>
+        <h3>Standaard reisschema</h3>
+        <div class="price">$80 <small>per staat</small></div>
+        <p class="desc">Kant-en-klaar reisschema per staat: beste routes, timing, insider-tips en aanbevolen overnachtingen.</p>
+        <ul>
+          <li>Dag-per-dag planning</li>
+          <li>Beste routes &amp; tussenstops</li>
+          <li>Aanbevolen hotels per budget</li>
+          <li>Must-sees + verborgen parels</li>
+          <li>PDF geleverd via WhatsApp</li>
+        </ul>
+        <a class="btn btn-line" href="https://wa.me/17028810971?text=Hallo!%20Ik%20wil%20graag%20een%20standaard%20reisschema." target="_blank" rel="noopener">Bestel · $80</a>
+      </div>
+      <div class="card feat">
+        <span class="tag">Meest volledig</span>
+        <h3>Reisschema op maat</h3>
+        <div class="price">$200 <small>vanaf</small></div>
+        <p class="desc">Persoonlijk intakegesprek, daarna een schema 100% op maat, afgestemd op jullie tempo en budget.</p>
+        <ul>
+          <li>Alles van het standaard schema</li>
+          <li>Persoonlijk intakegesprek</li>
+          <li>Meerdere staten combineerbaar</li>
+          <li>Revisie inbegrepen</li>
+          <li>Bereikbaar tijdens je trip</li>
+        </ul>
+        <a class="btn btn-solid" href="https://wa.me/17028810971?text=Hallo!%20Ik%20wil%20graag%20een%20reisschema%20op%20maat." target="_blank" rel="noopener">Bestel · vanaf $200</a>
+      </div>
+    </div>
+    <div class="schema-states">
+      <span>Nevada</span><span>California</span><span>SoCal</span><span>Utah · Mighty Five</span><span>Arizona</span><span>PCH</span><span>Oregon</span><span>Andere regio? App me</span>
+    </div>
+  </section>
+
+  <section class="section" data-scene="0">
+    <div class="wedding">
+      <div class="ic">💍</div>
+      <div>
+        <h3>Trouwen in Vegas? <span class="soon">Binnenkort</span></h3>
+        <p>We werken aan een aparte gespecialiseerde service: van huwelijksvergunning tot kapel, volledig in het Nederlands geregeld. Interesse? App me alvast.</p>
+      </div>
+      <a class="btn btn-line" href="https://wa.me/17028810971?text=Hallo!%20Ik%20heb%20interesse%20om%20te%20trouwen%20in%20Vegas." target="_blank" rel="noopener">Hou me op de hoogte</a>
+    </div>
+  </section>
+
+  <section class="about section" data-scene="7" id="over">
+    <span class="eyebrow">Over ons</span>
+    <figure class="teaser-photo">
+      <img src="images/gezin-vegas-sm.jpg" alt="Dominique en Tom met Summer en Ethan aan het Welcome to Las Vegas-bord" loading="lazy">
+    </figure>
+    <blockquote>"Beleef Las Vegas en de westkust door de ogen van een Vlaams gezin dat hier leeft."</blockquote>
+    <p>Wij zijn <strong style="color:var(--sand)">Tom en Dominique</strong>, met onze kinderen Ethan en Summer. Al 14 jaar verbonden met Las Vegas (we zijn er zelfs getrouwd) en vandaag woonachtig in Zuid-Californië. Geen callcenter, geen script: een persoonlijke ervaring, volledig in het Nederlands.</p>
+    <div class="cta-row" style="justify-content:center; margin-top:1.8rem;">
+      <a class="btn btn-solid" href="over-ons.html">Lees ons volledige verhaal →</a>
+    </div>
+  </section>
+
+  <footer>LOSVEGAS.BE · 34 STATEN. EÉN GIDS. · <a href="https://wa.me/17028810971" target="_blank" rel="noopener" style="color:var(--gold)">WHATSAPP</a></footer>
+</main>
+
+<div id="cookie">
+  <p>Deze site gebruikt enkel functionele cookies om je voorkeuren te onthouden. <a href="#">Meer info</a></p>
+  <button class="btn btn-line" id="cookieDecline">Weigeren</button>
+  <button class="btn btn-solid" id="cookieAccept">Akkoord</button>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* DATA (exact overgenomen prijzen/teksten) */
+  const SCENES = [
+    {key:'01-vegas-strip',    name:'VEGAS'},
+    {key:'02-canyon-desert',  name:'CANYON'},
+    {key:'03-utah-parks',     name:'UTAH'},
+    {key:'04-desert-highway', name:'HIGHWAY'},
+    {key:'05-temecula-vineyard', name:'TEMECULA'},
+    {key:'06-la-coast',       name:'LA COAST'},
+    {key:'07-san-diego-bay',  name:'SAN DIEGO'},
+    {key:'08-sequoia',        name:'SEQUOIA'}
+  ];
+
+  const TOURS_VEGAS = [
+    {scene:0, tag:"Las Vegas · Nevada", title:"Vegas Strip & Downtown", slug:"vegas-strip", desc:"De echte Vegas-beleving: de Strip, Fremont Street, het Sphere en insider-spots die toeristen nooit vinden.", spots:["The Strip","Fremont St","The Sphere","Arts District"], dur:"± 6u · halve dag", vegas:"$595", corona:"$795", fine:"excl. entrees & parkeren · tot 6 pers."},
+    {scene:1, tag:"Nevada · natuur", title:"Red Rock & Valley of Fire", slug:"red-rock", desc:"Rode rotsen en vuursteenformaties op 45 min van de Strip. Totale stilte, ongelooflijke kleuren.", spots:["Red Rock Canyon","Valley of Fire","Lake Mead"], dur:"± 8u · volledige dag", vegas:"$650", corona:"$1.295", fine:"excl. entrees & parkeren · tot 6 pers."},
+    {scene:1, tag:"Nevada · Arizona", title:"Hoover Dam & omgeving", slug:"hoover-dam", desc:"Een ingenieurswonder op de grens van Nevada en Arizona. Combineerbaar met Lake Mead en Boulder City.", spots:["Hoover Dam","Lake Mead","Boulder City"], dur:"± 6u · halve dag", vegas:"$650", corona:"$995", fine:"excl. entrees & parkeren · tot 6 pers."},
+    {scene:1, tag:"Nationaal park · Arizona", title:"Grand Canyon South Rim", slug:"grand-canyon", desc:"Eén van de zeven wereldwonderen als dagtrip. Beste uitkijkpunten, op het juiste moment, zonder de drukte.", spots:["South Rim","Mather Point","Desert View"], dur:"± 11u · lange dag", vegas:"$750", corona:"$1.395", fine:"excl. entrees & parkeren · tot 6 pers."},
+    {scene:2, tag:"Utah · nationaal park", title:"Zion National Park", slug:"zion", desc:"Angels Landing, The Narrows, Emerald Pools: Zion overweldigt. Ik begeleid jullie zodat je het maximale eruit haalt.", spots:["Angels Landing","The Narrows","Emerald Pools"], dur:"± 12u · lange dag", vegas:"$795", corona:"$1.495", fine:"excl. entrees & parkeren · tot 6 pers."},
+    {scene:2, tag:"Utah · nationaal park", title:"Bryce Canyon", slug:"bryce-canyon", desc:"Hoodoos zo ver het oog reikt, een andere planeet. Vanuit Vegas al een flinke trip, vanuit Corona een expeditie.", spots:["Bryce Canyon","Sunrise Point","Inspiration Point"], dur:"± 13u · zeer lange dag", vegas:"$895", corona:"$1.595", fine:"excl. entrees & parkeren · tot 6 pers."},
+    {scene:2, tag:"Utah · Arizona · dubbelpark", title:"Bryce Canyon + Antelope Canyon", slug:"bryce-antelope", desc:"De ultieme combinatie: hoodoos én de lichtstralen van Antelope Canyon. Bij voorkeur met overnachting.", spots:["Bryce Canyon","Antelope Canyon","Horseshoe Bend"], dur:"± 15u · met overnachting", vegas:"$995", corona:"$1.795", fine:"excl. entrees, parkeren & overnachting · tot 6 pers."},
+    {scene:3, tag:"Meerdere staten · op maat", title:"Meerdaagse West-USA Tour", slug:"west-usa", desc:"Combineer Nevada, Utah en Arizona over meerdere dagen. Ik rij, jullie slapen waar jullie willen.", spots:["NV","UT","AZ","Volledig op maat"], dur:null, quote:"Offerte via WhatsApp", fine:"excl. entrees, parkeren & overnachtingen"}
+  ];
+
+  const TOURS_SOCAL = [
+    {scene:4, tag:"Inland Empire · ~45 min", title:"Temecula wijnroute", slug:"temecula", desc:"De wijnvallei van SoCal, charming, relaxed en verrassend goed. Winery-bezoeken en lokale wijnen.", spots:["Old Town Temecula","Wilson Creek","Callaway"], dur:"± 6u", corona:"$550", fine:"excl. wijnproeverijen · tot 6 pers."},
+    {scene:5, tag:"Mountains · ~1u", title:"Big Bear & Mountains", slug:"big-bear", desc:"Pijnbomenwouden, een bergmeer en in de winter sneeuw, allemaal op een uur van Corona.", spots:["Big Bear Lake","Snow Summit","Hiking"], dur:"± 7u", corona:"$595", fine:"excl. entrees · tot 6 pers."},
+    {scene:5, tag:"Coachella Valley · ~1u", title:"Palm Springs & Desert", slug:"palm-springs", desc:"Mid-century modernisme, palmbomen en woestijnhitte. De gondola: 40°C temperatuurverschil in 10 minuten.", spots:["Palm Springs","Aerial Tramway","Joshua Tree"], dur:"± 7u", corona:"$595", fine:"excl. entrees · tot 6 pers."},
+    {scene:5, tag:"Los Angeles · ~1u", title:"Hollywood filmlocaties", slug:"hollywood", desc:"Van Pulp Fiction tot La La Land: de echte locaties, niet de toeristische clichés. Uniek in zijn soort.", spots:["Hollywood","Griffith Park","Iconic spots"], dur:"± 8u", corona:"$695", fine:"excl. entrees & parkeren · tot 6 pers."},
+    {scene:5, tag:"LA Coast · ~1u", title:"Santa Monica, Venice & Malibu", slug:"santa-monica", desc:"De iconische pier, Venice Beach boardwalk, de kliffen van Malibu en de Pacific Coast Highway.", spots:["Santa Monica Pier","Venice Beach","Malibu PCH"], dur:"± 8u", corona:"$650", fine:"excl. parkeren · tot 6 pers."},
+    {scene:6, tag:"San Diego · ~1.5u", title:"USS Midway & San Diego", slug:"san-diego", desc:"Het vliegdekschip USS Midway, het historische Gaslamp Quarter en de mooiste baai van California.", spots:["USS Midway","Gaslamp Quarter","Balboa Park"], dur:"± 8u", corona:"$650", fine:"excl. entree USS Midway · tot 6 pers."},
+    {scene:6, tag:"Santa Barbara · ~2u", title:"Santa Barbara & coast", slug:"santa-barbara", desc:"De Rivièra van Amerika: wit gestuukte gebouwen, wijngaarden en een prachtige haven.", spots:["State Street","Stearns Wharf","Mission"], dur:"± 9u", corona:"$750", fine:"excl. parkeren · tot 6 pers."},
+    {scene:7, tag:"Sequoia NP · ~2.5u", title:"Sequoia National Park", slug:"sequoia", desc:"De grootste bomen op aarde. General Sherman: 2800 jaar oud, 85 meter hoog. Woorden schieten tekort.", spots:["General Sherman","Giant Forest","Moro Rock"], dur:"± 10u", corona:"$795", fine:"excl. parkentree · tot 6 pers."},
+    {scene:5, tag:"Volledig op maat · SoCal", title:"Custom SoCal Tour", slug:"custom-socal", desc:"Laguna Beach, Getty Museum, Rose Bowl: combineer wat jij wil zien in één gepersonaliseerde dag.", spots:["Laguna Beach","Getty Center","Jouw keuze"], dur:null, quote:"Offerte via WhatsApp", fine:"flexibel"}
+  ];
+
+  const WA_NUMBER = '17028810971';
+  let tourCounter = 0;
+
+  function headlinePrice(t){
+    // the single price shown collapsed on the header
+    if(t.vegas) return `<span class="hp">${t.vegas}<small>vertrek uit Vegas · prijs vanaf</small></span>`;
+    if(t.corona) return `<span class="hp">${t.corona}<small>vertrek uit Corona · prijs vanaf</small></span>`;
+    return `<span class="hp">op aanvraag<small>&nbsp;</small></span>`;
+  }
+
+  function metaBlock(t){
+    let m = '';
+    if(t.dur) m += `<div class="m"><span class="lbl">Duur</span><span class="val dur">${t.dur}</span></div>`;
+    if(t.vegas) m += `<div class="m"><span class="lbl">Vertrek uit Vegas</span><span class="val">prijs vanaf ${t.vegas}</span></div>`;
+    if(t.corona) m += `<div class="m"><span class="lbl">Vertrek uit Corona</span><span class="val">prijs vanaf ${t.corona}</span></div>`;
+    if(!t.vegas && !t.corona && t.quote) m += `<div class="m"><span class="lbl">Prijs</span><span class="val">${t.quote}</span></div>`;
+    return m;
+  }
+
+  function tourHTML(t){
+    tourCounter++;
+    const idx = String(tourCounter).padStart(2,'0');
+    const spots = t.spots.map(s=>`<span>${s}</span>`).join('');
+    const waMsg = encodeURIComponent(`Hallo! Ik heb interesse in de tour: ${t.title}. Kan je me meer info geven?`);
+    const waUrl = `https://wa.me/${WA_NUMBER}?text=${waMsg}`;
+
+    const el = document.createElement('article');
+    el.className = 'tour';
+    el.dataset.scene = t.scene;
+    el.innerHTML = `
+      <button class="tour-head" aria-expanded="false">
+        <span class="idx">${idx}</span>
+        <span class="ht">
+          <span class="tag">${t.tag}</span>
+          <h3>${t.title}</h3>
+        </span>
+        ${headlinePrice(t)}
+        <span class="chev" aria-hidden="true"></span>
+      </button>
+      <div class="tour-body">
+        <div class="tour-body-inner">
+          <p>${t.desc}</p>
+          <div class="tour-photos">
+            <img data-src="images/tours/${t.slug}-1.jpg" alt="${t.title}">
+            <img data-src="images/tours/${t.slug}-2.jpg" alt="${t.title}">
+            <img data-src="images/tours/${t.slug}-3.jpg" alt="${t.title}">
+          </div>
+          <div class="spots">${spots}</div>
+          <div class="meta">${metaBlock(t)}</div>
+          <div class="fine">${t.fine}</div>
+          <a class="wa-btn" href="${waUrl}" target="_blank" rel="noopener">💬 Boek of vraag aan via WhatsApp</a>
+        </div>
+      </div>`;
+
+    const head = el.querySelector('.tour-head');
+    const body = el.querySelector('.tour-body');
+    const strip = el.querySelector('.tour-photos');
+    let photosStarted = false;
+
+    function fit(){
+      if(el.classList.contains('open')) body.style.maxHeight = body.scrollHeight + 'px';
+    }
+
+    // Foto's pas laden bij de eerste keer openklappen. Binnen een dichtgeklapte
+    // (hoogte 0) container laadt loading="lazy" soms nooit, vandaag hier bewust
+    // handmatig gestuurd.
+    function loadPhotos(){
+      if(photosStarted || !strip) return;
+      photosStarted = true;
+      strip.querySelectorAll('img').forEach(img=>{
+        img.addEventListener('load', fit);
+        img.addEventListener('error', ()=>{
+          img.remove();
+          if(strip && !strip.querySelector('img')) strip.remove();
+          fit();
+        });
+        img.src = img.dataset.src;
+      });
+    }
+
+    head.addEventListener('click', ()=>{
+      const isOpen = el.classList.toggle('open');
+      head.setAttribute('aria-expanded', isOpen ? 'true':'false');
+      if(isOpen) loadPhotos();
+      body.style.maxHeight = isOpen ? body.scrollHeight + 'px' : '';
+    });
+    return el;
+  }
+
+  const lv = document.getElementById('listVegas');
+  const ls = document.getElementById('listSocal');
+  TOURS_VEGAS.forEach(t=>lv.appendChild(tourHTML(t)));
+  TOURS_SOCAL.forEach(t=>ls.appendChild(tourHTML(t)));
+
+  /* BUILD VIDEO STAGE */
+  const stage = document.getElementById('videoStage');
+  const sceneEls = [];
+  SCENES.forEach((sc,i)=>{
+    const wrap = document.createElement('div');
+    if(reduce){
+      const img = document.createElement('img');
+      img.className='fallback'; img.src=`poster/${sc.key}.jpg`; img.alt='';
+      img.style.opacity = i===0 ? '1':'0';
+      stage.appendChild(img);
+      sceneEls.push({type:'img', el:img});
+    } else {
+      const v = document.createElement('video');
+      v.className='scene'; v.muted=true; v.playsInline=true; v.loop=true; v.autoplay=true;
+      v.preload='auto'; v.setAttribute('muted','');
+      v.setAttribute('poster',`poster/${sc.key}.jpg`);
+      const src = document.createElement('source');
+      src.src=`video/${sc.key}.mp4`; src.type='video/mp4';
+      v.appendChild(src);
+      if(i===0) v.classList.add('active');
+      // Force play as soon as the browser can, and surface load errors
+      v.addEventListener('canplay', ()=>{ if(v.classList.contains('active')) v.play().catch(()=>{}); });
+      v.addEventListener('loadeddata', ()=>{ if(v.classList.contains('active')) v.play().catch(()=>{}); });
+      v.addEventListener('error', ()=>{ console.warn('Video kon niet laden:', sc.key, v.error && v.error.message); });
+      stage.appendChild(v);
+      sceneEls.push({type:'video', el:v, loaded:true});
+    }
+  });
+
+  let activeScene = 0;
+  function ensureLoaded(i){
+    const s = sceneEls[i];
+    if(s && s.type==='video' && !s.loaded){ s.el.preload='auto'; s.el.load(); s.loaded=true; }
+  }
+  function setScene(i){
+    if(i===activeScene || i<0 || i>=sceneEls.length) return;
+    sceneEls.forEach((s,idx)=>{
+      if(s.type==='video'){
+        const on = idx===i;
+        s.el.classList.toggle('active', on);
+        if(on){ s.el.play().catch(()=>{}); } else { s.el.pause(); }
+      } else {
+        s.el.style.opacity = idx===i ? '1':'0';
+      }
+    });
+    activeScene = i;
+    document.getElementById('sceneIdx').textContent = String(i+1).padStart(2,'0');
+    document.getElementById('sceneName').textContent = SCENES[i].name;
+  }
+
+  /* SCROLL: scene switching + optional scrub */
+  const sceneSections = Array.from(document.querySelectorAll('[data-scene]'));
+  let ticking = false;
+  function onScroll(){
+    const scrollTop = window.scrollY;
+    const docH = document.documentElement.scrollHeight - window.innerHeight;
+    document.getElementById('topRailFill').style.width = (docH>0? Math.min(100,(scrollTop/docH)*100):0)+'%';
+
+    // find the section currently dominating the viewport centre
+    const mid = scrollTop + window.innerHeight*0.5;
+    let current = sceneSections[0];
+    for(const sec of sceneSections){
+      if(sec.offsetTop <= mid) current = sec;
+    }
+    const sceneIdx = parseInt(current.dataset.scene,10) || 0;
+    if(sceneIdx !== activeScene) setScene(sceneIdx);
+
+    // No scrubbing: the active video plays and loops smoothly on its own.
+    // Scroll only decides WHICH scene is shown (crossfaded via setScene).
+    ticking = false;
+  }
+  window.addEventListener('scroll', ()=>{ if(!ticking){ requestAnimationFrame(onScroll); ticking=true; } }, {passive:true});
+  window.addEventListener('resize', ()=>{ if(!ticking){ requestAnimationFrame(onScroll); ticking=true; } });
+
+  /* TOUR REVEAL */
+  if('IntersectionObserver' in window && !reduce){
+    const io = new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); }),{threshold:0.15});
+    document.querySelectorAll('.tour').forEach(t=>io.observe(t));
+  } else {
+    document.querySelectorAll('.tour').forEach(t=>t.classList.add('in'));
+  }
+
+  /* PRELOADER */
+  const pre = document.getElementById('preloader');
+  const preBar = document.getElementById('preBar');
+  const prePct = document.getElementById('prePct');
+  let pct = 0;
+  const fakeLoad = setInterval(()=>{
+    pct = Math.min(100, pct + Math.random()*22);
+    preBar.style.width = pct+'%';
+    prePct.textContent = Math.round(pct)+'%';
+    if(pct>=100){
+      clearInterval(fakeLoad);
+      setTimeout(()=>{
+        pre.classList.add('done');
+        document.body.classList.remove('loading');
+        onScroll();
+        // kick the first (active) video into playing
+        const first = sceneEls[0];
+        if(first && first.type==='video'){ first.el.play().catch(()=>{}); }
+      }, 350);
+    }
+  }, 180);
+
+  // Some browsers block muted autoplay until the first user gesture - retry
+  // playing the active scene on the first interaction, once.
+  function kickActive(){
+    const s = sceneEls[activeScene];
+    if(s && s.type==='video'){ s.el.play().catch(()=>{}); }
+    window.removeEventListener('pointerdown', kickActive);
+    window.removeEventListener('touchstart', kickActive);
+    window.removeEventListener('scroll', kickActive);
+  }
+  window.addEventListener('pointerdown', kickActive, {passive:true});
+  window.addEventListener('touchstart', kickActive, {passive:true});
+  window.addEventListener('scroll', kickActive, {passive:true});
+
+  /* HAMBURGER NAV */
+  const navToggle = document.getElementById('navToggle');
+  const navOverlay = document.getElementById('navOverlay');
+  function setNav(open){
+    document.body.classList.toggle('nav-open', open);
+    navToggle.setAttribute('aria-expanded', open?'true':'false');
+    navOverlay.setAttribute('aria-hidden', open?'false':'true');
+  }
+  navToggle.addEventListener('click', ()=> setNav(!document.body.classList.contains('nav-open')));
+  navOverlay.querySelectorAll('[data-nav]').forEach(a=> a.addEventListener('click', ()=> setNav(false)));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') setNav(false); });
+
+  /* COOKIE CONSENT */
+  const cookie = document.getElementById('cookie');
+  let consent=null;
+  try{ consent = localStorage.getItem('lv_consent'); }catch(e){}
+  if(!consent){ setTimeout(()=>cookie.classList.add('show'), 1400); }
+  function closeCookie(v){ try{ localStorage.setItem('lv_consent', v); }catch(e){} cookie.classList.remove('show'); }
+  document.getElementById('cookieAccept').addEventListener('click', ()=>closeCookie('accepted'));
+  document.getElementById('cookieDecline').addEventListener('click', ()=>closeCookie('declined'));
+})();
+</script>
+</body>
+</html>
