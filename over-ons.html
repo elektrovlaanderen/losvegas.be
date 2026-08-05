@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Over ons · LosVegas.be · Tom & Dominique</title>
+<meta name="description" content="Wij zijn Tom en Dominique, een Vlaams gezin dat in Zuid-Californië woont. Al 14 jaar verbonden met Las Vegas. We tonen je de stad en de westkust zoals wij ze zelf beleven.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0c0a09; --ink-2:#17130f; --ink-3:#221b15;
+    --sun:#e8873a; --sun-bright:#f4a94e; --rust:#b8472a; --sand:#e9dcc4;
+    --gold:#e8873a; --gold-bright:#f4a94e; --gold-dim:#e8873a55;
+    --text:#ece2d0; --muted:#9b8f79; --line:#332921;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{ margin:0; background:var(--ink); color:var(--text); font-family:'Archivo',sans-serif; overflow-x:hidden; }
+  h1,h2,h3,.display{ font-family:'Anton',sans-serif; font-weight:400; text-transform:uppercase; letter-spacing:0.005em; }
+  .mono{ font-family:'Space Mono',monospace; }
+  a{ color:inherit; text-decoration:none; }
+  .eyebrow{ font-family:'Space Mono',monospace; font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); }
+
+  /* fixed video/gradient backdrop */
+  #bg{ position:fixed; inset:0; z-index:-2; background:var(--ink); }
+  #bg video, #bg img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.5; }
+  #bgScrim{ position:fixed; inset:0; z-index:-1; pointer-events:none;
+    background:radial-gradient(120% 80% at 50% 0%, #0c0a0900 0%, #0c0a0966 55%, #0c0a09dd 100%),
+               linear-gradient(180deg,#0c0a0977 0%, #0c0a09cc 60%, #0c0a09 100%); }
+
+  /* chrome */
+  #topRail{ position:fixed; top:0; left:0; right:0; height:2px; background:#ffffff10; z-index:90; }
+  .wa-float{ position:fixed; bottom:20px; right:16px; z-index:90; display:flex; align-items:center; gap:0.5rem;
+    background:var(--gold); color:#1a1408; padding:0.7rem 1.15rem; border-radius:999px; font-weight:700; font-size:0.8rem; box-shadow:0 6px 26px #00000077; }
+
+  /* hamburger + nav (same as home) */
+  #navToggle{ position:fixed; top:12px; left:14px; z-index:130; width:40px; height:40px; border:1px solid var(--line); border-radius:6px;
+    background:#0c0a09aa; backdrop-filter:blur(6px); cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; }
+  #navToggle span{ width:18px; height:2px; background:var(--sand); border-radius:2px; transition:transform 0.3s, opacity 0.2s; }
+  body.nav-open #navToggle span:nth-child(1){ transform:translateY(6px) rotate(45deg); }
+  body.nav-open #navToggle span:nth-child(2){ opacity:0; }
+  body.nav-open #navToggle span:nth-child(3){ transform:translateY(-6px) rotate(-45deg); }
+  #navOverlay{ position:fixed; inset:0; z-index:125; background:linear-gradient(160deg,#0c0a09f5,#17130ff5); backdrop-filter:blur(8px);
+    display:flex; flex-direction:column; justify-content:center; padding:8vh 8vw; opacity:0; visibility:hidden; transition:opacity 0.4s, visibility 0.4s; }
+  body.nav-open #navOverlay{ opacity:1; visibility:visible; }
+  #navOverlay .eyebrow{ margin-bottom:2.5rem; }
+  #navOverlay a{ font-family:'Anton',sans-serif; text-transform:uppercase; font-size:clamp(1.8rem,6vw,3rem); color:var(--sand); padding:0.35rem 0; line-height:1.15;
+    display:flex; align-items:baseline; gap:1rem; transition:color 0.2s, padding-left 0.25s; }
+  #navOverlay a .n{ font-family:'Space Mono',monospace; font-size:0.8rem; color:var(--gold-dim); }
+  #navOverlay a:hover{ color:var(--sun); padding-left:0.8rem; }
+  #navOverlay .navwa{ margin-top:2.5rem; align-self:flex-start; font-family:'Archivo',sans-serif; font-size:0.9rem; text-transform:none; }
+
+  /* hero */
+  .hero{ min-height:78svh; display:flex; flex-direction:column; justify-content:flex-end; padding:16vh 6vw 6vh; max-width:1100px; margin:0 auto; }
+  .hero .eyebrow{ margin-bottom:1.2rem; }
+  .hero h1{ font-size:clamp(3rem,10vw,7rem); line-height:0.92; margin:0 0 1.3rem; }
+  .hero h1 .hl{ background:linear-gradient(100deg,var(--sun),var(--sun-bright) 60%,var(--rust)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .hero .lede{ max-width:52ch; font-size:1.15rem; line-height:1.6; opacity:0.9; margin:0; }
+
+  /* content */
+  .wrap{ max-width:920px; margin:0 auto; padding:2rem clamp(1.25rem,6vw,3rem) 8vh; }
+  .block{ margin:0 0 4rem; }
+  .block .eyebrow{ display:block; margin-bottom:0.8rem; }
+  .block h2{ font-size:clamp(1.7rem,4.5vw,2.6rem); margin:0 0 1.2rem; line-height:1.05; }
+  .block p{ font-size:1.05rem; line-height:1.75; color:var(--text); opacity:0.88; margin:0 0 1.1rem; max-width:62ch; }
+  .block p:last-child{ margin-bottom:0; }
+  .block strong{ color:var(--sand); font-weight:700; }
+
+  /* intro met foto */
+  .block-intro{ display:grid; grid-template-columns:1fr 220px; gap:2.4rem; align-items:start; }
+  .intro-text p:last-child{ margin-bottom:0; }
+  .intro-photo{ margin:0; position:relative; }
+  .intro-photo img{
+    width:100%; height:auto; display:block; border-radius:6px;
+    border:1px solid var(--line);
+    box-shadow:0 14px 40px #00000088, 0 0 0 6px #17130f;
+  }
+  .intro-photo figcaption{
+    font-family:'Space Mono',monospace; font-size:0.6rem; letter-spacing:0.08em;
+    text-transform:uppercase; color:var(--muted); text-align:center; margin-top:0.9rem;
+  }
+  @media(max-width:760px){
+    .block-intro{ grid-template-columns:1fr; gap:1.8rem; }
+    .intro-photo{ max-width:230px; margin:0 auto; }
+  }
+
+  /* pull stats */
+  .stats{ display:flex; flex-wrap:wrap; gap:2.5rem; margin:0 0 4rem; padding:2rem 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .stats .s .n{ font-family:'Anton',sans-serif; font-size:2.4rem; color:var(--gold); line-height:1; }
+  .stats .s .l{ font-family:'Space Mono',monospace; font-size:0.66rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--muted); margin-top:0.4rem; }
+
+  /* destination list */
+  .dests{ list-style:none; padding:0; margin:1.4rem 0 0; display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:0.6rem 1.5rem; }
+  .dests li{ font-family:'Space Mono',monospace; font-size:0.85rem; color:var(--text); opacity:0.85; padding-left:1.1rem; position:relative; }
+  .dests li::before{ content:"→"; position:absolute; left:0; color:var(--gold); }
+
+  /* promise / CTA */
+  .promise{ background:var(--ink-2); border:1px solid var(--line); border-radius:10px; padding:2.6rem 2.2rem; margin:0 0 3rem; }
+  .promise h2{ margin-top:0; }
+  .signoff{ font-family:'Anton',sans-serif; font-size:clamp(1.4rem,4vw,2rem); text-transform:uppercase; color:var(--sun); margin:2rem 0 0; }
+
+  .cta-row{ display:flex; gap:0.9rem; flex-wrap:wrap; margin-top:2.5rem; }
+  .btn{ display:inline-block; padding:0.9rem 1.8rem; border-radius:2px; font-weight:700; font-size:0.85rem; letter-spacing:0.02em; }
+  .btn-solid{ background:var(--gold); color:#1a1408; }
+  .btn-line{ border:1px solid #ffffff33; color:var(--text); }
+  .wa-btn{ display:inline-flex; align-items:center; gap:0.5rem; background:#25d366; color:#08240f; padding:0.9rem 1.8rem; border-radius:999px; font-weight:700; font-size:0.85rem; }
+
+  footer{ text-align:center; padding:3rem 6vw 6rem; color:var(--muted); font-size:0.72rem; border-top:1px solid var(--line); font-family:'Space Mono',monospace; letter-spacing:0.05em; }
+  footer a{ color:var(--gold); }
+
+  @media (prefers-reduced-motion:reduce){ #bg video{ display:none; } }
+</style>
+</head>
+<body>
+
+<!-- Achtergrond: hergebruikt een van je bestaande scene-video's. Pas de naam gerust aan. -->
+<div id="bg">
+  <video autoplay muted loop playsinline poster="poster/06-la-coast.jpg">
+    <source src="video/06-la-coast.mp4" type="video/mp4">
+  </video>
+</div>
+<div id="bgScrim"></div>
+
+<div id="topRail"></div>
+
+<button id="navToggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+<nav id="navOverlay" aria-hidden="true">
+  <div class="eyebrow">LosVegas.be · Menu</div>
+  <a href="index.html#top" data-nav><span class="n">00</span> Home</a>
+  <a href="index.html#tours" data-nav><span class="n">01</span> Vegas, Utah &amp; Arizona</a>
+  <a href="index.html#socal" data-nav><span class="n">02</span> Southern California</a>
+  <a href="index.html#reisschema" data-nav><span class="n">03</span> Reisschema's</a>
+  <a href="over-ons.html" data-nav><span class="n">04</span> Over ons</a>
+  <a class="navwa" href="https://wa.me/17028810971" target="_blank" rel="noopener">💬 Direct via WhatsApp</a>
+</nav>
+
+<a class="wa-float" href="https://wa.me/17028810971" target="_blank" rel="noopener">💬 App me</a>
+
+<header class="hero">
+  <div class="eyebrow">Over ons · LosVegas.be</div>
+  <h1>Een Vlaams gezin<br>dat <span class="hl">hier leeft.</span></h1>
+  <p class="lede">Wij zijn Tom en Dominique. Samen met onze kinderen Ethan en Summer wonen we in Zuid-Californië, op enkele uren van Las Vegas, en we laten je de stad en de westkust beleven zoals wij ze zelf beleven.</p>
+</header>
+
+<main class="wrap">
+
+  <div class="stats">
+    <div class="s"><div class="n">14+</div><div class="l">Jaar verbonden met Vegas</div></div>
+    <div class="s"><div class="n">34</div><div class="l">Staten bezocht</div></div>
+    <div class="s"><div class="n">NL</div><div class="l">Volledig Nederlandstalig</div></div>
+    <div class="s"><div class="n">tot 6</div><div class="l">Prijs per tour, niet per persoon</div></div>
+  </div>
+
+  <section class="block block-intro">
+    <div class="intro-text">
+      <span class="eyebrow">Welkom</span>
+      <h2>Onze band met Las Vegas</h2>
+      <p>Welkom bij <strong>LosVegas.be</strong>. Wij zijn <strong>Tom en Dominique</strong>, een Vlaams gezin dat zijn hart verloren heeft aan de Amerikaanse westkust. Samen met onze kinderen <strong>Ethan</strong> en <strong>Summer</strong> wonen we in <strong>Zuid-Californië</strong>, op slechts enkele uren van Las Vegas.</p>
+      <p>Onze band met Las Vegas gaat veel verder dan die van een gewone bezoeker. Al meer dan <strong>14 jaar</strong> komen we regelmatig naar deze unieke stad. We hebben Las Vegas zien veranderen, nieuwe hotspots ontdekt en talloze herinneringen opgebouwd. Voor ons is het een plek waar we ons thuis voelen.</p>
+      <p>Las Vegas heeft zelfs een bijzondere plaats in ons leven, want <strong>wij zijn er officieel getrouwd</strong>. Dat maakt deze stad voor ons extra speciaal.</p>
+      <p>We komen beiden uit de <strong>farmaceutische wereld</strong>. Dat klinkt misschien ver van reizen, maar het zit in alles wat we doen: nauwkeurig plannen, niets aan het toeval overlaten en afspraken nakomen. Precies wat je wil van iemand die jouw vakantie in handen heeft.</p>
+    </div>
+    <figure class="intro-photo">
+      <img src="images/gezin-vegas.jpg" alt="Tom en Dominique met hun kinderen aan het Welcome to Las Vegas-bord" loading="lazy">
+      <figcaption>Tom, Dominique, Ethan &amp; Summer</figcaption>
+    </figure>
+  </section>
+
+  <section class="block">
+    <span class="eyebrow">Waarom wij</span>
+    <h2>Waarom LosVegas.be?</h2>
+    <p>Omdat wij Las Vegas niet tonen zoals een reisgids dat doet.</p>
+    <p>Wij laten je de stad beleven zoals wij ze zelf beleven. Natuurlijk bezoeken we de iconische locaties zoals de Strip, Fremont Street en de bekende hotels, maar we nemen je ook mee naar de plekken die de meeste toeristen nooit ontdekken.</p>
+    <p>Door onze jarenlange ervaring én doordat we in Californië wonen, kennen we niet alleen Las Vegas, maar de volledige regio. We volgen de nieuwste ontwikkelingen op de voet en weten welke restaurants, shows, uitzichtpunten en uitstappen écht de moeite waard zijn.</p>
+  </section>
+
+  <section class="block">
+    <span class="eyebrow">Zelfde taal, zelfde cultuur</span>
+    <h2>Een Vlaming begrijpt een Vlaming</h2>
+    <p>Op reis wil je vooral genieten.</p>
+    <p>Je hoeft je bij ons geen zorgen te maken over taal, cultuur of praktische zaken. We spreken dezelfde taal, begrijpen wat Vlaamse en Nederlandse reizigers belangrijk vinden en geven eerlijk advies zoals we dat ook aan vrienden of familie zouden geven.</p>
+    <p>Geen standaardverhalen of gehaaste bustours met vreemden, maar een persoonlijke ervaring die volledig afgestemd is op jouw wensen.</p>
+  </section>
+
+  <section class="block">
+    <span class="eyebrow">De hele westkust</span>
+    <h2>Meer dan alleen Las Vegas</h2>
+    <p>Vanuit onze thuisbasis in Zuid-Californië kennen we de Amerikaanse westkust als onze eigen achtertuin. We helpen je niet alleen met Las Vegas, maar ook met uitstappen en roadtrips naar onder andere:</p>
+    <ul class="dests">
+      <li>Hoover Dam</li>
+      <li>Red Rock Canyon</li>
+      <li>Valley of Fire</li>
+      <li>Death Valley</li>
+      <li>Joshua Tree</li>
+      <li>Zion National Park</li>
+      <li>Bryce Canyon</li>
+      <li>Grand Canyon</li>
+      <li>Route 66</li>
+    </ul>
+    <p style="margin-top:1.4rem;">Of je nu enkele dagen in Las Vegas verblijft of een volledige roadtrip door het westen maakt, we helpen je graag om het maximale uit je vakantie te halen.</p>
+  </section>
+
+  <section class="block">
+    <span class="eyebrow">Extra troef</span>
+    <h2>Professionele foto's en video's</h2>
+    <p>Naast onze passie voor reizen zijn we ook professioneel actief in fotografie, videografie, drones en 3D-media. Daardoor weten we niet alleen waar je de mooiste foto's kunt maken, maar kunnen we jouw reis ook professioneel vastleggen.</p>
+    <p>Zo ga je niet alleen naar huis met onvergetelijke herinneringen, maar ook met prachtige beelden om nog jarenlang van na te genieten.</p>
+  </section>
+
+  <section class="promise">
+    <span class="eyebrow">Onze belofte</span>
+    <h2>Zoals we zelf ontvangen willen worden</h2>
+    <p>Wij behandelen iedere gast zoals we zelf graag ontvangen zouden worden. Persoonlijk, eerlijk, flexibel en met veel enthousiasme.</p>
+    <p>Ons doel is eenvoudig: ervoor zorgen dat jij Las Vegas en de Amerikaanse westkust beleeft door de ogen van een Vlaams gezin dat hier leeft, deze regio door en door kent en zijn passie graag met anderen deelt.</p>
+    <p>We kijken ernaar uit om je binnenkort persoonlijk te verwelkomen.</p>
+    <div class="signoff">Tot snel in Vegas of Californië!</div>
+    <div class="cta-row">
+      <a class="wa-btn" href="https://wa.me/17028810971?text=Hallo%20Tom%20en%20Dominique!%20Ik%20heb%20jullie%20over-ons%20pagina%20gelezen%20en%20wil%20graag%20meer%20info." target="_blank" rel="noopener">💬 Neem contact op via WhatsApp</a>
+      <a class="btn btn-line" href="index.html#tours">Bekijk de tours</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>LOSVEGAS.BE · TOM &amp; DOMINIQUE · <a href="https://wa.me/17028810971" target="_blank" rel="noopener">WHATSAPP</a></footer>
+
+<script>
+(function(){
+  const navToggle=document.getElementById('navToggle');
+  const navOverlay=document.getElementById('navOverlay');
+  function setNav(open){ document.body.classList.toggle('nav-open',open); navToggle.setAttribute('aria-expanded',open?'true':'false'); navOverlay.setAttribute('aria-hidden',open?'false':'true'); }
+  navToggle.addEventListener('click',()=>setNav(!document.body.classList.contains('nav-open')));
+  navOverlay.querySelectorAll('[data-nav]').forEach(a=>a.addEventListener('click',()=>setNav(false)));
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape') setNav(false); });
+})();
+</script>
+</body>
+</html>
