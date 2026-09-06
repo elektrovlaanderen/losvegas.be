@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LosVegas.be — Boekingen open vanaf januari 2027</title>
+<meta name="description" content="Onze tours staan online. Boeken kan vanaf januari 2027. Laat nu al weten waar je interesse in hebt.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0c0a09; --ink-2:#17130f;
+    --sun:#e8873a; --sun-bright:#f4a94e; --rust:#b8472a; --sand:#e9dcc4;
+    --text:#ece2d0; --muted:#8d8272; --line:#332921;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; min-height:100svh; background:var(--ink); color:var(--text);
+    font-family:'Archivo',sans-serif; display:flex; flex-direction:column; overflow-x:hidden;
+  }
+  a{ color:inherit; text-decoration:none; }
+
+  #bg{ position:fixed; inset:0; z-index:-2; background:
+      radial-gradient(90% 55% at 50% 88%, #3a2214 0%, transparent 62%),
+      radial-gradient(65% 45% at 15% 15%, #1d1a2a 0%, transparent 60%),
+      var(--ink); }
+  #bg video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.26; }
+  #scrim{ position:fixed; inset:0; z-index:-1; pointer-events:none;
+    background:linear-gradient(180deg,#0c0a09cc 0%, #0c0a0999 45%, #0c0a09ee 100%); }
+  .beam{ position:fixed; left:0; right:0; bottom:0; height:36vh; z-index:-1; pointer-events:none; overflow:hidden; }
+  .beam::before{ content:""; position:absolute; left:-20%; right:-20%; bottom:-12vh; height:32vh;
+    background:radial-gradient(ellipse at 50% 100%, #e8873a2b 0%, transparent 68%);
+    animation:sweep 10s ease-in-out infinite alternate; }
+  @keyframes sweep{ from{transform:translateX(-6%)} to{transform:translateX(6%)} }
+
+  .topbar{
+    display:flex; justify-content:space-between; align-items:center; gap:1rem;
+    padding:1.3rem clamp(1.25rem,6vw,3rem); border-bottom:1px solid var(--line);
+    font-family:'Space Mono',monospace; font-size:0.63rem; letter-spacing:0.16em; text-transform:uppercase;
+  }
+  .topbar .brand{ color:var(--sand); }
+  .topbar .brand b{ color:var(--sun); font-weight:400; }
+  .topbar .status{ display:flex; align-items:center; gap:0.5rem; color:var(--muted); }
+  .topbar .status .dot{ width:6px;height:6px;border-radius:50%;background:var(--sun); animation:pulse 2s ease-in-out infinite; }
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.75)}}
+
+  main{ flex:1; display:flex; flex-direction:column; justify-content:center;
+    padding:5vh clamp(1.25rem,6vw,3rem) 4vh; max-width:1000px; margin:0 auto; width:100%; }
+
+  .kicker{ font-family:'Space Mono',monospace; font-size:0.68rem; letter-spacing:0.2em;
+    text-transform:uppercase; color:var(--sun); margin-bottom:1.1rem; }
+  .headline{
+    font-family:'Anton',sans-serif; font-weight:400; text-transform:uppercase;
+    font-size:clamp(2rem,6vw,4rem); line-height:1.0; margin:0 0 1.6rem; max-width:17ch;
+    text-shadow:0 2px 40px #000000cc;
+  }
+  .headline .hl{ background:linear-gradient(100deg,var(--sun),var(--sun-bright) 55%,var(--rust));
+    -webkit-background-clip:text; background-clip:text; color:transparent; }
+
+  .lede{ max-width:52ch; font-size:1.02rem; line-height:1.7; opacity:0.88; margin:0 0 2rem; }
+
+  /* aftelklok */
+  .clock{ display:flex; gap:clamp(0.5rem,2vw,1.2rem); flex-wrap:wrap; margin-bottom:0.9rem; }
+  .unit{ background:#17130fcc; border:1px solid var(--line); border-radius:8px;
+    padding:clamp(0.7rem,2vw,1.1rem) clamp(0.8rem,2.2vw,1.4rem);
+    min-width:clamp(68px,15vw,100px); text-align:center; backdrop-filter:blur(4px); }
+  .unit .n{ font-family:'Anton',sans-serif; font-size:clamp(1.7rem,5.5vw,2.9rem); line-height:1;
+    color:var(--sand); font-variant-numeric:tabular-nums; display:block; }
+  .unit.sec .n{ color:var(--sun); }
+  .unit .l{ font-family:'Space Mono',monospace; font-size:0.54rem; letter-spacing:0.14em;
+    text-transform:uppercase; color:var(--muted); margin-top:0.5rem; display:block; }
+  .open-date{ font-family:'Space Mono',monospace; font-size:0.68rem; letter-spacing:0.1em;
+    color:var(--muted); margin:0 0 2rem; }
+  .open-date b{ color:var(--sun); font-weight:400; }
+
+  .cta-row{ display:flex; gap:0.9rem; flex-wrap:wrap; align-items:center; }
+  .btn-line{
+    display:inline-flex; align-items:center; gap:0.5rem;
+    border:1px solid #ffffff33; color:var(--text); padding:0.9rem 1.7rem; border-radius:999px;
+    font-weight:600; font-size:0.88rem; backdrop-filter:blur(4px);
+    transition:border-color .2s ease, transform .2s ease;
+  }
+  .btn-line:hover{ border-color:var(--sun); transform:translateY(-2px); }
+  .wa-btn{
+    display:inline-flex; align-items:center; gap:0.55rem;
+    background:#25d366; color:#08240f; padding:0.9rem 1.8rem; border-radius:999px;
+    font-weight:700; font-size:0.88rem; box-shadow:0 8px 30px #25d36630;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .wa-btn:hover{ transform:translateY(-2px); box-shadow:0 12px 36px #25d36655; }
+  .cta-sub{ font-family:'Space Mono',monospace; font-size:0.64rem; color:var(--muted); margin-top:0.9rem; display:block; }
+
+  footer{ padding:1.3rem clamp(1.25rem,6vw,3rem); border-top:1px solid var(--line);
+    font-family:'Space Mono',monospace; font-size:0.6rem; letter-spacing:0.08em;
+    color:var(--muted); display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap; }
+  footer a{ color:var(--sun); }
+
+  @media (max-height:780px){
+    .unit{ padding:0.6rem 0.85rem; }
+    .unit .n{ font-size:clamp(1.5rem,5vw,2.2rem); }
+    .headline{ margin-bottom:1.2rem; } .lede{ margin-bottom:1.4rem; }
+  }
+  @media (prefers-reduced-motion:reduce){
+    .beam::before{animation:none} .topbar .status .dot{animation:none} #bg video{display:none}
+  }
+</style>
+</head>
+<body>
+
+<div id="bg">
+  <video autoplay muted loop playsinline poster="poster/04-desert-highway.jpg">
+    <source src="video/04-desert-highway.mp4" type="video/mp4">
+  </video>
+</div>
+<div id="scrim"></div>
+<div class="beam"></div>
+
+<div class="topbar">
+  <span class="brand">LOS<b>VEGAS</b>.BE</span>
+  <span class="status"><span class="dot"></span> Boekingen openen binnenkort</span>
+</div>
+
+<main>
+  <div class="kicker">Save the date</div>
+
+  <h1 class="headline">Boeken kan vanaf<br><span class="hl">januari 2027.</span></h1>
+
+  <p class="lede">Onze tours en reisschema's staan al helemaal online, dus je kan nu al rustig alles doorbladeren en je reis uitstippelen. Vanaf januari 2027 nemen we de eerste boekingen aan.</p>
+
+  <div class="clock" id="clock" role="timer" aria-live="off">
+    <div class="unit"><span class="n" id="d">00</span><span class="l">Dagen</span></div>
+    <div class="unit"><span class="n" id="h">00</span><span class="l">Uren</span></div>
+    <div class="unit"><span class="n" id="m">00</span><span class="l">Minuten</span></div>
+    <div class="unit sec"><span class="n" id="s">00</span><span class="l">Seconden</span></div>
+  </div>
+  <p class="open-date">Boekingen open vanaf <b>1 januari 2027</b></p>
+
+  <div class="cta-row">
+    <a class="btn-line" href="tours.html">Bekijk alvast de tours</a>
+    <a class="wa-btn" href="https://wa.me/17028810971?text=Hallo!%20Ik%20heb%20interesse%20in%20een%20tour%20en%20wil%20graag%20op%20de%20hoogte%20blijven%20wanneer%20boeken%20kan." target="_blank" rel="noopener">💬 Hou me op de hoogte</a>
+  </div>
+  <span class="cta-sub">Laat weten welke tour je interesseert, dan denken we alvast met je mee</span>
+</main>
+
+<footer>
+  <span>LOSVEGAS.BE</span>
+  <span><a href="https://wa.me/17028810971" target="_blank" rel="noopener">WHATSAPP</a></span>
+</footer>
+
+<script>
+(function(){
+  // Boekingen openen: 1 januari 2027, 00:00 lokale tijd.
+  var target = new Date(2027, 0, 1, 0, 0, 0).getTime();
+  var el = { d:document.getElementById('d'), h:document.getElementById('h'),
+             m:document.getElementById('m'), s:document.getElementById('s') };
+  var pad = function(n){ return String(n).padStart(2,'0'); };
+  function tick(){
+    var diff = target - Date.now();
+    if(diff <= 0){
+      document.getElementById('clock').innerHTML =
+        '<div class="unit" style="min-width:auto;padding:1rem 1.6rem"><span class="n" style="font-size:clamp(1.4rem,4.5vw,2.2rem)">Boekingen open</span></div>';
+      document.querySelector('.open-date').innerHTML = 'Je kan nu <b>boeken</b>';
+      clearInterval(timer); return;
+    }
+    var sec = Math.floor(diff/1000);
+    el.d.textContent = pad(Math.floor(sec/86400));
+    el.h.textContent = pad(Math.floor(sec%86400/3600));
+    el.m.textContent = pad(Math.floor(sec%3600/60));
+    el.s.textContent = pad(sec%60);
+  }
+  tick();
+  var timer = setInterval(tick, 1000);
+})();
+</script>
+</body>
+</html>
