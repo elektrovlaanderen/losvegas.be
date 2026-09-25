@@ -10,6 +10,17 @@ Werkboek voor Amazon KDP (paperback), gebaseerd op het "Color & Grow"-voorbeeld:
 | `cover.png`, `voorbeeld_paginas.png` | Voorbeeldafbeeldingen |
 | `bron/` | Broncode om de PDF's opnieuw te maken (`npm i playwright-core pdf-lib`, dan `node build.js --png && node cover.js`) |
 
+## Versie 2: met Higgsfield-illustraties (aanbevolen)
+De tekeningen zijn gemaakt met Higgsfield (GPT Image 2.5), met de voorbeeldpagina's als stijlreferentie. De PDF's zijn gebouwd in de Higgsfield-sandbox:
+- Binnenwerk: https://d2ol7oe51mr4n9.cloudfront.net/user_3HBB2MMxSPG4JtlCTmWPSIJHi6P/c8adbd3e-e9ac-491d-a585-83acaf540417.pdf
+- Omslag: https://d2ol7oe51mr4n9.cloudfront.net/user_3HBB2MMxSPG4JtlCTmWPSIJHi6P/ce530469-7ed2-48a7-b671-3aee753f5d8e.pdf
+- Voorbeeldbladen: `e36b3344…jpg`, `2ac331ad…jpg` en de omslag `3184405a…jpg` (in je Higgsfield-media)
+
+Opnieuw bouwen (waar de cloudfront-domeinen bereikbaar zijn): in `bron/` voer je `sh fetch_art.sh && npm i playwright-core pdf-lib && node build_img.js --png && node cover_img.js && python3 sheets.py` uit.
+De PDF's in deze map (`Cappy_*.pdf`) zijn nog versie 1, met de eenvoudige lijntekeningen.
+
+⚠️ Controleer met de hand: op **Color by Number** (pagina 5) en **Label Cappy** (pagina 11) heeft de AI de cijfers in de tekening gezet. Kijk na of die kloppen met de kleurcode en de antwoordsleutel.
+
 ## Instellingen bij het uploaden naar KDP
 - **Ink and paper:** Premium color, white paper *(standard color kan pas vanaf 72 pagina's)*
 - **Trim size:** 8.5 × 11 in
