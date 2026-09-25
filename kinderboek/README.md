@@ -52,3 +52,17 @@ Inside you'll find 21 activities:
 - A certificate and an answer key for parents and teachers
 
 **Keywords (7):** capybara activity book · 2nd grade workbook · grade 2 math and reading · capybara coloring book for kids · summer bridge activities grade 2 · ages 7-8 activity book · homeschool second grade
+
+---
+
+# Halloween-editie: Cappy's Halloween Fun (Grade 2)
+Hetzelfde formaat (26 pagina's, 8,5 × 11 inch, premium color) met Halloween-inhoud: pompoenen, snoep tellen, kostuums en vriendelijke spookjes.
+- Binnenwerk: https://d2ol7oe51mr4n9.cloudfront.net/user_3HBB2MMxSPG4JtlCTmWPSIJHi6P/eaf94726-1f82-41d3-a49c-57210831a246.pdf
+- Omslag: https://d2ol7oe51mr4n9.cloudfront.net/user_3HBB2MMxSPG4JtlCTmWPSIJHi6P/07c4a65e-7d7c-40e2-9b41-753f22dde77e.pdf
+- Bouwen: `sh fetch_art.sh art_urls_halloween.txt && node build_halloween.js --png && node cover_halloween.js`
+
+⚠️ Ook hier moet je **Color by Number** en **Label Witch Cappy** (hoed, oog, neus, snorharen, poot, cape) met de hand nakijken.
+
+**Titel:** Cappy's Halloween Fun
+**Subtitle:** Activity Book for Grade 2 – Halloween Coloring, Reading, Math, Science & Puzzles for Kids Ages 7–8
+**Keywords:** halloween activity book for kids · 2nd grade halloween workbook · capybara halloween coloring book · halloween math and reading grade 2 · ages 7-8 halloween gift · pumpkin activity book · halloween basket stuffer for kids
