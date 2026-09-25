@@ -1,5 +1,5 @@
 // Builds the KDP interior PDF: 8.5 x 11 in, no bleed, premium colour.
-const { chromium } = require('playwright-core');
+const { chromium } = require(process.env.PW || 'playwright-core');
 const fs = require('fs');
 const path = require('path');
 const A = n => `<img class="art" src="art/${n}.png">`;

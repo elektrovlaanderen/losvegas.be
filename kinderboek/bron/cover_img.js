@@ -1,5 +1,5 @@
 // Full-wrap KDP cover: back + spine + front with 0.125in bleed. Premium colour, 26 pages.
-const { chromium } = require('playwright-core');
+const { chromium } = require(process.env.PW || 'playwright-core');
 const fs = require('fs'), path = require('path');
 const PAGES = 26, SPINE = +(PAGES * 0.002347).toFixed(4); // premium colour paper
 const W = 0.125 + 8.5 + SPINE + 8.5 + 0.125, H = 11.25;
