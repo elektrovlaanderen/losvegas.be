@@ -22,7 +22,7 @@ Werkboek voor Amazon KDP (paperback), gebaseerd op het "Color & Grow"-voorbeeld:
 > ⚠️ Pas je het aantal pagina's aan, dan verandert de rugbreedte. Maak de omslag in dat geval opnieuw: zet `PAGES` in `bron/cover.js` op het nieuwe aantal.
 
 ## Voor je het boek publiceert
-1. Vervang `[Author Name]` door je naam of pennaam: `AUTHOR="Jouw Naam" node build.js`.
+1. Uitgever staat op **Debacker LLC** (titelpagina + copyright). Vul bij KDP ook een auteursnaam of pennaam in.
 2. Bestel eerst een **proof copy** (drukproef) en controleer die op papier.
 
 ## Tekst voor de Amazon-pagina

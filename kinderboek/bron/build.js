@@ -5,7 +5,7 @@ const path = require('path');
 const c = require('./capy');
 
 const CHROME = '/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
-const AUTHOR = process.env.AUTHOR || '[Author Name]';
+const PUBLISHER = process.env.PUBLISHER || 'Debacker LLC';
 const YEAR = 2026;
 const DOTS = ['#f2b8bf', '#f6dd8f', '#b9dfc2', '#b9d4ef', '#d7c4ef', '#f7c9a4'];
 const TEAL = '#5f9f99';
@@ -35,7 +35,7 @@ pages.push(`<div class="title">
   <div class="tsub">Color · Read · Count · Learn</div>
   <div class="tpic">${c.sit({ flower: false, bird: true })}</div>
   <div class="tgrade">Grade 2 · Ages 7–8</div>
-  <div class="tauthor">${esc(AUTHOR)}</div></div>`);
+  <div class="tauthor">${esc(PUBLISHER)}</div></div>`);
 
 // ---------- copyright / belongs to ----------
 pages.push(`<div class="belongs"><div class="bb">This book belongs to:</div><div class="wline big"></div>
@@ -43,7 +43,7 @@ pages.push(`<div class="belongs"><div class="bb">This book belongs to:</div><div
   <div class="how"><h2>How to use this book</h2>
   <p>Each page has one short activity. Read the directions first, then have fun! Use crayons, colored pencils, or markers.
   Grown-ups can check the answers at the back of the book.</p></div>
-  <div class="copy">Copyright © ${YEAR} ${esc(AUTHOR)}. All rights reserved.<br>
+  <div class="copy">Published by ${esc(PUBLISHER)}<br>Copyright © ${YEAR} ${esc(PUBLISHER)}. All rights reserved.<br>
   No part of this book may be copied or reproduced without written permission from the author, except for personal or classroom use of single pages.</div>`);
 
 // ---------- 1 Meet Cappy ----------
