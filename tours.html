@@ -355,7 +355,7 @@
   <section class="hero section" data-scene="0">
     <div class="eyebrow">LOSVEGAS.BE · NEDERLANDSTALIGE PRIVÉGIDS</div>
     <h1>34 staten.<br><span class="hl">Eén gids.</span><br>Jouw trip.</h1>
-    <p class="lede">Privé dagtrips en reisschema's op maat door Nevada, Utah, Arizona en heel Southern California. Jij rijdt niet, ik rij voor jou. Alles in het Nederlands.</p>
+    <p class="lede">Privé dagtrips en reisschema's op maat door Nevada, Utah, Arizona en heel Southern California. Ik rij voor jou, of jij rijdt zelf en ik gids mee. Alles in het Nederlands.</p>
     <p class="note">Je boekt de tour voor je eigen gezelschap, tot 6 personen. Koppel, gezin of vriendengroep: de prijs geldt voor de hele wagen, dus je splitst de kosten onderling. Nooit vreemden erbij.</p>
     <p class="note">Alle prijzen zijn vanafprijzen per dag, onder voorbehoud. Je exacte prijs krijg je via WhatsApp. LosVegas.be verkoopt geen pakketreizen: elke dagtrip wordt afzonderlijk geboekt en per dag gefactureerd. Vluchten en overnachtingen boek je zelf.</p>
     <div class="stat-row">
@@ -548,6 +548,7 @@
           <div class="spots">${spots}</div>
           <div class="meta">${metaBlock(t)}</div>
           <div class="fine">${t.fine}</div>
+          ${(t.vegas||t.corona) && t.slug!=='jij-rijdt' ? '<div class="fine">Liever zelf rijden? Dan gidsen wij mee in jullie wagen, vanaf $550 per dag (zie tour 18).</div>' : ''}
           <a class="wa-btn" href="${waUrl}" target="_blank" rel="noopener">💬 Boek of vraag aan via WhatsApp</a>
         </div>
       </div>`;
