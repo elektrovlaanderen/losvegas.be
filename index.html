@@ -439,9 +439,9 @@
       <div>
         <span class="eyebrow">Brochure 2026 · 2027</span>
         <h2>Alle tours in één brochure</h2>
-        <p>26 pagina's met alle privé dagtrips, prijzen, de kaart en praktische info. Handig om rustig door te bladeren of te delen met je reisgezelschap.</p>
+        <p>27 pagina's met alle privé dagtrips, prijzen, de kaart en praktische info. Handig om rustig door te bladeren of te delen met je reisgezelschap.</p>
         <div class="cta-row">
-          <a class="btn btn-solid" href="brochure/LosVegas-be-brochure-2026-2027.pdf" download>Download de brochure (PDF, 10 MB)</a>
+          <a class="btn btn-solid" href="brochure/LosVegas-be-brochure-2026-2027.pdf" download>Download de brochure (PDF, 11 MB)</a>
           <a class="btn btn-line" href="brochure/LosVegas-be-brochure-2026-2027.pdf" target="_blank" rel="noopener">Bekijk online</a>
         </div>
       </div>
@@ -517,8 +517,9 @@
     {scene:6, tag:"San Diego · ~1.5u", title:"USS Midway & San Diego", slug:"san-diego", desc:"Het vliegdekschip USS Midway, het historische Gaslamp Quarter en de mooiste baai van California.", spots:["USS Midway","Gaslamp Quarter","Balboa Park"], dur:"± 8u", corona:"$650", fine:"excl. entree USS Midway · prijs tot 4 pers., +$75 per extra pers. (max. 6)"},
     {scene:6, tag:"Santa Barbara · ~2u", title:"Santa Barbara & coast", slug:"santa-barbara", desc:"De Rivièra van Amerika: wit gestuukte gebouwen, wijngaarden en een prachtige haven.", spots:["State Street","Stearns Wharf","Mission"], dur:"± 9u", corona:"$750", fine:"excl. parkeren · prijs tot 4 pers., +$75 per extra pers. (max. 6)"},
     {scene:7, tag:"Sequoia NP · ~4u rijden", title:"Sequoia National Park", slug:"sequoia", desc:"De grootste bomen op aarde. General Sherman: 2800 jaar oud, 85 meter hoog. Woorden schieten tekort. Met zo'n 4 uur rijden per richting is het een lange dag, die elke kilometer waard is.", spots:["General Sherman","Giant Forest","Moro Rock"], dur:"volledige dag · vroeg vertrek", corona:"$875", fine:"excl. parkentree · prijs tot 4 pers., +$75 per extra pers. (max. 6)"},
-    {scene:5, tag:"Volledig op maat · SoCal", title:"Custom SoCal Tour", slug:"custom-socal", desc:"Laguna Beach, Getty Museum, Rose Bowl: combineer wat jij wil zien in één gepersonaliseerde dag.", spots:["Laguna Beach","Getty Center","Jouw keuze"], dur:null, quote:"Offerte via WhatsApp", fine:"flexibel"},
-    {scene:3, tag:"Jouw wagen · onze gids", title:"Jij rijdt, wij gidsen", slug:"jij-rijdt", desc:"Liever zelf achter het stuur? Dan rijdt Tom of Dominique mee in jullie huurwagen. Wij wijzen de weg, kiezen de mooiste stops en vertellen onderweg, volledig in het Nederlands. Elke route uit deze lijst kan, of jullie eigen plan.", spots:["Jullie huurwagen","Elke route","Nederlandstalige gids"], dur:"volledige dag", vegas:"$550", corona:"$550", fine:"excl. aanrijkosten buiten Vegas of Corona, terugreis gids bij eenrichtingsritten & overnachting gids · per dag geboekt"}
+    {n:"19", scene:5, tag:"Los Angeles · voor gamers · nieuw", title:"Los Santos in het echt", slug:"los-santos", desc:"Uren rondgereden in GTA V? Dan herken je deze stad meteen. We rijden langs de echte LA-plekken achter Los Santos: het Vinewood-bord is de Hollywood Sign, Galileo Observatory is Griffith Observatory, Kortz Center is het Getty Center en Del Perro Pier is Santa Monica Pier, bij zonsondergang.", spots:["Hollywood Sign","Griffith Observatory","Beverly Hills","Getty Center","Venice Beach","Santa Monica Pier"], dur:"± 9u", corona:"$695", fine:"excl. entrees & parkeren · prijs tot 4 pers., +$75 per extra pers. (max. 6) · niet verbonden aan Rockstar Games"},
+    {n:"17", scene:5, tag:"Volledig op maat · SoCal", title:"Custom SoCal Tour", slug:"custom-socal", desc:"Laguna Beach, Getty Museum, Rose Bowl: combineer wat jij wil zien in één gepersonaliseerde dag.", spots:["Laguna Beach","Getty Center","Jouw keuze"], dur:null, quote:"Offerte via WhatsApp", fine:"flexibel"},
+    {n:"18", scene:3, tag:"Jouw wagen · onze gids", title:"Jij rijdt, wij gidsen", slug:"jij-rijdt", desc:"Liever zelf achter het stuur? Dan rijdt Tom of Dominique mee in jullie huurwagen. Wij wijzen de weg, kiezen de mooiste stops en vertellen onderweg, volledig in het Nederlands. Elke route uit deze lijst kan, of jullie eigen plan.", spots:["Jullie huurwagen","Elke route","Nederlandstalige gids"], dur:"volledige dag", vegas:"$550", corona:"$550", fine:"excl. aanrijkosten buiten Vegas of Corona, terugreis gids bij eenrichtingsritten & overnachting gids · per dag geboekt"}
   ];
 
   const WA_NUMBER = '17028810971';
@@ -542,7 +543,7 @@
 
   function tourHTML(t){
     tourCounter++;
-    const idx = String(tourCounter).padStart(2,'0');
+    const idx = t.n || String(tourCounter).padStart(2,'0');
     const spots = t.spots.map(s=>`<span>${s}</span>`).join('');
     const waMsg = encodeURIComponent(`Hallo! Ik heb interesse in de tour: ${t.title}. Kan je me meer info geven?`);
     const waUrl = `https://wa.me/${WA_NUMBER}?text=${waMsg}`;
