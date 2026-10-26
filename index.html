@@ -179,6 +179,25 @@
   .btn{ display:inline-block; padding:0.85rem 1.7rem; border-radius:2px; font-weight:700; font-size:0.82rem; letter-spacing:0.02em; }
   .btn-solid{ background:var(--gold); color:#1a1408; }
   .btn-line{ border:1px solid #ffffff33; color:var(--text); backdrop-filter:blur(4px); }
+  .b5-wrap,.ex-wrap{ max-width:1100px; margin:6rem auto; text-align:center; }
+  .b5-wrap h2,.ex-wrap h2{ font-size:clamp(2rem,5vw,3.2rem); margin:0.6rem 0 0.8rem; }
+  .b5-lede{ opacity:0.8; max-width:56ch; margin:0 auto 2rem; line-height:1.6; }
+  .b5-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(min(180px,100%),1fr)); gap:1rem; text-align:left; }
+  .b5{ position:relative; display:flex; flex-direction:column; background:#17130fe6; border:1px solid var(--line); overflow:hidden; }
+  .b5 img{ width:100%; aspect-ratio:3/4; object-fit:cover; display:block; }
+  .b5n{ position:absolute; left:0; top:0; background:var(--sun); color:#1a1408; font-family:'Anton',sans-serif; font-size:1.4rem; width:2.6rem; height:2.6rem; display:flex; align-items:center; justify-content:center; }
+  .b5t{ font-family:'Anton',sans-serif; text-transform:uppercase; font-size:1.3rem; padding:0.8rem 0.9rem 0.2rem; }
+  .b5d{ font-size:0.85rem; opacity:0.8; padding:0 0.9rem; line-height:1.45; }
+  .b5p{ margin-top:auto; padding:0.8rem 0.9rem; font-family:'Anton',sans-serif; color:var(--sun); font-size:1.2rem; }
+  .b5p small{ font-family:'Space Mono',monospace; font-size:0.65rem; color:var(--muted); }
+  .ex-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr)); gap:1rem; text-align:left; }
+  .ex{ border:1px solid var(--line); background:#17130fe6; padding:1.1rem 1.2rem; display:flex; flex-direction:column; gap:0.4rem; }
+  .ex h3{ margin:0; font-family:'Anton',sans-serif; text-transform:uppercase; font-size:1.2rem; font-weight:400; }
+  .ex p{ margin:0; font-size:0.88rem; line-height:1.5; opacity:0.85; }
+  .ex span{ margin-top:auto; font-family:'Space Mono',monospace; font-size:0.66rem; color:var(--sun); text-transform:uppercase; }
+  .ex-hero{ background:var(--sun); color:#1a1408; border-color:var(--sun); }
+  .ex-hero span{ color:#1a1408; }
+  .ex-note{ font-size:0.8rem; opacity:0.7; margin-top:1.4rem; }
   .brochure-block{ max-width:1000px; margin:6rem auto; display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); gap:2.5rem; align-items:center; }
   .brochure-cover img{ width:100%; display:block; box-shadow:0 20px 60px #000000aa; transform:rotate(-1.5deg); transition:transform .3s ease; }
   .brochure-cover:hover img{ transform:rotate(0deg); }
@@ -250,6 +269,8 @@
   .tour-body .fine{ font-size:0.6rem; color:#6f6857; margin:0 0 1.1rem; line-height:1.4; }
   .wa-btn{ display:inline-flex; align-items:center; gap:0.5rem; background:#25d366; color:#08240f; padding:0.7rem 1.3rem; border-radius:999px; font-weight:700; font-size:0.82rem; }
   .wa-btn:hover{ filter:brightness(1.08); }
+  .wa-row{ display:flex; flex-wrap:wrap; gap:0.6rem; }
+  .wa-be{ background:transparent; color:#25d366; border:1.5px solid #25d366; }
   @media(max-width:720px){
     .tour-head{ grid-template-columns:auto 1fr auto; gap:0.8rem; padding:1.05rem 1.1rem; }
     .tour-head .idx{ display:none; }
@@ -350,9 +371,11 @@
   <a href="#tours" data-nav><span class="n">01</span> Vegas, Utah &amp; Arizona</a>
   <a href="#socal" data-nav><span class="n">02</span> Southern California</a>
   <a href="#reisschema" data-nav><span class="n">03</span> Reisschema's</a>
-  <a href="#brochure" data-nav><span class="n">04</span> Brochure</a>
-  <a href="over-ons.html" data-nav><span class="n">05</span> Over ons</a>
-  <a class="navwa" href="https://wa.me/17028810971" target="_blank" rel="noopener">💬 Direct via WhatsApp</a>
+  <a href="#big5" data-nav><span class="n">04</span> Big 5 &amp; extraatjes</a>
+  <a href="#brochure" data-nav><span class="n">05</span> Brochure</a>
+  <a href="over-ons.html" data-nav><span class="n">06</span> Over ons</a>
+  <a class="navwa" href="https://wa.me/17028810971" target="_blank" rel="noopener">💬 WhatsApp VS +1 702 881 0971</a>
+  <a class="navwa" style="margin-top:0.6rem" href="https://wa.me/32476611099" target="_blank" rel="noopener">💬 WhatsApp BE +32 476 61 10 99</a>
 </nav>
 
 <div class="hud" id="sceneHud"><b id="sceneIdx">01</b> / 08 · <span id="sceneName">VEGAS</span></div>
@@ -373,7 +396,8 @@
     </div>
     <div class="cta-row">
       <a class="btn btn-solid" href="#tours">Bekijk de tours</a>
-      <a class="btn btn-line" href="https://wa.me/17028810971" target="_blank" rel="noopener">Direct WhatsApp</a>
+      <a class="btn btn-line" href="https://wa.me/17028810971" target="_blank" rel="noopener">WhatsApp VS</a>
+      <a class="btn btn-line" href="https://wa.me/32476611099" target="_blank" rel="noopener">WhatsApp BE</a>
       <a class="btn btn-line" href="#brochure">Brochure (PDF)</a>
     </div>
     <div class="scroll-hint"><span class="l"></span> SCROLL OM TE VERKENNEN</div>
@@ -433,13 +457,46 @@
     </div>
   </section>
 
+  <section class="section" data-scene="1" id="big5">
+    <div class="b5-wrap">
+      <span class="eyebrow">Weinig tijd? Begin hier</span>
+      <h2>Onze Big 5</h2>
+      <p class="b5-lede">De vijf dagen waar onze gasten het meest over blijven vertellen.</p>
+      <div class="b5-grid">
+      <a class="b5" href="#tours"><img src="images/tours/grand-canyon-1.jpg" alt="Grand Canyon" loading="lazy"><span class="b5n">1</span><span class="b5t">Grand Canyon</span><span class="b5d">Een wereldwonder, op het juiste moment, zonder de drukte.</span><span class="b5p">$925 <small>· tour 04</small></span></a>
+      <a class="b5" href="#tours"><img src="images/tours/zion-2.jpg" alt="Zion" loading="lazy"><span class="b5n">2</span><span class="b5t">Zion</span><span class="b5d">Wandelen tussen torenhoge rode wanden, op jullie tempo.</span><span class="b5p">$795 <small>· tour 05</small></span></a>
+      <a class="b5" href="#tours"><img src="images/tours/vegas-strip-1.jpg" alt="Vegas bij nacht" loading="lazy"><span class="b5n">3</span><span class="b5t">Vegas bij nacht</span><span class="b5d">De Strip, Fremont Street en plekken die toeristen missen.</span><span class="b5p">$595 <small>· tour 01</small></span></a>
+      <a class="b5" href="#tours"><img src="images/tours/temecula-1.jpg" alt="Temecula" loading="lazy"><span class="b5n">4</span><span class="b5t">Temecula</span><span class="b5d">Wijnproeven zonder zorgen: wij rijden, jullie genieten.</span><span class="b5p">$550 <small>· tour 09</small></span></a>
+      <a class="b5" href="#tours"><img src="images/tours/los-santos-1.jpg" alt="Los Santos" loading="lazy"><span class="b5n">5</span><span class="b5t">Los Santos</span><span class="b5d">De echte LA-plekken achter GTA V.</span><span class="b5p">$695 <small>· tour 19</small></span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" data-scene="5" id="extraatjes">
+    <div class="ex-wrap">
+      <span class="eyebrow">Maak je dag onvergetelijk</span>
+      <h2>Extraatjes</h2>
+      <p class="b5-lede">Dingen die je zelf niet snel vindt of moeilijk geregeld krijgt. Wij zoeken het uit, reserveren en passen het in jullie dag.</p>
+      <div class="ex-grid">
+      <div class="ex ex-hero"><h3>Fotoshoot onderweg</h3><p>Tom is beroepsfotograaf. Hij legt jullie dag vast op de mooiste plekken en op het beste licht, zodat jullie zelf gewoon kunnen genieten.</p><span>Bij elke tour · prijs op aanvraag</span></div>
+      <div class="ex"><h3>ATV in de roze duinen</h3><p>Coral Pink Sand Dunes bij Kanab, Utah.</p><span>Bij Zion of Bryce</span></div>
+      <div class="ex"><h3>Ezelrit langs de Grand Canyon</h3><p>Ongeveer 2 uur langs de rand. Vanaf 9 jaar, ver vooraf boeken.</p><span>Bij Grand Canyon</span></div>
+      <div class="ex"><h3>Een echte rodeo</h3><p>Bryce Canyon, eind mei tot eind augustus, wo tot za om 19u.</p><span>Bij Bryce · met overnachting</span></div>
+      <div class="ex"><h3>Schietsessie</h3><p>Onder begeleiding op een erkende schietbaan in Las Vegas.</p><span>Bij Vegas Strip</span></div>
+      <div class="ex"><h3>Batting cage voor de kids</h3><p>Zelf eens slaan als een echte honkballer.</p><span>In Vegas of SoCal</span></div>
+      <div class="ex"><h3>Vegas-avond met Elvis</h3><p>Een Elvis-show of themadiner als afsluiter.</p><span>Bij Vegas Strip</span></div>
+      </div>
+      <p class="ex-note">Extraatjes betaal je rechtstreeks aan de aanbieder, aan hun tarief. Wij reserveren en plannen ze in jullie dag.</p>
+    </div>
+  </section>
+
   <section class="section" data-scene="3" id="brochure">
     <div class="brochure-block">
       <a class="brochure-cover" href="brochure/LosVegas-be-brochure-2026-2027.pdf" target="_blank" rel="noopener"><img src="images/brochure-cover.jpg" alt="Cover van de LosVegas.be brochure 2026 · 2027" loading="lazy"></a>
       <div>
         <span class="eyebrow">Brochure 2026 · 2027</span>
         <h2>Alle tours in één brochure</h2>
-        <p>27 pagina's met alle privé dagtrips, prijzen, de kaart en praktische info. Handig om rustig door te bladeren of te delen met je reisgezelschap.</p>
+        <p>30 pagina's met alle privé dagtrips, de Big 5, extraatjes, prijzen, de kaart en praktische info. Handig om rustig door te bladeren of te delen met je reisgezelschap.</p>
         <div class="cta-row">
           <a class="btn btn-solid" href="brochure/LosVegas-be-brochure-2026-2027.pdf" download>Download de brochure (PDF, 11 MB)</a>
           <a class="btn btn-line" href="brochure/LosVegas-be-brochure-2026-2027.pdf" target="_blank" rel="noopener">Bekijk online</a>
@@ -471,7 +528,7 @@
     </div>
   </section>
 
-  <footer>LOSVEGAS.BE · 34 STATEN. EÉN GIDS. · <a href="https://wa.me/17028810971" target="_blank" rel="noopener" style="color:var(--gold)">WHATSAPP</a><br>GEEN PAKKETREIZEN · ELKE DAGTRIP WORDT APART GEBOEKT EN GEFACTUREERD · PRIJZEN ONDER VOORBEHOUD</footer>
+  <footer>LOSVEGAS.BE · 34 STATEN. EÉN GIDS.<br>WHATSAPP VS <a href="https://wa.me/17028810971" target="_blank" rel="noopener" style="color:var(--gold)">+1 702 881 0971</a> · WHATSAPP BE <a href="https://wa.me/32476611099" target="_blank" rel="noopener" style="color:var(--gold)">+32 476 61 10 99</a><br>GEEN PAKKETREIZEN · ELKE DAGTRIP WORDT APART GEBOEKT EN GEFACTUREERD · PRIJZEN ONDER VOORBEHOUD</footer>
 </main>
 
 <div id="cookie">
@@ -505,7 +562,8 @@
     {scene:2, tag:"Utah · nationaal park", title:"Zion National Park", slug:"zion", desc:"Angels Landing, The Narrows, Emerald Pools: Zion overweldigt. Ik begeleid jullie zodat je het maximale eruit haalt.", spots:["Angels Landing","The Narrows","Emerald Pools"], dur:"± 12u · lange dag", vegas:"$795", corona:"$1.495", fine:"excl. entrees & parkeren · prijs tot 4 pers., +$75 per extra pers. (max. 6)"},
     {scene:2, tag:"Utah · nationaal park", title:"Bryce Canyon", slug:"bryce-canyon", desc:"Hoodoos zo ver het oog reikt, een andere planeet. Vanuit Vegas al een flinke trip, vanuit Corona een expeditie.", spots:["Bryce Canyon","Sunrise Point","Inspiration Point"], dur:"± 13u · zeer lange dag", vegas:"$895", corona:"$1.595", fine:"excl. entrees & parkeren · prijs tot 4 pers., +$75 per extra pers. (max. 6)"},
     {scene:2, tag:"Utah · Arizona · dubbelpark", title:"Bryce Canyon + Antelope Canyon", slug:"bryce-antelope", desc:"De ultieme combinatie: hoodoos én de lichtstralen van Antelope Canyon, met Horseshoe Bend erbij. Liever rustiger? Overnachten kan: jullie boeken zelf het hotel en elke dag wordt apart geboekt.", spots:["Bryce Canyon","Antelope Canyon","Horseshoe Bend"], dur:"± 15u · of over 2 dagen", vegas:"$995", corona:"$1.795", fine:"excl. entrees & parkeren · prijs per dag · prijs tot 4 pers., +$75 per extra pers. (max. 6)"},
-    {scene:3, tag:"Meerdere dagen · per dag geboekt", title:"Meerdere dagen op pad", slug:"west-usa", desc:"Langer in de regio? Plan gerust meerdere dagtrips na elkaar. Jullie boeken zelf je hotels, elke dag wordt afzonderlijk geboekt en gefactureerd.", spots:["NV","UT","AZ","Per dag geboekt"], dur:null, quote:"Prijs per dag via WhatsApp", fine:"elke dag apart geboekt & gefactureerd · excl. entrees, parkeren & overnachtingen"}
+    {n:"20", scene:3, tag:"Arizona · historische route · nieuw", title:"Route 66 & Oatman", slug:"route-66", desc:"Route 66 bestaat in 2026 precies 100 jaar. We rijden een van de mooiste stukken van de Mother Road, over de bochtige Sitgreaves Pass naar Oatman: een oud goudzoekersstadje waar wilde ezels gewoon door de hoofdstraat wandelen.", spots:["Historische Route 66","Hackberry General Store","Sitgreaves Pass","Ezels van Oatman"], dur:"± 9u · volledige dag", vegas:"$695", fine:"excl. entrees & parkeren · prijs tot 4 pers., +$75 per extra pers. (max. 6)"},
+    {n:"08", scene:3, tag:"Meerdere dagen · per dag geboekt", title:"Meerdere dagen op pad", slug:"west-usa", desc:"Langer in de regio? Plan gerust meerdere dagtrips na elkaar. Jullie boeken zelf je hotels, elke dag wordt afzonderlijk geboekt en gefactureerd.", spots:["NV","UT","AZ","Per dag geboekt"], dur:null, quote:"Prijs per dag via WhatsApp", fine:"elke dag apart geboekt & gefactureerd · excl. entrees, parkeren & overnachtingen"}
   ];
 
   const TOURS_SOCAL = [
@@ -515,7 +573,7 @@
     {scene:5, tag:"Los Angeles · ~1u", title:"Hollywood filmlocaties", slug:"hollywood", desc:"Van Pulp Fiction tot La La Land: de echte locaties, niet de toeristische clichés. Uniek in zijn soort.", spots:["Hollywood","Griffith Park","Iconic spots"], dur:"± 8u", corona:"$695", fine:"excl. entrees & parkeren · prijs tot 4 pers., +$75 per extra pers. (max. 6)"},
     {scene:5, tag:"LA Coast · ~1u", title:"Santa Monica, Venice & Malibu", slug:"santa-monica", desc:"De iconische pier, Venice Beach boardwalk, de kliffen van Malibu en de Pacific Coast Highway.", spots:["Santa Monica Pier","Venice Beach","Malibu PCH"], dur:"± 8u", corona:"$650", fine:"excl. parkeren · prijs tot 4 pers., +$75 per extra pers. (max. 6)"},
     {scene:6, tag:"San Diego · ~1.5u", title:"USS Midway & San Diego", slug:"san-diego", desc:"Het vliegdekschip USS Midway, het historische Gaslamp Quarter en de mooiste baai van California.", spots:["USS Midway","Gaslamp Quarter","Balboa Park"], dur:"± 8u", corona:"$650", fine:"excl. entree USS Midway · prijs tot 4 pers., +$75 per extra pers. (max. 6)"},
-    {scene:6, tag:"Santa Barbara · ~2u", title:"Santa Barbara & coast", slug:"santa-barbara", desc:"De Rivièra van Amerika: wit gestuukte gebouwen, wijngaarden en een prachtige haven.", spots:["State Street","Stearns Wharf","Mission"], dur:"± 9u", corona:"$750", fine:"excl. parkeren · prijs tot 4 pers., +$75 per extra pers. (max. 6)"},
+    {scene:6, tag:"Santa Barbara · Solvang · ~2u", title:"Santa Barbara & Solvang", slug:"santa-barbara", desc:"De Rivièra van Amerika: wit gestuukte gebouwen, een prachtige haven en State Street. Daarna door de wijngaarden naar Solvang, een Deens dorpje met windmolens en vakwerkhuizen, midden in Californië.", spots:["State Street","Stearns Wharf","Mission","Solvang"], dur:"± 10u", corona:"$750", fine:"excl. parkeren · prijs tot 4 pers., +$75 per extra pers. (max. 6)"},
     {scene:7, tag:"Sequoia NP · ~4u rijden", title:"Sequoia National Park", slug:"sequoia", desc:"De grootste bomen op aarde. General Sherman: 2800 jaar oud, 85 meter hoog. Woorden schieten tekort. Met zo'n 4 uur rijden per richting is het een lange dag, die elke kilometer waard is.", spots:["General Sherman","Giant Forest","Moro Rock"], dur:"volledige dag · vroeg vertrek", corona:"$875", fine:"excl. parkentree · prijs tot 4 pers., +$75 per extra pers. (max. 6)"},
     {n:"19", scene:5, tag:"Los Angeles · voor gamers · nieuw", title:"Los Santos in het echt", slug:"los-santos", desc:"Uren rondgereden in GTA V? Dan herken je deze stad meteen. We rijden langs de echte LA-plekken achter Los Santos: het Vinewood-bord is de Hollywood Sign, Galileo Observatory is Griffith Observatory, Kortz Center is het Getty Center en Del Perro Pier is Santa Monica Pier, bij zonsondergang.", spots:["Hollywood Sign","Griffith Observatory","Beverly Hills","Getty Center","Venice Beach","Santa Monica Pier"], dur:"± 9u", corona:"$695", fine:"excl. entrees & parkeren · prijs tot 4 pers., +$75 per extra pers. (max. 6) · niet verbonden aan Rockstar Games"},
     {n:"17", scene:5, tag:"Volledig op maat · SoCal", title:"Custom SoCal Tour", slug:"custom-socal", desc:"Laguna Beach, Getty Museum, Rose Bowl: combineer wat jij wil zien in één gepersonaliseerde dag.", spots:["Laguna Beach","Getty Center","Jouw keuze"], dur:null, quote:"Offerte via WhatsApp", fine:"flexibel"},
@@ -547,6 +605,7 @@
     const spots = t.spots.map(s=>`<span>${s}</span>`).join('');
     const waMsg = encodeURIComponent(`Hallo! Ik heb interesse in de tour: ${t.title}. Kan je me meer info geven?`);
     const waUrl = `https://wa.me/${WA_NUMBER}?text=${waMsg}`;
+    const waUrlBe = `https://wa.me/32476611099?text=${waMsg}`;
 
     const el = document.createElement('article');
     el.className = 'tour';
@@ -573,7 +632,7 @@
           <div class="meta">${metaBlock(t)}</div>
           <div class="fine">${t.fine}</div>
           ${(t.vegas||t.corona) && t.slug!=='jij-rijdt' ? '<div class="fine">Liever zelf rijden? Dan gidsen wij mee in jullie wagen, vanaf $550 per dag (zie tour 18).</div>' : ''}
-          <a class="wa-btn" href="${waUrl}" target="_blank" rel="noopener">💬 Boek of vraag aan via WhatsApp</a>
+          <div class="wa-row"><a class="wa-btn" href="${waUrl}" target="_blank" rel="noopener">💬 WhatsApp VS +1 702 881 0971</a><a class="wa-btn wa-be" href="${waUrlBe}" target="_blank" rel="noopener">💬 WhatsApp BE +32 476 61 10 99</a></div>
         </div>
       </div>`;
 
