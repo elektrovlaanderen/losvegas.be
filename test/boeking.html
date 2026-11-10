@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[TEST] Je aanvraag · LosVegas.be</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --ink:#0c0a09; --ink-2:#17130f; --gold:#e8873a; --gold-bright:#f4a94e; --rust:#b8472a; --sand:#e9dcc4; --text:#ece2d0; --muted:#9b8f79; --line:#332921; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; min-height:100vh; background:radial-gradient(120% 80% at 50% 0%, #2a1a10 0%, var(--ink) 60%); color:var(--text); font-family:'Archivo',sans-serif; }
+  a{ color:inherit; }
+  header{ padding:20px 16px; text-align:center; }
+  header a{ font-family:'Anton',sans-serif; font-size:1.5rem; letter-spacing:0.02em; text-decoration:none; text-transform:uppercase; }
+  header a span{ color:var(--gold); }
+  main{ width:min(600px,100%); margin:0 auto; padding:0 16px 60px; }
+  .card{ background:var(--ink-2); border:1px solid var(--line); border-top:3px solid var(--gold); border-radius:8px; padding:2rem 1.7rem; }
+  .eyebrow{ font-family:'Space Mono',monospace; font-size:0.66rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); }
+  h1{ font-family:'Anton',sans-serif; font-weight:400; text-transform:uppercase; font-size:clamp(1.8rem,6vw,2.5rem); line-height:1.05; margin:0.5rem 0 1rem; }
+  p{ line-height:1.6; margin:0 0 1rem; }
+  .muted{ color:var(--muted); font-size:0.88rem; }
+  .rows{ border-top:1px dashed var(--line); border-bottom:1px dashed var(--line); padding:0.9rem 0; margin:1.2rem 0; font-family:'Space Mono',monospace; font-size:0.78rem; }
+  .rows div{ display:flex; justify-content:space-between; gap:1rem; padding:0.25rem 0; }
+  .rows dt, .rows span:first-child{ color:var(--muted); }
+  .rows span:last-child{ text-align:right; overflow-wrap:anywhere; }
+  .big{ display:flex; justify-content:space-between; align-items:baseline; margin:0 0 1.2rem; }
+  .big b{ font-family:'Space Mono',monospace; font-size:1.7rem; color:var(--gold); }
+  .note{ border-left:2px solid var(--gold); padding:0.2rem 0 0.2rem 0.9rem; margin:0 0 1.2rem; white-space:pre-line; }
+  .btn{ display:block; width:100%; text-align:center; padding:1rem; border-radius:2px; font-weight:700; font-size:0.9rem; font-family:inherit; border:0; cursor:pointer; text-decoration:none; margin-top:0.6rem; }
+  .btn-solid{ background:var(--gold); color:#1a1408; }
+  .btn-line{ background:transparent; color:var(--text); border:1px solid #ffffff33; }
+  .btn[disabled]{ opacity:0.55; cursor:wait; }
+  .wa{ display:flex; flex-wrap:wrap; gap:0.6rem; margin-top:1rem; }
+  .wa a{ flex:1 1 200px; text-align:center; text-decoration:none; border:1.5px solid #25d366; color:#25d366; border-radius:999px; padding:0.65rem 1rem; font-weight:700; font-size:0.82rem; }
+  .err{ color:#f08a6a; }
+  label{ display:block; margin:0 0 1rem; }
+  label span{ display:block; font-family:'Space Mono',monospace; font-size:0.6rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); margin-bottom:0.4rem; }
+  input, textarea{ width:100%; background:var(--ink); border:1px solid var(--line); border-radius:4px; color:var(--text); font:inherit; font-size:16px; padding:0.7rem 0.8rem; }
+  input:focus, textarea:focus{ outline:none; border-color:var(--gold); }
+  .check{ display:inline-flex; width:56px; height:56px; border-radius:50%; align-items:center; justify-content:center; background:var(--gold); color:#1a1408; font-size:1.6rem; font-weight:700; margin-bottom:0.4rem; }
+  .spin{ display:inline-block; width:18px; height:18px; border:2px solid var(--line); border-top-color:var(--gold); border-radius:50%; animation:sp 0.8s linear infinite; vertical-align:-3px; margin-right:0.5rem; }
+  @keyframes sp{ to{ transform:rotate(360deg); } }
+  .admin .card{ border-top-color:var(--rust); }
+</style>
+</head>
+<body>
+<header><a href="/">Los<span>Vegas</span>.be</a></header>
+<main><div class="card" id="out"><p class="muted"><span class="spin"></span>Even laden...</p></div></main>
+<script>
+(function(){
+  "use strict";
+  const API = '';
+  const q = new URLSearchParams(location.search);
+  const B = q.get('b'), K = q.get('k'), A = q.get('a'), SID = q.get('session_id');
+  const out = document.getElementById('out');
+  const fmt = v => '$' + String(Math.round(v)).replace(/\B(?=(\d{3})+(?!\d))/g,'.');
+  const esc = s => String(s==null?'':s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const nlDate = d => d ? String(d).split('-').reverse().join('/') : '';
+  const WA = `<div class="wa"><a href="https://wa.me/17028810971" target="_blank" rel="noopener">WhatsApp VS +1 702 881 0971</a><a href="https://wa.me/32476611099" target="_blank" rel="noopener">WhatsApp BE +32 476 61 10 99</a></div>`;
+  const get = p => fetch(API + '?' + new URLSearchParams(p)).then(r=>r.json());
+  const post = b => fetch(API, { method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(b) }).then(r=>r.json());
+  const oops = (t) => { out.innerHTML = `<span class="eyebrow">LosVegas.be</span><h1>Oeps</h1><p>${t || 'Deze link werkt niet (meer). Kijk of je de volledige link uit de mail gebruikt, of app ons even.'}</p>${WA}`; };
+
+  if(!API) return oops('Het boekingssysteem is nog niet actief.');
+  if(B && A) admin(); else if(B && K) client(0); else oops();
+
+  function rows(i){
+    const r = [['Aanvraag', i.id], ['Wat', i.product]];
+    if(i.date) r.push([i.kind==='Tour' ? 'Datum' : 'Vertrek (ongeveer)', nlDate(i.date)]);
+    if(i.departure) r.push(['Vertrek uit', i.departure]);
+    if(i.persons) r.push(['Personen', i.persons]);
+    if(i.states) r.push(['Staten', i.states]);
+    r.push(['Prijs', fmt(i.total) + (i.kind==='Tour' ? ' · excl. entrees & parkeren' : '')]);
+    return '<div class="rows">' + r.map(x=>`<div><span>${esc(x[0])}</span><span>${esc(x[1])}</span></div>`).join('') + '</div>';
+  }
+
+  /* ---------- klant ---------- */
+  function client(tries){
+    const p = { action:'info', b:B, k:K }; if(SID) p.session_id = SID;
+    get(p).then(i=>{
+      if(!i.ok) return oops();
+      const tour = i.kind === 'Tour';
+      if(i.paid){
+        out.innerHTML = `<span class="check">&#10003;</span><span class="eyebrow" style="display:block">Betaling ontvangen</span>
+          <h1>${tour ? 'Je dag ligt vast!' : 'Bedankt!'}</h1>
+          <p>${tour ? `We hebben je voorschot van ${fmt(i.pay)} ontvangen. Het saldo van ${fmt(i.total - i.pay)} betaal je op de dag zelf. Een paar dagen vooraf stemmen we het ophaaluur en de plek nog af.`
+                    : i.kind === 'Reisschema standaard' ? `We hebben ${fmt(i.pay)} ontvangen en gaan aan de slag. Je reisschema krijg je als PDF via WhatsApp of mail.`
+                    : `We hebben ${fmt(i.pay)} ontvangen en nemen contact op om het intakegesprek in te plannen.`}</p>
+          ${rows(i)}<p class="muted">Je krijgt ook een bevestiging per mail.</p><a class="btn btn-line" href="/">Terug naar LosVegas.be</a>`;
+        return;
+      }
+      if(SID && i.payable && tries < 4){
+        out.innerHTML = `<p><span class="spin"></span>We verwerken je betaling...</p>`;
+        return setTimeout(()=>client(tries+1), 2500);
+      }
+      if(i.payable){
+        out.innerHTML = `<span class="eyebrow">${tour ? 'Bevestigd · nog te betalen' : 'Nog te betalen'}</span>
+          <h1>${tour ? 'Leg je dag vast' : esc(i.product)}</h1>
+          ${i.note ? `<p class="note">${esc(i.note)}</p>` : ''}
+          ${rows(i)}
+          <div class="big"><span>${tour ? 'Voorschot 50%' : 'Te betalen'}</span><b>${fmt(i.pay)}</b></div>
+          ${tour ? `<p class="muted">Het saldo van ${fmt(i.total - i.pay)} betaal je op de dag zelf.</p>` : ''}
+          ${SID ? `<p class="muted">Is je betaling niet gelukt? Probeer het gerust opnieuw.</p>` : ''}
+          <button class="btn btn-solid" id="pay">Betaal ${fmt(i.pay)}</button>
+          <p class="muted" style="text-align:center;margin-top:0.8rem">Veilig betalen via Stripe</p><p class="err" id="perr" hidden></p>`;
+        document.getElementById('pay').onclick = function(){
+          this.disabled = true; this.textContent = 'Even naar de betaalpagina...';
+          get({ action:'pay', b:B, k:K }).then(r=>{
+            if(r.ok && r.url) return location.href = r.url;
+            if(r.ok && r.paid) return client(0);
+            throw 0;
+          }).catch(()=>{ this.disabled = false; this.textContent = `Betaal ${fmt(i.pay)}`; const e = document.getElementById('perr'); e.hidden = false; e.textContent = 'Er ging iets mis. Probeer het opnieuw of app ons even.'; });
+        };
+        return;
+      }
+      if(i.status === 'Niet beschikbaar'){
+        out.innerHTML = `<span class="eyebrow">Je aanvraag</span><h1>Helaas lukt dit niet</h1>${i.note ? `<p class="note">${esc(i.note)}</p>` : ''}${rows(i)}<p>We zoeken graag samen naar een andere dag.</p>${WA}`;
+        return;
+      }
+      out.innerHTML = `<span class="eyebrow">Je aanvraag</span><h1>We bekijken je aanvraag</h1><p>Je krijgt zo snel mogelijk een mail${tour ? ' met een betaallink voor het voorschot' : ''}.</p>${rows(i)}${WA}`;
+    }).catch(()=>oops('Er ging iets mis bij het laden. Probeer het straks opnieuw.'));
+  }
+
+  /* ---------- beheer (Tom) ---------- */
+  function admin(){
+    document.body.classList.add('admin');
+    document.title = 'Beheer aanvraag · LosVegas.be';
+    get({ action:'admin', b:B, a:A }).then(d=>{
+      if(!d.ok) return oops();
+      const r = d.row, tour = d.tour;
+      const skip = ['Boeking','Totaal','Te betalen','Notitie aan klant','Pagina'];
+      const list = Object.keys(r).filter(h=>skip.indexOf(h)<0 && r[h]!=='' && r[h]!=null)
+        .map(h=>`<div><span>${esc(h)}</span><span>${h==='E-mail' ? `<a href="mailto:${esc(r[h])}">${esc(r[h])}</a>` : h==='Telefoon' ? `<a href="https://wa.me/${esc(String(r[h]).replace(/[^\d]/g,''))}" target="_blank" rel="noopener">${esc(r[h])}</a>` : esc(r[h])}</span></div>`).join('');
+      let h = `<span class="eyebrow">Beheer · ${esc(r.Boeking)}</span><h1>${esc(r.Product)}</h1><div class="rows">${list}</div>`;
+      if(d.canApprove){
+        h += `<label><span>Totaalprijs in dollar${tour ? '' : ' (te betalen)'}</span><input type="number" id="tot" min="1" step="1" value="${d.row.Totaal}"></label>
+          ${tour ? `<p class="muted" id="dep"></p>` : ''}
+          <label><span>Bericht aan de klant (optioneel)</span><textarea id="note" rows="3" placeholder="${tour ? 'bv. ophaaluur, plek, of bij weigeren een andere datum' : 'bv. wat er in de prijs zit'}">${esc(r['Notitie aan klant']||'')}</textarea></label>
+          <button class="btn btn-solid" id="ok">Bevestig en stuur betaallink</button>
+          <button class="btn btn-line" id="no">Niet beschikbaar</button><p class="err" id="aerr" hidden></p>`;
+        out.innerHTML = h;
+        const tot = document.getElementById('tot'), dep = document.getElementById('dep');
+        const upd = ()=>{ if(dep) dep.textContent = `Voorschot (50%) dat de klant betaalt: ${fmt(Math.round((+tot.value||0)*d.rate))} · saldo op de dag: ${fmt((+tot.value||0) - Math.round((+tot.value||0)*d.rate))}`; };
+        tot.oninput = upd; upd();
+        armed(document.getElementById('ok'), 'Zeker? Klik nogmaals om te versturen', ()=>{
+          const v = Math.round(+tot.value); if(!(v >= 1)) throw new Error('Vul een geldige prijs in.');
+          return post({ action:'approve', b:B, a:A, total:v, note:document.getElementById('note').value }).then(x=>{
+            if(!x.ok) throw new Error(x.error==='status' ? 'Deze aanvraag kan niet meer bevestigd worden.' : 'Er ging iets mis.');
+            done(`Verstuurd. ${esc(r.Naam)} kreeg een mail met een betaallink voor ${fmt(x.pay)}.`);
+          });
+        });
+        armed(document.getElementById('no'), 'Zeker? Klik nogmaals', ()=>
+          post({ action:'decline', b:B, a:A, note:document.getElementById('note').value }).then(x=>{
+            if(!x.ok) throw new Error('Er ging iets mis.');
+            done(`${esc(r.Naam)} kreeg een mail dat het niet lukt${document.getElementById('note').value ? ', met je bericht erbij' : ''}.`);
+          }));
+      } else {
+        out.innerHTML = h + `<div class="big"><span>Totaal · betaald deel</span><b>${fmt(r.Totaal)} · ${fmt(r['Te betalen'])}</b></div><p class="muted">Status: ${esc(r.Status)}. Hier valt niets meer te bevestigen.</p>`;
+      }
+    }).catch(()=>oops('Er ging iets mis bij het laden.'));
+
+    function armed(btn, confirmTxt, fn){
+      const label = btn.textContent; let t;
+      btn.onclick = ()=>{
+        const e = document.getElementById('aerr'); e.hidden = true;
+        if(!btn.dataset.armed){ btn.dataset.armed = 1; btn.textContent = confirmTxt; t = setTimeout(()=>{ delete btn.dataset.armed; btn.textContent = label; }, 4000); return; }
+        clearTimeout(t); btn.disabled = true; btn.textContent = 'Bezig...';
+        Promise.resolve().then(fn).catch(x=>{ btn.disabled = false; delete btn.dataset.armed; btn.textContent = label; e.hidden = false; e.textContent = x.message || 'Er ging iets mis.'; });
+      };
+    }
+    function done(msg){ out.innerHTML = `<span class="check">&#10003;</span><h1>Gelukt</h1><p>${msg}</p><p class="muted">De sheet is bijgewerkt.</p>`; }
+  }
+})();
+</script>
+</body>
+</html>
